@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class customize : MonoBehaviour{
     
     //テスト用テキスト
-    public Text x_coordinate_text;
-    public Text y_coordinate_text;
+    public Text angle_text;
 
-    //マウスカーソルの位置
+    //マウスの位置
     Vector2 mouse_position;
+
+    //オブジェクトの角度
+    public static float obj_angle;
 
     void Start(){
         
@@ -21,8 +23,7 @@ public class customize : MonoBehaviour{
     void Update(){
         
         //テスト表示用
-        x_coordinate_text.text="x:"+mouse_position.x.ToString();
-        y_coordinate_text.text="y:"+mouse_position.y.ToString();
+        angle_text.text="angle:"+obj_angle.ToString();
 
     }
 
@@ -30,6 +31,17 @@ public class customize : MonoBehaviour{
         
         Vector2 getMouseposition=new Vector2(Input.mousePosition.x,Input.mousePosition.y);
         mouse_position=Camera.main.ScreenToWorldPoint(getMouseposition);
+        obj_angle=GetAngle(new Vector2(0,0),mouse_position);
+
+    }
+
+    float GetAngle(Vector2 start,Vector2 target){
+
+        Vector2 dt=target-start;
+        float rad=Mathf.Atan2(dt.y,dt.x);
+        float degree=rad*Mathf.Rad2Deg;
+
+        return degree;
 
     }
 
