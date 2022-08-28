@@ -17,7 +17,7 @@ https://jamboard.google.com/d/1hFgI9bMV8jxPfW7I1mwtX7hJZ6KOiLfZhpG-Sx54yio/viewe
 `https://github.com/shinjinhakase/ROBOT-ROCKET.git`   
 
 
-クローンしたリポジトリに移動してコマンドプロンプトを起動
+クローンしたリポジトリに移動してコマンドプロンプトを起動  
 `git Bush Here`  
 
 ブランチを切る  
@@ -41,7 +41,7 @@ Unityプロジェクトを閉じる
 
 
 ### プルリクを出す  
-New Pull requestからプルリクエストを新規に作成  
+ブラウザでリポジトリを開き、New Pull requestからプルリクエストを新規に作成  
 
 
 compareを選択し、自分の作業したブランチを指定    
