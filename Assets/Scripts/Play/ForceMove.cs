@@ -35,10 +35,16 @@ public class ForceMove : MonoBehaviour
     }
 
     // デバッグ用。何らかの力を追加する
-    [ContextMenu("AddTestForce")]
-    private void AddTestForce()
+    [ContextMenu("Debug/AddPressForce")]
+    private void AddTestPressForce()
     {
         PressForce f = new PressForce(testAngle, testF, testT, testK);
+        AddForce(f);
+    }
+    [ContextMenu("Debug/AddImpulseForce")]
+    private void AddTestImpulseForce()
+    {
+        ImpulseForce f = new ImpulseForce(testAngle, testF);
         AddForce(f);
     }
 

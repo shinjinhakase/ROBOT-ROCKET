@@ -183,9 +183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forces: []
   testAngle: 80
-  testF: 60
+  testF: 30
   testT: 3
-  testK: 20
+  testK: 6
   references:
     version: 2
     RefIds: []
