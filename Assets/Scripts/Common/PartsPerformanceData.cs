@@ -11,4 +11,6 @@ public class PartsPerformanceData : ScriptableObject
     {
         return dataList;
     }
+
+    public PartsPerformance getData(PartsPerformance.E_PartsID id) => dataList.Find(data => data.id == id);
 }

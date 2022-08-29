@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PartsInfo : SavableSingletonBase<PartsInfo>
 {
     // 使用待機しているパーツのリスト（使用順に並べる）
-    public List<PartsData> partsList;
+    public List<PartsData> partsList = new List<PartsData>();
 
     //↓リストの操作をメソッドに起こしておく。使いたかったらご自由にどうぞ
     public int Length => partsList.Count;   // パーツの数を取得
@@ -21,6 +21,8 @@ public class PartsInfo : SavableSingletonBase<PartsInfo>
         partsList[index2] = tmp;
     }
     public void RemoveParts(int index = 0) => partsList.RemoveAt(index);
+    public void AddParts(PartsData data) => partsList.Add(data);
+
 
     // パーツ一つのデータを格納しているクラス
     [Serializable]
