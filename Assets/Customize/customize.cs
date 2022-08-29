@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class customize : MonoBehaviour{
-    
-    //テスト用テキスト
-    public Text angle_text;
 
     //マウスの位置
     Vector2 mouse_position;
@@ -21,10 +18,6 @@ public class customize : MonoBehaviour{
     }
 
     void Update(){
-        
-        //テスト表示用
-        angle_text.text="angle:"+obj_angle.ToString();
-
     }
 
     void OnMouseDrag(){
