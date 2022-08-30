@@ -20,3 +20,4 @@ MonoBehaviour:
   R: 0
   k: 1.5
   cooltime: 1
+  summonObjects: []

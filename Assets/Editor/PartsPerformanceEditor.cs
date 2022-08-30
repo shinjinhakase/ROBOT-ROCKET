@@ -44,13 +44,18 @@ public class PartsPerformanceEditor : Editor
             case PartsPerformance.E_ForceType.CollisionForce:
                 EditorGUILayout.LabelField("考え中…。ステージギミックに使う予定だった。");
                 break;
+            case PartsPerformance.E_ForceType.NoForce:
+                break;
         }
+        SerializedProperty prop = serializedObject.FindProperty("summonObjects");
+        EditorGUILayout.PropertyField(prop, true);
 
         // 変更を検知した場合、設定ファイルに書き出す
         if (EditorGUI.EndChangeCheck())
         {
             // Dirtyフラグを立てて、Unity終了時に設定を.assetに書き出す
             EditorUtility.SetDirty(target);
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
