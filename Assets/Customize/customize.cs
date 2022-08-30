@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class customize : MonoBehaviour{
-    
-    //テスト用テキスト
-    public Text angle_text;
 
     //マウスの位置
     Vector2 mouse_position;
@@ -21,17 +18,13 @@ public class customize : MonoBehaviour{
     }
 
     void Update(){
-        
-        //テスト表示用
-        angle_text.text="angle:"+obj_angle.ToString();
-
     }
 
     void OnMouseDrag(){
         
         Vector2 getMouseposition=new Vector2(Input.mousePosition.x,Input.mousePosition.y);
         mouse_position=Camera.main.ScreenToWorldPoint(getMouseposition);
-        obj_angle=GetAngle(new Vector2(0,0),mouse_position);
+        obj_angle=GetAngle(new Vector2(3.5f,0f),mouse_position);
 
     }
 
