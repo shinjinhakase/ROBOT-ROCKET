@@ -3,6 +3,7 @@ using UnityEngine;
 // ロケットやプロペラなど、同じ方向に持続的に力を加え続ける力のクラス
 public class PressForce : IForce
 {
+    private bool IsPartsForce;
     public float m;     // （アイテムの重量）
     public float Angle; // 角度
     public float F;     // 力の大きさ
@@ -13,8 +14,9 @@ public class PressForce : IForce
     private int endFrame;   // 終了時間（フレーム）
     private Vector2 Fe;     // 前方向の基底ベクトル
 
-    public PressForce(float Angle, float F, float t, float k, float m = 0)
+    public PressForce(float Angle, float F, float t, float k, float m = 0, bool IsPartsForce = false)
     {
+        this.IsPartsForce = IsPartsForce;
         this.m = m;
         this.Angle = Angle;
         this.F = F;
@@ -25,7 +27,7 @@ public class PressForce : IForce
         float radAngle = Angle * Mathf.Deg2Rad;
         Fe = new Vector2(Mathf.Cos(radAngle), Mathf.Sin(radAngle));
 
-        endFrame = Mathf.FloorToInt(t / Time.fixedDeltaTime);
+        endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Fe * (F - k * CalcFrontVelocity(velocity));
@@ -35,6 +37,11 @@ public class PressForce : IForce
     void IForce.StartPush() => cntFrame = 0;
 
     float IForce.GetMass() => m;
+
+    void IForce.EndPress()
+    {
+        if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+    }
 
     // 前方向の速度を計算する（読まなくて良いけど解説↓）
     //      （Feを前方向の基底ベクトル、Fe2を下方向の基底ベクトルとする）

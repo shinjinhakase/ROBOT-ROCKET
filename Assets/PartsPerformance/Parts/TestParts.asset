@@ -19,3 +19,4 @@ MonoBehaviour:
   t: 5
   R: 0
   k: 1.5
+  cooltime: 1

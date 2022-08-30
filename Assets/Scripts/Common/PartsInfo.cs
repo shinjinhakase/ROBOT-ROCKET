@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 // パーツの情報の内、カスタムに関わる情報を格納しているクラス。PartsInfo.Instanceでアクセス可能。
+[Serializable]
 public class PartsInfo : SavableSingletonBase<PartsInfo>
 {
     // 使用待機しているパーツのリスト（使用順に並べる）

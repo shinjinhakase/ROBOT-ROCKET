@@ -10,6 +10,7 @@ public class PartsPerformanceEditor : Editor
     GUIContent guiC_F = new GUIContent("F", "力の大きさ。力が大きい程重いものを浮かせたり、早く加速したりできる。総重量Mが大きいほど加速度は減る(ma=Fより)。");
     GUIContent guiC_k = new GUIContent("k", "係数。抵抗力の計算に用いる。この値が高い程、終端速度は遅くなる(ma=F-kvすなわちv=F/kより)。");
     GUIContent guiC_t = new GUIContent("t", "持続時間。この時間の分だけ力を加え続ける。");
+    GUIContent guiC_cooltime = new GUIContent("cooltime", "クールタイム。アイテムの効果が終了してから、次のアイテムが使えるようになるまでの待機時間。");
 
     public override void OnInspectorGUI()
     {
@@ -18,6 +19,7 @@ public class PartsPerformanceEditor : Editor
         _target.id = (PartsPerformance.E_PartsID)EditorGUILayout.EnumPopup("パーツを区別するID", _target.id);
         _target.forceType = (PartsPerformance.E_ForceType)EditorGUILayout.EnumPopup("力の加わり方の定義", _target.forceType);
 
+        _target.cooltime = EditorGUILayout.FloatField(guiC_cooltime, _target.cooltime);
         _target.m = EditorGUILayout.FloatField(guiC_m, _target.m);
         switch (_target.forceType)
         {

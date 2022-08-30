@@ -14,4 +14,7 @@ public interface IForce
 
     // 力が無くなった際にプレイヤーから引かれる重量（アイテムを使用した際の力で使用）
     public float GetMass();
+
+    // 力が無くなった際に呼ばれる処理（主にアイテム使用中フラグの切替）
+    public void EndPress();
 }

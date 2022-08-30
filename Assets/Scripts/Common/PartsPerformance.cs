@@ -26,4 +26,5 @@ public class PartsPerformance : ScriptableObject
     public float t; // 時間
     public float R; // 抵抗力
     public float k; // 係数
+    public float cooltime;  // 効果終了後のクールタイム
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ForceMove : MonoBehaviour
 {
+    public static float RobotWeight => 1f;  // ロボット単体の重量
+
     // 今加えられている力のリスト
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();
@@ -36,6 +38,7 @@ public class ForceMove : MonoBehaviour
             if (forces[i].IsEnd())
             {
                 // 力が無くなったら重量をプレイヤーから引く（アイテム産の力であれば重量が設定されている）
+                forces[i].EndPress();
                 rb.mass = rb.mass - forces[i].GetMass();
                 forces.RemoveAt(i);
                 i--;
