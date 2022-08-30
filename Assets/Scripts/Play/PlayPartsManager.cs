@@ -5,6 +5,9 @@ using UnityEngine;
 // 道中でのアイテムの入手・使用、重量計算はこっちを介する。
 public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManager>
 {
+    // 現在パーツ使用中かのフラグ
+    [NonSerialized] public bool IsUsingParts = false;
+
     private PartsInfo partsInfo;
     [SerializeField] private PartsPerformanceData partsPerformanceData;
 
@@ -23,12 +26,13 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
     }
 
     // パーツを使う（使うパーツのデータと、生まれる力を返す）
-    public void UseParts(out PartsInfo.PartsData data, out IForce force)
+    public void UseParts(out PartsPerformance performance, out PartsInfo.PartsData data, out IForce force)
     {
         // 使用するパーツのデータを取得する
         if (partsInfo.Length == 0) throw new Exception("使用するパーツがありません。");
+        IsUsingParts = true;
         data = partsInfo.GetParts(0);
-        var performance = partsPerformanceData.getData(data.id);
+        performance = partsPerformanceData.getData(data.id);
         // リストからアイテムを除外する
         partsInfo.RemoveParts();
 
@@ -36,11 +40,11 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         switch (performance.forceType)
         {
             case PartsPerformance.E_ForceType.Bomb:
-                force = new ImpulseForce(data.angle, performance.F, performance.m);
+                force = new ImpulseForce(data.angle, performance.F, performance.m, true);
                 break;
             case PartsPerformance.E_ForceType.Rocket:
             case PartsPerformance.E_ForceType.Propeller:
-                force = new PressForce(data.angle, performance.F, performance.t, performance.k, performance.m);
+                force = new PressForce(data.angle, performance.F, performance.t, performance.k, performance.m, true);
                 break;
             case PartsPerformance.E_ForceType.Glider:
             case PartsPerformance.E_ForceType.CollisionForce:

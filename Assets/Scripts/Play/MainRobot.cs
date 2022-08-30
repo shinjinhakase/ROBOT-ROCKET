@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(ForceMove))]
 public class MainRobot : MonoBehaviour
 {
+    PartsInfo partsInfo;
+    PlayPartsManager playPartsManager;
     RobotStatus _status;
     ForceMove _move;
 
@@ -18,6 +20,7 @@ public class MainRobot : MonoBehaviour
 
     private void Awake()
     {
+        partsInfo = PartsInfo.Instance;
         _status = GetComponent<RobotStatus>();
         _move = GetComponent<ForceMove>();
     }
@@ -25,10 +28,18 @@ public class MainRobot : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // 仮の動作テスト処理（アイテム使用）
-        if (Input.GetKeyDown(KeyCode.Space))
+        // 飛行中の処理
+        if (_status.IsFlying)
         {
-            UseParts();
+            // アイテム使用終了判定
+            if (_status.IsUsingParts && !playPartsManager.IsUsingParts) _status.endUseParts();
+
+            // 仮の操作処理（アイテム使用）
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("アイテム使用ボタンを押した");
+                UseParts();
+            }
         }
     }
 
@@ -37,7 +48,8 @@ public class MainRobot : MonoBehaviour
     public void GameStart()
     {
         // ロボットの初期重量を設定する
-        float allWeight = PlayPartsManager.Instance.GetAllWeight();
+        playPartsManager = PlayPartsManager.Instance;
+        float allWeight = playPartsManager.GetAllWeight();
         _move.SetWeight(allWeight + ForceMove.RobotWeight);
 
         // 状態を変化させる
@@ -54,6 +66,7 @@ public class MainRobot : MonoBehaviour
             Debug.LogWarning("飛行中以外にアイテムを使用しようとしています！");
             return;
         }
+        else if (!partsInfo.HasNext) return;
         else if (!_status.IsPartsUsable)
         {
             // アイテムが使用できない状態のとき
@@ -67,12 +80,13 @@ public class MainRobot : MonoBehaviour
         }
 
         // アイテム管理にアイテムの使用を伝え、必要な情報を貰う
+        PartsPerformance performance;
         PartsInfo.PartsData data;
         IForce force;
-        PlayPartsManager.Instance.UseParts(out data, out force);
+        playPartsManager.UseParts(out performance, out data, out force);
 
         // 状態管理にアイテムの使用を伝える
-        _status.startUseParts(data);
+        _status.startUseParts(performance, data);
 
         // 物理管理に力を加える
         _move.AddForce(force);

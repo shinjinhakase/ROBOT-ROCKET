@@ -27,17 +27,10 @@ public class RobotStatus : MonoBehaviour
 
     [SerializeField] private Animator _animator;
 
-    // Start is called before the first frame update
-    void Start()
+    private void FixedUpdate()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // クールタイム消費
-        if (IsFlying && cooltime > 0)
+        // クールタイム消費（実装方法はコルーチンのWaitForSecondsとか使うべきか迷ってる）
+        if (_status == E_RobotStatus.Cooldown && cooltime > 0)
         {
             cooltime--;
             if (cooltime <= 0)
@@ -62,7 +55,7 @@ public class RobotStatus : MonoBehaviour
     }
 
     // パーツの使用開始
-    public void startUseParts(PartsInfo.PartsData data)
+    public void startUseParts(PartsPerformance performance, PartsInfo.PartsData data)
     {
         // アイテムが使用できる状態か判定
         if (!IsPartsUsable)
@@ -71,8 +64,11 @@ public class RobotStatus : MonoBehaviour
             return;
         }
 
-        // 状態遷移
+        // アイテム使用状態へ状態遷移
         _status = E_RobotStatus.UseParts;
+
+        // クールタイムを計算しておく
+        cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
         // TODO：アイテムの種類によって特有のアニメーションへ遷移
     }
@@ -87,7 +83,7 @@ public class RobotStatus : MonoBehaviour
         }
 
         // 状態遷移（クールタイムがあれば待機状態へ移行する）
-        if (cooltime <= 0) _status = E_RobotStatus.Cooldown;
+        if (cooltime > 0) _status = E_RobotStatus.Cooldown;
         else _status = E_RobotStatus.Fly;
 
         // TODO：飛行orクールタイムのアニメーションに遷移する
