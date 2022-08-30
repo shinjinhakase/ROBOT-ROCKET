@@ -41,6 +41,14 @@ public class MainRobot : MonoBehaviour
                 UseParts();
             }
         }
+        if (Input.GetKey(KeyCode.A))
+        {
+            Time.timeScale = 0.25f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     // ゲーム開始メソッド
@@ -90,5 +98,14 @@ public class MainRobot : MonoBehaviour
 
         // 物理管理に力を加える
         _move.AddForce(force);
+
+        // 召喚オブジェクトを召喚する
+        Transform _transform = transform;
+        Vector3 nowPosition = _transform.position;
+        foreach(SummonableObject summonObject in performance.summonObjects)
+        {
+            var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
+            summonned.Summon(data, _transform);
+        }
     }
 }

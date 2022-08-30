@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable, CreateAssetMenu(fileName = "Parts", menuName = "ScriptableObjects/PartsPerformance")]
@@ -11,7 +12,8 @@ public class PartsPerformance : ScriptableObject
         Rocket,         //ロケット。持続的で低加速・高速度な力を加える。
         Propeller,      //プロペラ。持続的で高加速・低速度な力を加える。
         Glider,         //グライダー。紙飛行機などのような特徴的な力を加える。
-        CollisionForce  //特殊(ステージギミックなど)。プレイヤーが衝突している間、力を加え続ける。
+        CollisionForce, //特殊(ステージギミックなど)。プレイヤーが衝突している間、力を加え続ける。
+        NoForce         //攻撃用のアイテムなど。特に力を加えない。
     }
     // アイテムを区別するIDの役割を果たす列挙型
     public enum E_PartsID
@@ -27,4 +29,5 @@ public class PartsPerformance : ScriptableObject
     public float R; // 抵抗力
     public float k; // 係数
     public float cooltime;  // 効果終了後のクールタイム
+    public List<SummonableObject> summonObjects = new List<SummonableObject>();
 }

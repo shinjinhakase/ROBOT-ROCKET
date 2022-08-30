@@ -63,6 +63,7 @@ public class ForceMove : MonoBehaviour
     // ƒŠƒXƒg‚É—Í‚ð’Ç‰Á‚·‚é
     public void AddForce(IForce force)
     {
+        if (force == null) return;
         force.StartPush();
         forces.Add(force);
     }

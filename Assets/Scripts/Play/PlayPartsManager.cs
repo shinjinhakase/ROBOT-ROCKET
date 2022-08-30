@@ -46,6 +46,9 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
             case PartsPerformance.E_ForceType.Propeller:
                 force = new PressForce(data.angle, performance.F, performance.t, performance.k, performance.m, true);
                 break;
+            case PartsPerformance.E_ForceType.NoForce:
+                force = null;
+                break;
             case PartsPerformance.E_ForceType.Glider:
             case PartsPerformance.E_ForceType.CollisionForce:
             default:
