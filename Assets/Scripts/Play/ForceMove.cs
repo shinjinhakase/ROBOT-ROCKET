@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ForceMove : MonoBehaviour
 {
+    public static float RobotWeight => 1f;  // ロボット単体の重量
+
     // 今加えられている力のリスト
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();

@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 179471747}
   - component: {fileID: 179471746}
   - component: {fileID: 179471745}
+  - component: {fileID: 179471751}
+  - component: {fileID: 179471750}
   m_Layer: 0
   m_Name: TestCube
   m_TagString: Untagged
@@ -279,6 +281,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &179471750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179471744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bad0c2288d01d44a8f79fa28d093f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &179471751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179471744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e0245a094b1e34c89a8bef95edb86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
 --- !u!1 &484747443
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea1d70b4ee5681439108d88a2030c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robot: {fileID: 179471746}
   partsPerformanceData: {fileID: 11400000, guid: 95337da6147298f43934ed34d0386d8f, type: 2}
 --- !u!4 &1051520451
 Transform:
