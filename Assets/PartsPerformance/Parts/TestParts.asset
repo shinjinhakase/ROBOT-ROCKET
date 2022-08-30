@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestParts
   m_EditorClassIdentifier: 
   id: 0
-  forceType: 0
-  m: 0
-  F: 0
-  t: 0
+  forceType: 1
+  m: 0.3
+  F: 15
+  t: 5
   R: 0
-  k: 0
+  k: 1.5
