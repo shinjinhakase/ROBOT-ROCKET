@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class tab : MonoBehaviour{
     
     private Rigidbody2D body;
 
-    public SpriteRenderer tab1;
-    public SpriteRenderer tab2;
-    public SpriteRenderer tab3;
+    public GameObject tab1;
+    public GameObject tab2;
+    public GameObject tab3;
+
+    GameObject[] tabs;
     
     void Start(){
 
         body=GetComponent<Rigidbody2D>();
+        tabs=new GameObject[]{tab1,tab2,tab3};
 
     }
 
@@ -21,28 +25,36 @@ public class tab : MonoBehaviour{
 
     public void Click_tab1(){
 
-        Debug.Log("tab1");
-        tab1.sortingOrder=1;
-        tab2.sortingOrder=0;
-        tab3.sortingOrder=0;
+        draw(0);
 
     }
 
     public void Click_tab2(){
 
-        Debug.Log("tab2");
-        tab1.sortingOrder=0;
-        tab2.sortingOrder=1;
-        tab3.sortingOrder=0;
+        draw(1);
 
     }
 
     public void Click_tab3(){
 
-        Debug.Log("tab3");
-        tab1.sortingOrder=0;
-        tab2.sortingOrder=0;
-        tab3.sortingOrder=1;
+        draw(2);
+
+    }
+
+    void draw(int tab_select){
+
+        for(int i=0;i<3;i++){
+
+            if(i==tab_select){
+
+                tabs[i].GetComponent<SortingGroup>().sortingOrder=1;
+
+            }else{
+
+                tabs[i].GetComponent<SortingGroup>().sortingOrder=0;
+            }
+
+        }
 
     }
 
