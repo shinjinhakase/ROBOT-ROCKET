@@ -35,6 +35,7 @@ public class ForceMove : MonoBehaviour
         {
             if (forces[i].IsEnd())
             {
+                // 力が無くなったら重量をプレイヤーから引く（アイテム産の力であれば重量が設定されている）
                 rb.mass = rb.mass - forces[i].GetMass();
                 forces.RemoveAt(i);
                 i--;

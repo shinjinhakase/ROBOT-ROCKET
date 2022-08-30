@@ -1,16 +1,24 @@
 using System;
 using UnityEngine;
 
+// プレイシーンで使用するアイテムを管理するComponent。
+// 道中でのアイテムの入手・使用、重量計算はこっちから。
 public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManager>
 {
+    private PartsInfo partsInfo;
     [SerializeField] private ForceMove robot;   // 力を加える対象
     [SerializeField] private PartsPerformanceData partsPerformanceData;
 
-    // その時点での総重量を計算して返す
+    private void Start()
+    {
+        partsInfo = PartsInfo.Instance;
+    }
+
+    // 総重量を計算して返す
     public float GetAllWeight()
     {
         float allWeight = 0f;
-        var datas = PartsInfo.Instance.GetPartsList();
+        var datas = partsInfo.GetPartsList();
         datas.ForEach(data => allWeight += partsPerformanceData.getData(data.id).m);
         return allWeight;
     }
@@ -19,11 +27,11 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
     void UseParts()
     {
         // 使用するパーツのデータを取得する
-        // （使用したアイテムの消去は力が消えたら行う）
-        PartsInfo PI = PartsInfo.Instance;
-        if (PI.Length == 0) throw new Exception("使用するパーツがありません。");
-        var data = PI.GetParts(0);
+        if (partsInfo.Length == 0) throw new Exception("使用するパーツがありません。");
+        var data = partsInfo.GetParts(0);
         var performance = partsPerformanceData.getData(data.id);
+        // リストからアイテムを除外する
+        partsInfo.RemoveParts();
 
         // 加える力を構築する
         IForce force;
@@ -53,6 +61,6 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         var data = new PartsInfo.PartsData();
         data.id = PartsPerformance.E_PartsID.TestParts;
         data.angle = 80;
-        PartsInfo.Instance.AddParts(data);
+        partsInfo.AddParts(data);
     }
 }
