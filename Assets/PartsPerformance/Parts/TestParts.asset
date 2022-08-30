@@ -20,4 +20,5 @@ MonoBehaviour:
   R: 0
   k: 1.5
   cooltime: 1
-  summonObjects: []
+  summonObjects:
+  - {fileID: 4481321133947344490, guid: caa2cd5ec6d3ed9468aed5b5dd4f6eb5, type: 3}
