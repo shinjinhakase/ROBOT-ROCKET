@@ -41,6 +41,14 @@ public class MainRobot : MonoBehaviour
                 UseParts();
             }
         }
+        if (Input.GetKey(KeyCode.A))
+        {
+            Time.timeScale = 0.25f;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     // ゲーム開始メソッド
