@@ -11,4 +11,7 @@ public interface IForce
 
     // 力が加わり始めた際に呼び出されるメソッド
     public void StartPush();
+
+    // 力が無くなった際にプレイヤーから引かれる重量（アイテムを使用した際の力で使用）
+    public float GetMass();
 }

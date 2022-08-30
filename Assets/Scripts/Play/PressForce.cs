@@ -3,6 +3,7 @@ using UnityEngine;
 // ロケットやプロペラなど、同じ方向に持続的に力を加え続ける力のクラス
 public class PressForce : IForce
 {
+    public float m;     // （アイテムの重量）
     public float Angle; // 角度
     public float F;     // 力の大きさ
     public float t;     // 力を加える時間（秒）
@@ -12,8 +13,9 @@ public class PressForce : IForce
     private int endFrame;   // 終了時間（フレーム）
     private Vector2 Fe;     // 前方向の基底ベクトル
 
-    public PressForce(float Angle, float F, float t, float k)
+    public PressForce(float Angle, float F, float t, float k, float m = 0)
     {
+        this.m = m;
         this.Angle = Angle;
         this.F = F;
         this.t = t;
@@ -31,6 +33,8 @@ public class PressForce : IForce
     bool IForce.IsEnd() => cntFrame++ == endFrame;
 
     void IForce.StartPush() => cntFrame = 0;
+
+    float IForce.GetMass() => m;
 
     // 前方向の速度を計算する（読まなくて良いけど解説↓）
     //      （Feを前方向の基底ベクトル、Fe2を下方向の基底ベクトルとする）

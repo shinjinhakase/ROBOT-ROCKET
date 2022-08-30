@@ -43,6 +43,13 @@ public class PartsPerformanceEditor : Editor
                 EditorGUILayout.LabelField("考え中…。ステージギミックに使う予定だった。");
                 break;
         }
+
+        // 変更を検知した場合、設定ファイルに書き出す
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Dirtyフラグを立てて、Unity終了時に設定を.assetに書き出す
+            EditorUtility.SetDirty(target);
+        }
     }
 }
 #endif

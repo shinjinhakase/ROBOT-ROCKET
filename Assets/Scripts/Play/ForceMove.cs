@@ -10,13 +10,13 @@ public class ForceMove : MonoBehaviour
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();
 
-    private Rigidbody2D rb;
-
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;
     [SerializeField] private float testF;
     [SerializeField] private float testT;
     [SerializeField] private float testK;
+
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,16 @@ public class ForceMove : MonoBehaviour
         rb.AddForce(F);
 
         // 無くなった力をリストから除去する
-        forces.RemoveAll(force => force.IsEnd());
+        for(int i = 0; i < forces.Count; i++)
+        {
+            if (forces[i].IsEnd())
+            {
+                // 力が無くなったら重量をプレイヤーから引く（アイテム産の力であれば重量が設定されている）
+                rb.mass = rb.mass - forces[i].GetMass();
+                forces.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     // デバッグ用。何らかの力を追加する
@@ -55,6 +64,10 @@ public class ForceMove : MonoBehaviour
         forces.Add(force);
     }
 
+    // 重量を設定する（初期重量の設定用。アイテムを使用した後は自動で重量が減っていく）
+    public void SetWeight(float mass) {
+        rb.mass = mass;
+    }
 
     // 加える合力の計算
     private Vector2 CalcForce()
