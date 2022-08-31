@@ -4,6 +4,13 @@ using UnityEngine;
 // 破壊可能オブジェクト(CrashableObject)を破壊可能なオブジェクトを定義するComponent。
 public class CrasherObject : MonoBehaviour
 {
+    private enum E_DisableSetting
+    {
+        NoSetting,
+        DisableWhenStartAttack,
+        DisableWhenEndAttack
+    }
+
     [Tooltip("攻撃開始の当たり判定を担うCollider2Dをセットする")]
     [SerializeField] private Collider2D CollisionDetectCollider;
 
@@ -16,7 +23,18 @@ public class CrasherObject : MonoBehaviour
     [Tooltip("攻撃が終了してからオブジェクトが破棄されるまでのタイムラグ")]
     [SerializeField] private float DestroyDuration = 0f;
 
+    // 物理・判定動作に関わる設定
+    [Header("詳細設定")]
+    [Tooltip("もしRigidbody2Dがアタッチされているなら、指定のタイミングで移動・回転を固定します")]
+    [SerializeField] private E_DisableSetting DisableRidigbody2DSetting = E_DisableSetting.NoSetting;
+    [Tooltip("もし判定に用いていないCollider2Dがアタッチされているなら、指定のタイミングで無効化します")]
+    [SerializeField] private E_DisableSetting DisableCollider2DSetting = E_DisableSetting.NoSetting;
+
+
     public bool IsStartAttack { get; private set; } = false;
+
+    private Rigidbody2D rb = null;
+    private Collider2D _collider = null;
 
     // Start is called before the first frame update
     private void Awake()
@@ -24,6 +42,9 @@ public class CrasherObject : MonoBehaviour
         // 当たり判定の有効化を確認しておく
         CollisionDetectCollider.enabled = true;
         AttackRangeCollider.enabled = false;
+
+        rb = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
     }
 
     [ContextMenu("Debug/StartAttack")]
@@ -38,6 +59,17 @@ public class CrasherObject : MonoBehaviour
         if (IsStartAttack) return;
         IsStartAttack = true;
 
+        // Ridigbody2Dの移動を設定次第で無効化する
+        if(rb != null && DisableRidigbody2DSetting == E_DisableSetting.DisableWhenStartAttack)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        // Collider2Dを設定次第で無効化する
+        if (_collider != null && DisableCollider2DSetting == E_DisableSetting.DisableWhenStartAttack)
+        {
+            _collider.enabled = false;
+        }
+
         // 衝突判定をオフにし、攻撃の当たり判定をオンにする
         CollisionDetectCollider.enabled = false;
         AttackRangeCollider.enabled = true;
@@ -51,6 +83,16 @@ public class CrasherObject : MonoBehaviour
     {
         yield return new WaitForSeconds(AttackTime);
         AttackRangeCollider.enabled = false;
+        // Ridigbody2Dの移動を設定次第で無効化する
+        if (rb != null && DisableRidigbody2DSetting == E_DisableSetting.DisableWhenEndAttack)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        // Collider2Dを設定次第で無効化する
+        if (_collider != null && DisableCollider2DSetting == E_DisableSetting.DisableWhenEndAttack)
+        {
+            _collider.enabled = false;
+        }
         Destroy(gameObject, DestroyDuration);
     }
 }
