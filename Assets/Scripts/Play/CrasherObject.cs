@@ -33,6 +33,7 @@ public class CrasherObject : MonoBehaviour
 
     public bool IsStartAttack { get; private set; } = false;
 
+    private IEnumerator timerCoroutine;
     private Rigidbody2D rb = null;
     private Collider2D _collider = null;
 
@@ -53,11 +54,26 @@ public class CrasherObject : MonoBehaviour
         StartAttack(CollisionDetectCollider);
     }
 
+    // 攻撃タイマーをスタートさせる
+    public void StartTimer(float time)
+    {
+        if (timerCoroutine != null || IsStartAttack) return;
+        timerCoroutine = SetTimerCoroutine(time);
+        StartCoroutine(timerCoroutine);
+    }
+
     // 攻撃開始時に当たり判定Colliderから呼び出される、衝突メソッド
     public void StartAttack(Collider2D other)
     {
         if (IsStartAttack) return;
         IsStartAttack = true;
+
+        // タイマーが設定されていた場合は切る
+        if(timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
+        }
 
         // Ridigbody2Dの移動を設定次第で無効化する
         if(rb != null && DisableRidigbody2DSetting == E_DisableSetting.DisableWhenStartAttack)
@@ -76,6 +92,13 @@ public class CrasherObject : MonoBehaviour
 
         // 衝突以降の処理を始める
         StartCoroutine(ControlAttack());
+    }
+
+    // 指定秒数後に攻撃開始メソッドを呼び出すメソッド
+    private IEnumerator SetTimerCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+        StartAttack(null);
     }
 
     // 攻撃を開始してからの処理管理メソッド
