@@ -11,7 +11,8 @@ https://jamboard.google.com/d/18bGMHT7Gqq2zIysEBVdmsObe0YRfuFPZ57wtglUFmLk/viewe
 https://jamboard.google.com/d/1A2_xj3gJ2PdqOYkuhJ0LRItLj6UdUwHMEtoA7EmCA40/viewer?f=0<br>
 8月24日<br>
 https://jamboard.google.com/d/1hFgI9bMV8jxPfW7I1mwtX7hJZ6KOiLfZhpG-Sx54yio/viewer?f=0<br>
-
+8月31日<br>
+https://jamboard.google.com/d/15LtmhOt-9kePwlN-D3QiK9NWpK0WJ2ncQ9fNE0Tjq4I/viewer?f=0<br>
 # GitHubの使い方について
 ## 作業手順 
 ### 作業環境を作る 
