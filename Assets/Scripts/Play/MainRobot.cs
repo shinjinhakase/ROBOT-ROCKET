@@ -41,13 +41,15 @@ public class MainRobot : MonoBehaviour
                 UseParts();
             }
         }
-        if (Input.GetKey(KeyCode.A))
+
+        // ヒットストップデバッグ
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            Time.timeScale = 0.25f;
+            PlaySceneController.Instance.RequestHitStopBySlow(0.25f, 1f);
         }
-        else
+        else if(Input.GetKeyDown(KeyCode.S))
         {
-            Time.timeScale = 1;
+            PlaySceneController.Instance.RequestHitStopByStop(1f);
         }
     }
 
