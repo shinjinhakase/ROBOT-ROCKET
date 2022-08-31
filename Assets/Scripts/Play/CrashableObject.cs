@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // 破壊可能なオブジェクトの動作を定義するComponent。
@@ -9,6 +7,7 @@ public class CrashableObject : MonoBehaviour
     [Tooltip("破壊されてから完全にオブジェクトが消えるまでの時間")]
     [SerializeField] private float CrashDuration = 0f;
 
+    public bool IsAlive { get; private set; } = true;
     private Collider2D _collider;
 
     void Awake()
@@ -20,6 +19,9 @@ public class CrashableObject : MonoBehaviour
     [ContextMenu("Debug/Crash")]
     private void Crash()
     {
+        if (!IsAlive) return;
+        IsAlive = false;
+
         // 当たり判定を無効化
         _collider.enabled = false;
 
