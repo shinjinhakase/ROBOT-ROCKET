@@ -50,6 +50,8 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
                 force = null;
                 break;
             case PartsPerformance.E_ForceType.Glider:
+                force = new GliderForce(data.angle, performance.F, performance.t, performance.R, performance.m, true);
+                break;
             case PartsPerformance.E_ForceType.CollisionForce:
             default:
                 throw new Exception("ロボットに加える力を構築できません。");
