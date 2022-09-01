@@ -22,3 +22,5 @@ MonoBehaviour:
   cooltime: 1
   summonObjects:
   - {fileID: 9189922234437165178, guid: 22d0f9f0825994442ab35bce63a23d72, type: 3}
+  partsName: "\u30C6\u30B9\u30C8\u30D1\u30FC\u30C4"
+  description: "\u30C7\u30D0\u30C3\u30B0\u7528\u306E\u88C5\u5099\u30D1\u30FC\u30C4\u3067\u3059\u3002"
