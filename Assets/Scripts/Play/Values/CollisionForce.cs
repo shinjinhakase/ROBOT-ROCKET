@@ -8,7 +8,8 @@ public class CollisionForce : PressForce, IForce
     private ForceGimick gimick;
     private ForceMove target;
 
-    public CollisionForce(ForceGimick gimick, ForceMove target, float Angle, float F, float k) : base(Angle, F, 0, k, 0, false)
+    public CollisionForce(ForceGimick gimick, ForceMove target,
+        float Angle, float F, float k, float m = 0, bool IsPartsForce = false) : base(Angle, F, 0, k, m, IsPartsForce)
     {
         this.gimick = gimick;
         this.target = target;

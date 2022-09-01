@@ -44,7 +44,8 @@ public class PartsPerformanceEditor : Editor
                 EditorGUILayout.LabelField("パラメータ思い出し中…");
                 break;
             case PartsPerformance.E_ForceType.CollisionForce:
-                EditorGUILayout.LabelField("考え中…。ステージギミックに使う予定だった。");
+                EditorGUILayout.LabelField("パーツの力にCollisionForceを直接指定することはできません。");
+                EditorGUILayout.LabelField("NoForceにして、召喚オブジェクトからForceGimickを召喚してください。");
                 break;
             case PartsPerformance.E_ForceType.NoForce:
                 break;
