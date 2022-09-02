@@ -59,6 +59,12 @@ public class ForceMove : MonoBehaviour
         ImpulseForce f = new ImpulseForce(testAngle, testF);
         AddForce(f);
     }
+    [ContextMenu("Debug/AddGliderForce")]
+    private void AddGliderForce()
+    {
+        GliderForce f = new GliderForce(testAngle, testF, testT, testK);
+        AddForce(f);
+    }
 
     // ƒŠƒXƒg‚É—Í‚ð’Ç‰Á‚·‚é
     public void AddForce(IForce force)
