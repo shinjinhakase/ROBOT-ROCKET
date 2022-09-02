@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   forceType: 1
-  m: 0.3
+  m: 0.2
   F: 15
-  t: 5
-  R: 0
-  k: 1.5
+  t: 3
+  R: 0.1
+  k: 1
   cooltime: 1
   summonObjects:
   - {fileID: 9189922234437165178, guid: 22d0f9f0825994442ab35bce63a23d72, type: 3}

@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(ForceMove))]
 public class MainRobot : MonoBehaviour
 {
+    private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
+
     PartsInfo partsInfo;
     PlayPartsManager playPartsManager;
     RobotStatus _status;
@@ -59,7 +61,6 @@ public class MainRobot : MonoBehaviour
     }
 
     // ゲーム開始メソッド
-    [ContextMenu("Debug/GameStart")]
     public void GameStart()
     {
         // ロボットの初期重量を設定する
@@ -113,6 +114,51 @@ public class MainRobot : MonoBehaviour
         {
             var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
             summonned.Summon(data, _transform);
+        }
+    }
+
+
+    // ゲームクリア時の処理
+    public void GameClear()
+    {
+        // 力を無くし、成功アニメーション処理に遷移する
+        _move.ZeroForce();
+        _status.GameClear();
+    }
+    // ゲームオーバー時の処理
+    public void GameOver()
+    {
+        // 失敗アニメーション処理に遷移する
+        _status.GameOver();
+
+        // TODO：ロボットを非表示にするとかする（パージのパーツが飛び散るアニメーションに移る）
+        gameObject.SetActive(false);
+    }
+    // カスタムメニューを開いたときの処理
+    public void OpenCustomMenu()
+    {
+        // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
+        if (_status.IsFlying)
+        {
+            _status.OpenCustomMenu();
+        }
+        // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
+    }
+    // リセットするときの処理
+    public void ResetToStart()
+    {
+        partsInfo = PartsInfo.Instance;
+        _move.ResetToFirst();
+        _status.ResetStatus();
+        gameObject.SetActive(true);
+    }
+
+    // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
+    public void CheckGameOverCollision(Collider2D other)
+    {
+        if (_status.IsFlying && other.CompareTag(GameOverColliderTag))
+        {
+            PlaySceneController.Instance.GameOver();
         }
     }
 }

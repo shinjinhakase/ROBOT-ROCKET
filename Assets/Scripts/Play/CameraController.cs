@@ -84,6 +84,15 @@ public class CameraController : MonoBehaviour
         robotInitX = robotTransform.position.x;
     }
 
+    // カメラをロボットの場所へセットする
+    public void SetCameraToRobot()
+    {
+        Vector3 cameraPos = _transform.position;
+        cameraPos.x = robotTransform.position.x - robotX;
+        cameraPos.y = robotTransform.position.y - initY;
+        _transform.position = cameraPos;
+    }
+
     // カメラの移動が終わった際の処理
     public void endCameraBeginning()
     {

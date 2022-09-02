@@ -19,11 +19,13 @@ public class ForceMove : MonoBehaviour
     [SerializeField] private float testK;
 
     private Rigidbody2D rb;
+    private Vector3 firstPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        firstPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -89,5 +91,19 @@ public class ForceMove : MonoBehaviour
             F = force.CalcForce(F, v);
         }
         return F;
+    }
+
+    // ‰Á‚¦‚é—Í‚ğ–³‚­‚·
+    public void ZeroForce()
+    {
+        forces.Clear();
+    }
+
+    // ‰Šúó‘Ô‚ÉƒŠƒZƒbƒg‚·‚é
+    public void ResetToFirst()
+    {
+        ZeroForce();
+        rb.velocity = Vector2.zero;
+        transform.position = firstPosition;
     }
 }
