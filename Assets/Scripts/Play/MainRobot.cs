@@ -59,7 +59,6 @@ public class MainRobot : MonoBehaviour
     }
 
     // ゲーム開始メソッド
-    [ContextMenu("Debug/GameStart")]
     public void GameStart()
     {
         // ロボットの初期重量を設定する
@@ -114,5 +113,32 @@ public class MainRobot : MonoBehaviour
             var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
             summonned.Summon(data, _transform);
         }
+    }
+
+
+    // ゲームクリア時の処理
+    public void GameClear()
+    {
+        // 力を無くし、成功アニメーション処理に遷移する
+        _move.ZeroForce();
+        _status.GameClear();
+    }
+    // ゲームオーバー時の処理
+    public void GameOver()
+    {
+        // 失敗アニメーション処理に遷移する
+        _status.GameOver();
+    }
+    // カスタムメニューを開いたときの処理
+    public void OpenCustomMenu()
+    {
+        _status.OpenCustomMenu();
+    }
+    // リセットするときの処理
+    public void ResetToStart()
+    {
+        partsInfo = PartsInfo.Instance;
+        _move.ResetToFirst();
+        _status.ResetStatus();
     }
 }

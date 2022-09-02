@@ -129,4 +129,20 @@ public class RobotStatus : MonoBehaviour
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
     }
+
+    // カスタムメニューを開いた際に呼び出されるメソッド
+    public void OpenCustomMenu()
+    {
+        if (PlaySceneController.Instance.IsOpenableCustomMenu)
+        {
+            _status = E_RobotStatus.EndFly;
+        }
+    }
+
+    // 初めからやり直す際に呼び出されるメソッド
+    public void ResetStatus()
+    {
+        _status = E_RobotStatus.Ready;
+        cooltime = 0;
+    }
 }

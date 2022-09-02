@@ -67,4 +67,13 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         data.angle = 80;
         partsInfo.AddParts(data);
     }
+
+    // パーツの使用状況をリセットする。
+    public void ResetPartsStatus()
+    {
+        // アイテムの使用状況をリセットし、カスタムパーツリストを保存した状態に戻す。
+        IsUsingParts = false;
+        partsInfo.Reset();
+        partsInfo = PartsInfo.Instance;
+    }
 }
