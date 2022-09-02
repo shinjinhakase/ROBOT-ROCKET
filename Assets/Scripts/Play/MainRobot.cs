@@ -137,7 +137,12 @@ public class MainRobot : MonoBehaviour
     // カスタムメニューを開いたときの処理
     public void OpenCustomMenu()
     {
-        _status.OpenCustomMenu();
+        // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
+        if (_status.IsFlying)
+        {
+            _status.OpenCustomMenu();
+        }
+        // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
     }
     // リセットするときの処理
     public void ResetToStart()

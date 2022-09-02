@@ -10,7 +10,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     public E_PlayScene scene { get; private set; } = E_PlayScene.FirstCameraMove;
 
     // カスタムメニューを開けるかの判定
-    public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay;
+    public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;
 
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
@@ -43,6 +43,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
 
     // 最初のカメラ移動が終わった際に呼び出されるメソッド
+    [ContextMenu("Scene/EndFirstCameraMove")]
     public void endFirstCameraMove()
     {
         if (scene == E_PlayScene.FirstCameraMove)
@@ -54,7 +55,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // ゲームが開始した際に呼び出されるメソッド
-    [ContextMenu("Debug/GameStart")]
+    [ContextMenu("Scene/GameStart")]
     public void GameStart()
     {
         if (scene == E_PlayScene.StartAnimation)
@@ -66,7 +67,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // カスタムメニューを開く
-    [ContextMenu("Debug/OpenCustomMenu")]
+    [ContextMenu("Scene/OpenCustomMenu")]
     public void OpenCustomMenu()
     {
         if (IsOpenableCustomMenu)
@@ -77,7 +78,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
-            // ロボットを連れていってカスタムメニューを開く処理に移る（カメラの追尾を外す）
+            // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
 
@@ -85,7 +86,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // カスタムメニューを閉じたときの処理
-    [ContextMenu("Debug/CloseCustomMenu")]
+    [ContextMenu("Scene/CloseCustomMenu")]
     public void CloseCustomMenu()
     {
         if (scene == E_PlayScene.CustomMenu) 
@@ -102,7 +103,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // ゲームクリア処理を行う
-    [ContextMenu("Debug/GameClear")]
+    [ContextMenu("Scene/GameClear")]
     public void GameClear()
     {
         if(scene == E_PlayScene.GamePlay)
@@ -118,7 +119,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // ゲームオーバー処理を行う
-    [ContextMenu("Debug/GameOver")]
+    [ContextMenu("Scene/GameOver")]
     public void GameOver()
     {
         if (scene == E_PlayScene.GamePlay)
