@@ -13,7 +13,7 @@ public class PartsPerformanceEditor : Editor
     GUIContent guiC_cooltime = new GUIContent("cooltime", "クールタイム。アイテムの効果が終了してから、次のアイテムが使えるようになるまでの待機時間。");
     GUIContent guiC_name = new GUIContent("partsName", "パーツ名。UIでパーツ名表示に用います。");
     GUIContent guiC_flipF = new GUIContent("F", "揚力の大きさ。縦方向の力に掛ける倍数として計算に用いる。");
-    GUIContent guiC_dragF = new GUIContent("F", "抗力の大きさ。横方向の力に掛ける倍数として計算に用いる。基本揚力より小さい。");
+    GUIContent guiC_dragF = new GUIContent("R", "抗力の大きさ。横方向の力に掛ける倍数として計算に用いる。基本揚力より小さい。");
 
     public override void OnInspectorGUI()
     {
