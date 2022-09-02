@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(ForceMove))]
 public class MainRobot : MonoBehaviour
 {
+    private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
+
     PartsInfo partsInfo;
     PlayPartsManager playPartsManager;
     RobotStatus _status;
@@ -128,6 +130,9 @@ public class MainRobot : MonoBehaviour
     {
         // 失敗アニメーション処理に遷移する
         _status.GameOver();
+
+        // TODO：ロボットを非表示にするとかする（パージのパーツが飛び散るアニメーションに移る）
+        gameObject.SetActive(false);
     }
     // カスタムメニューを開いたときの処理
     public void OpenCustomMenu()
@@ -140,5 +145,15 @@ public class MainRobot : MonoBehaviour
         partsInfo = PartsInfo.Instance;
         _move.ResetToFirst();
         _status.ResetStatus();
+        gameObject.SetActive(true);
+    }
+
+    // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
+    public void CheckGameOverCollision(Collider2D other)
+    {
+        if (_status.IsFlying && other.CompareTag(GameOverColliderTag))
+        {
+            PlaySceneController.Instance.GameOver();
+        }
     }
 }
