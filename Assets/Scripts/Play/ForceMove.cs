@@ -80,6 +80,7 @@ public class ForceMove : MonoBehaviour
     public void SetWeight(float mass) {
         rb.mass = mass;
     }
+    public float GetWeight() => rb.mass;
 
     // ‰Á‚¦‚é‡—Í‚ÌŒvZ
     private Vector2 CalcForce()
