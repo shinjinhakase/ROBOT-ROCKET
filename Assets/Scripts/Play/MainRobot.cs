@@ -9,10 +9,10 @@ public class MainRobot : MonoBehaviour
 {
     private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
 
-    PartsInfo partsInfo;
-    PlayPartsManager playPartsManager;
-    RobotStatus _status;
-    ForceMove _move;
+    private PartsInfo partsInfo;
+    private PlayPartsManager playPartsManager;
+    public RobotStatus _status;
+    public ForceMove _move;
 
     // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool IsUsePartsInForce = false;
