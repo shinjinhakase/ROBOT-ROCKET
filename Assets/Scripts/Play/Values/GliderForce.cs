@@ -9,9 +9,6 @@ public class GliderForce : IForce
     // グライダーが上向き→左に進んでいた場合左に減速しながら上昇するが、失速すると重力によって左に逸れていく。
     // グライダーが下向き→右に加速しながら、グライダー方向に安定して落下する。
 
-    // private AnimationCurve FlipCoeff;   // 揚力曲線（失速角を超えると揚力が急激に失われる）
-    // private AnimationCurve DragCoeff;   // 抗力曲線（失速角を超えると抗力が急激に増加する）
-
     // 基本抗力は揚力より弱め。
     private bool IsPartsForce;
     public float m;     // （アイテムの重量）
@@ -25,6 +22,8 @@ public class GliderForce : IForce
 
     private int cntFrame;
     private int endFrame;
+
+    private PlayPartsManager playPartsManager;
 
     public GliderForce(float Angle, float F, float t, float R, float m = 0, bool IsPartsForce = false)
     {
@@ -50,9 +49,8 @@ public class GliderForce : IForce
         float angleCos = Mathf.Cos(radAngle);
         Fe1 = new Vector2(angleCos, angleSin);
         Fe2 = new Vector2(angleSin, -angleCos);
-        // F *= GetDragCoeff(Angle);
-        // R *= GetFlipCoeff(Angle);
 
+        playPartsManager = PlayPartsManager.Instance;
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
@@ -62,7 +60,7 @@ public class GliderForce : IForce
         return nowForce - Fe1 * vForward * R - Fe2 * vBelow * F;
     }
 
-    bool IForce.IsEnd() => cntFrame++ == endFrame;
+    bool IForce.IsEnd() => cntFrame++ == endFrame || (IsPartsForce && !playPartsManager.IsUsingParts);
 
     void IForce.StartPush() => cntFrame = 0;
 
@@ -79,8 +77,4 @@ public class GliderForce : IForce
         vForward = Vector2.Dot(Fe1, velocity);
         vBelow = Vector2.Dot(Fe2, velocity);
     }
-
-    // 揚力係数・抗力係数の算出
-    // private float GetFlipCoeff(float Angle) => FlipCoeff.Evaluate(Angle);
-    // private float GetDragCoeff(float Angle) => DragCoeff.Evaluate(Angle);
 }

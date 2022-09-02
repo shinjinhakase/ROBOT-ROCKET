@@ -40,6 +40,11 @@ public class MainRobot : MonoBehaviour
                 Debug.Log("アイテム使用ボタンを押した");
                 UseParts();
             }
+            // アイテムの手動パージ（グライダーでは実装？他のパーツではどうするか聞いてない）
+            if(playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
+            {
+                playPartsManager.IsUsingParts = false;
+            }
         }
 
         // ヒットストップデバッグ
