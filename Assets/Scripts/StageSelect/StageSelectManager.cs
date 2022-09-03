@@ -11,7 +11,7 @@ public class StageSelectManager : MonoBehaviour
 
     private void Start()
     {
-        // ステージ選択ボタンを作成
+        // ステージ選択ボタンを作成 ステージ番号格納
         int stageNum = 0;
         foreach(Stage stage in stageDataBase.stageList)
         {
@@ -23,13 +23,24 @@ public class StageSelectManager : MonoBehaviour
             if (stageButton == null) stageButton = stageButtonObj.AddComponent<StageButton>();
 
             // スクロールビューに追加
-            stageButton.transform.parent = scrollViewContent.transform;
+            stageButton.transform.SetParent(scrollViewContent.transform);
 
-            // 初期化
-            stageButton.Init(stage, this, stageNum);
+            // ボタン初期化
+            stageButton.Init(stage, this);
+
+            // ステージ番号格納
+            stage.StageNum = stageNum;
 
             stageNum++;
         }
+
+        // セーブとロードの動作確認
+        /*
+        StagesProgressSaveManager saveManager = new StagesProgressSaveManager();
+        saveManager.Save(new StagesProgressSaveData(stageDataBase.stageList));
+        StagesProgressSaveData saveData = saveManager.Load();
+        Debug.Log($"Operation check : saveData -> {saveData}");
+        */
     }
 
     public void SelectStage(Stage stage)
