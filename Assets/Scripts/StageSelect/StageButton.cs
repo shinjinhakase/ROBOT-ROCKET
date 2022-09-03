@@ -10,12 +10,10 @@ public class StageButton : MonoBehaviour
     public void Init
     (
         Stage stage, 
-        StageSelectManager stageSelectManager, 
-        int stageNum
+        StageSelectManager stageSelectManager
     ){
         this.stage = stage;
         this.stageSelectManager = stageSelectManager;
-        stage.StageNum = stageNum;
     }
 
     public void OnSelect()
