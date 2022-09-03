@@ -8,22 +8,20 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 {
     // シーンの処理場面を示す列挙型
     public E_PlayScene scene { get; private set; } = E_PlayScene.FirstCameraMove;
-    public int frameCnt = 0;    // 経過フレーム数カウント（ゲーム開始後ロボット動き始めが基準）
+    public int StageNum = -1;
 
     // カスタムメニューを開けるかの判定
     public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;
 
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
-
+    private ReplayInputManager replayInputManager;
 
     // ゴールのX座標
     [SerializeField] private float _goalXPoint;
-    public float GoalXPoint
-    {
-        get { return _goalXPoint; }
-        private set { _goalXPoint = value; }
-    }
+    public float GoalXPoint { get { return _goalXPoint; } private set { _goalXPoint = value; } }
+    [SerializeField] private float score;
+    public float Score { get { return score; } private set { score = value; } }
 
     [Tooltip("カメラの移動終了後、ゲーム開始直前に呼び出されるメソッド")]
     [SerializeField] private UnityEvent startAnimation = new UnityEvent();
@@ -40,11 +38,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         cam.CameraReady();
 
         // (必要であればここで暗転の解除など)
-    }
-
-    private void FixedUpdate()
-    {
-        if (scene == E_PlayScene.GamePlay) frameCnt++;
     }
 
     // 最初のカメラ移動が終わった際に呼び出されるメソッド
@@ -66,7 +59,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (scene == E_PlayScene.StartAnimation)
         {
             scene = E_PlayScene.GamePlay;
-            frameCnt = 0;
+
+            // リプレイの準備を完了させる
+            ReplayInputManager.Instance.Ready();
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();

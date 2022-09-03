@@ -81,6 +81,7 @@ public class ForceMove : MonoBehaviour
         rb.mass = mass;
     }
     public float GetWeight() => rb.mass;
+    public Vector2 GetVelocity() => rb.velocity;
 
     // ‰Á‚¦‚é‡—Í‚ÌŒvZ
     private Vector2 CalcForce()

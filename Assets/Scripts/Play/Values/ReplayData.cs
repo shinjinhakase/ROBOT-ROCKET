@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// そのプレイのリプレイ用データを格納するクラス。
+// そのプレイのリプレイ用データを格納するクラス。（ここでのframeとは、FixedUpdateの処理単位時間でのこと）
 [Serializable]
 public class ReplayData
 {
@@ -30,7 +30,7 @@ public class ReplayData
     public void ReadyPartsInfo(int StageNum)
     {
         this.StageNum = StageNum;
-        readyPartsList = PartsInfo.Instance.GetPartsList();
+        readyPartsList = new List<PartsInfo.PartsData>(PartsInfo.Instance.GetPartsList());
         getPartsList.Clear();
         usePartsFrame.Clear();
         locateDatas.Clear();

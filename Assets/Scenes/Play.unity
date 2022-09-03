@@ -549,6 +549,8 @@ MonoBehaviour:
     forceDatas: []
     finishFrame: 0
     score: 0
+  TransformUpdateFrame: 50
+  robot: {fileID: 179471750}
 --- !u!4 &866832309
 Transform:
   m_ObjectHideFlags: 0
@@ -1125,10 +1127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5100536abc5ac0848809c5ba0bffece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameCnt: 0
+  StageNum: -1
   cam: {fileID: 484747447}
   robot: {fileID: 179471750}
   _goalXPoint: 30
+  score: 0
   startAnimation:
     m_PersistentCalls:
       m_Calls:
