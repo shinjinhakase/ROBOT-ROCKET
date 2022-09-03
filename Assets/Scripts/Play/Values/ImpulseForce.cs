@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class ImpulseForce : IForce
 {
     private bool IsPartsForce;   // アイテム産の力かのフラグ

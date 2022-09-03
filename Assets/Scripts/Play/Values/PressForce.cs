@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 // ロケットやプロペラなど、同じ方向に持続的に力を加え続ける力のクラス
+[Serializable]
 public class PressForce : IForce
 {
     private bool IsPartsForce;

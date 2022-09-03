@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class GliderForce : IForce
 {
     // ・グライダーの角度を傾けない場合の軌道予測

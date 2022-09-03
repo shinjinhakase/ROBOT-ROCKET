@@ -8,6 +8,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 {
     // シーンの処理場面を示す列挙型
     public E_PlayScene scene { get; private set; } = E_PlayScene.FirstCameraMove;
+    public int frameCnt = 0;    // 経過フレーム数カウント（ゲーム開始後ロボット動き始めが基準）
 
     // カスタムメニューを開けるかの判定
     public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;
@@ -41,6 +42,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         // (必要であればここで暗転の解除など)
     }
 
+    private void FixedUpdate()
+    {
+        if (scene == E_PlayScene.GamePlay) frameCnt++;
+    }
 
     // 最初のカメラ移動が終わった際に呼び出されるメソッド
     [ContextMenu("Scene/EndFirstCameraMove")]
@@ -61,6 +66,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (scene == E_PlayScene.StartAnimation)
         {
             scene = E_PlayScene.GamePlay;
+            frameCnt = 0;
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();
