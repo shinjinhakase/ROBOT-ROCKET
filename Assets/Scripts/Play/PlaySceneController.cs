@@ -15,7 +15,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
-    private ReplayInputManager replayInputManager;
 
     // ゴールのX座標
     [SerializeField] private float _goalXPoint;
@@ -73,6 +72,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (IsOpenableCustomMenu)
         {
+            if (scene == E_PlayScene.GamePlay)
+            {
+                ReplayInputManager.Instance.SetResult();
+            }
             scene = E_PlayScene.CustomMenu;
 
             // ヒットストップ処理を停止し、時間の流れを戻す
@@ -115,6 +118,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
+            ReplayInputManager.Instance.SetResult();
             robot.GameClear();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。
         }
@@ -131,6 +135,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
+            ReplayInputManager.Instance.SetResult();
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();

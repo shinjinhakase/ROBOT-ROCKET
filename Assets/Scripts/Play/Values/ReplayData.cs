@@ -87,7 +87,10 @@ public class ReplayData
                 collisionForce.Angle, t: 0, F: collisionForce.F, k: collisionForce.k);
             forceDatas.Add(forceData);
         }
-        throw new Exception("加わった力をリプレイに保存できませんでした。");
+        else
+        {
+            throw new Exception("加わった力をリプレイに保存できませんでした。");
+        }
     }
     // 終了結果を記録する
     public void RegisterResult(int frame, float score)

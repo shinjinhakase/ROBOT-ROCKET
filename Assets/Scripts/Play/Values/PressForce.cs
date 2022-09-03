@@ -35,6 +35,10 @@ public class PressForce : IForce
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
+    private bool _isMainRobot = false;
+    bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+
+
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Fe * (F - k * CalcFrontVelocity(velocity));
 
     bool IForce.IsEnd() => cntFrame++ == endFrame || (IsPartsForce && !playPartsManager.IsUsingParts);
@@ -46,6 +50,7 @@ public class PressForce : IForce
     void IForce.EndPress()
     {
         if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+        if (_isMainRobot) ReplayInputManager.Instance.SetForce(this);
     }
 
     // 前方向の速度を計算する（読まなくて良いけど解説↓）

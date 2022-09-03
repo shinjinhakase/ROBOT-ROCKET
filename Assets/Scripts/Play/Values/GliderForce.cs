@@ -54,6 +54,10 @@ public class GliderForce : IForce
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
+    private bool _isMainRobot = false;
+    bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+
+
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity)
     {
         CalcVelocity(velocity, out float vForward, out float vBelow);
@@ -69,6 +73,7 @@ public class GliderForce : IForce
     void IForce.EndPress()
     {
         if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+        if (_isMainRobot) ReplayInputManager.Instance.SetForce(this);
     }
 
     // ‘¬“x‚ð‘O•û‚Æ‰º•û‚É•ª‰ð‚·‚é

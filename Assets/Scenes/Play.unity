@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forces: []
+  IsMainRobot: 1
   testAngle: 80
   testF: 30
   testT: 3

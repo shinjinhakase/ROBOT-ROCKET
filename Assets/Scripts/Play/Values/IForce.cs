@@ -3,6 +3,8 @@ using UnityEngine;
 // 力のインターフェース
 public interface IForce
 {
+    public bool IsMainRobot { get; set; }
+
     // 現時点での合力と現在の速度から、力を計算するメソッド
     public Vector2 CalcForce(Vector2 nowForce, Vector2 velocity);
 
