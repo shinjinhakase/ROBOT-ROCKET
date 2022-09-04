@@ -19,8 +19,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     // ゴールのX座標
     [SerializeField] private float _goalXPoint;
     public float GoalXPoint { get { return _goalXPoint; } private set { _goalXPoint = value; } }
-    [SerializeField] private float score;
-    public float Score { get { return score; } private set { score = value; } }
+    [SerializeField] private float _score;
+    public float Score {
+        get { return _score; }
+        set { if (_score <= _goalXPoint) _score = value; else _score = _goalXPoint; }
+    }
 
     [Tooltip("カメラの移動終了後、ゲーム開始直前に呼び出されるメソッド")]
     [SerializeField] private UnityEvent startAnimation = new UnityEvent();
@@ -47,6 +50,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.StartAnimation;
 
+            _score = 0;
             // 開始アニメーション処理を呼び出す
             startAnimation.Invoke();
         }
@@ -120,6 +124,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
+            cam.IsFollowRobot = false;
             robot.GameClear();
             ReplayInputManager.Instance.SetResult();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。

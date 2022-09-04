@@ -11,6 +11,7 @@ public class MainRobot : MonoBehaviour
 
     private PartsInfo partsInfo;
     private ReplayInputManager replayInputManager;
+    private PlaySceneController playSceneController;
     private PlayPartsManager playPartsManager;
     public RobotStatus _status;
     public ForceMove _move;
@@ -20,6 +21,8 @@ public class MainRobot : MonoBehaviour
     // リプレイ操作に従うか
     // private bool ReplayMode = false;
 
+    // 最高到達距離
+    private float _highScore = 0;
 
     private void Awake()
     {
@@ -61,11 +64,27 @@ public class MainRobot : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        // 最高到達距離を確認する
+        if (_status.IsFlying && transform.position.x > _highScore)
+        {
+            _highScore = transform.position.x;
+            playSceneController.Score = _highScore;
+            // クリア判定
+            if (_highScore >= playSceneController.GoalXPoint)
+            {
+                playSceneController.GameClear();
+            }
+        }
+    }
+
     // ゲーム開始メソッド
     public void GameStart()
     {
         // ロボットの初期重量を設定する
         replayInputManager = ReplayInputManager.Instance;
+        playSceneController = PlaySceneController.Instance;
         playPartsManager = PlayPartsManager.Instance;
         float allWeight = playPartsManager.GetAllWeight();
         _move.SetWeight(allWeight + ForceMove.RobotWeight);
