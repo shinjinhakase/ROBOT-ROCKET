@@ -10,6 +10,7 @@ public class MainRobot : MonoBehaviour
     private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
 
     private PartsInfo partsInfo;
+    private ReplayInputManager replayInputManager;
     private PlayPartsManager playPartsManager;
     public RobotStatus _status;
     public ForceMove _move;
@@ -64,12 +65,16 @@ public class MainRobot : MonoBehaviour
     public void GameStart()
     {
         // ロボットの初期重量を設定する
+        replayInputManager = ReplayInputManager.Instance;
         playPartsManager = PlayPartsManager.Instance;
         float allWeight = playPartsManager.GetAllWeight();
         _move.SetWeight(allWeight + ForceMove.RobotWeight);
 
         // 状態を変化させる
         _status.startGame();
+
+        // 開始と同時にリプレイのフレームカウントをスタートさせる（仮の処理）
+        replayInputManager.StartMemory();
     }
 
     // アイテムを使用する処理
@@ -160,5 +165,11 @@ public class MainRobot : MonoBehaviour
         {
             PlaySceneController.Instance.GameOver();
         }
+    }
+    // リプレイに自分の位置と速度情報を格納する
+    public void GetTransform(out Vector2 position, out Vector2 velocity)
+    {
+        position = transform.position;
+        velocity = _move.GetVelocity();
     }
 }

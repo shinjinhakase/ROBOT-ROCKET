@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class GliderForce : IForce
 {
     // ・グライダーの角度を傾けない場合の軌道予測
@@ -54,6 +54,10 @@ public class GliderForce : IForce
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
+    private bool _isMainRobot = false;
+    bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+    int IForce.frameCnt { get { return cntFrame; } set { cntFrame = value; } }
+
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity)
     {
         CalcVelocity(velocity, out float vForward, out float vBelow);
@@ -69,6 +73,7 @@ public class GliderForce : IForce
     void IForce.EndPress()
     {
         if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+        if (_isMainRobot) ReplayInputManager.Instance.SetForce(this);
     }
 
     // 速度を前方と下方に分解する

@@ -11,6 +11,8 @@ public class ForceMove : MonoBehaviour
     // 今加えられている力のリスト
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();
+    [SerializeField]
+    private bool IsMainRobot = false;
 
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;
@@ -72,6 +74,7 @@ public class ForceMove : MonoBehaviour
     public void AddForce(IForce force)
     {
         if (force == null) return;
+        force.IsMainRobot = IsMainRobot;
         force.StartPush();
         forces.Add(force);
     }
@@ -81,6 +84,7 @@ public class ForceMove : MonoBehaviour
         rb.mass = mass;
     }
     public float GetWeight() => rb.mass;
+    public Vector2 GetVelocity() => rb.velocity;
 
     // 加える合力の計算
     private Vector2 CalcForce()
