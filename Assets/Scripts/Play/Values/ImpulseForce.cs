@@ -25,6 +25,7 @@ public class ImpulseForce : IForce
 
     private bool _isMainRobot = false;
     bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+    int IForce.frameCnt { get { return 1; } set { } }
 
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Force;
 

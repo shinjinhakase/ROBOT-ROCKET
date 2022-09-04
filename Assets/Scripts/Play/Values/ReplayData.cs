@@ -56,13 +56,14 @@ public class ReplayData
     // ロボットに加わった力を記録する
     public void RegisterRobotForce(int frame, IForce force)
     {
-        // TODO：途中で手動パージした場合の時間の対応、当たり判定型の力の対応
-        Debug.LogWarning("力のリプレイデータ保存機能はまだ完全に実装できていません。");
+        // 力を加え始めたフレームを計算する
+        frame = frame - force.frameCnt;
+        // それぞれの力のタイプに合わせてデータを記録する
         if (typeof(PressForce) == force.GetType())
         {
             PressForce pressForce = (PressForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.Rocket,
-                pressForce.Angle, t: pressForce.t, F: pressForce.F, k: pressForce.k);
+                pressForce.Angle, t: force.frameCnt - 1, F: pressForce.F, k: pressForce.k);
             forceDatas.Add(forceData);
         }
         else if (typeof(ImpulseForce) == force.GetType())
@@ -76,7 +77,7 @@ public class ReplayData
         {
             GliderForce gliderForce = (GliderForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.Glider,
-                gliderForce.Angle, t: gliderForce.t, F: gliderForce.F, k: gliderForce.R);
+                gliderForce.Angle, t: force.frameCnt - 1, F: gliderForce.F, k: gliderForce.R);
             forceDatas.Add(forceData);
         }
         else if (typeof(CollisionForce) == force.GetType())
@@ -84,7 +85,7 @@ public class ReplayData
             // 時間の対応がそもそもまだ
             CollisionForce collisionForce = (CollisionForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.CollisionForce,
-                collisionForce.Angle, t: 0, F: collisionForce.F, k: collisionForce.k);
+                collisionForce.Angle, t: force.frameCnt - 1, F: collisionForce.F, k: collisionForce.k);
             forceDatas.Add(forceData);
         }
         else
@@ -124,11 +125,12 @@ public class ReplayData
         public float F;
         public float k;
         public ForceData(int frame, PartsPerformance.E_ForceType forceType, float Angle,
-            float t = 0, float F = 0, float k = 0)
+            int t = 0, float F = 0, float k = 0)
         {
             this.frame = frame;
             this.forceType = forceType;
-            this.t = t;
+            this.t = t * Time.fixedDeltaTime;
+            this.Angle = Angle;
             this.F = F;
             this.k = k;
         }

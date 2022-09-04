@@ -56,7 +56,7 @@ public class GliderForce : IForce
 
     private bool _isMainRobot = false;
     bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
-
+    int IForce.frameCnt { get { return cntFrame; } set { cntFrame = value; } }
 
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity)
     {

@@ -12,7 +12,7 @@ public class PressForce : IForce
     public float t;     // 力を加える時間（秒）
     public float k;     // 抵抗力（大きい程終端速度が遅くなる）
 
-    private int cntFrame;   // 経過時間（フレーム）
+    protected int cntFrame; // 経過時間（フレーム）
     private int endFrame;   // 終了時間（フレーム）
     private Vector2 Fe;     // 前方向の基底ベクトル
 
@@ -37,7 +37,7 @@ public class PressForce : IForce
 
     private bool _isMainRobot = false;
     bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
-
+    int IForce.frameCnt { get { return cntFrame; } set { cntFrame = value; } }
 
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Fe * (F - k * CalcFrontVelocity(velocity));
 

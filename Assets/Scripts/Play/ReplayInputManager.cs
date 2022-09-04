@@ -49,8 +49,8 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        frameCnt = -1;
         _data.RegisterResult(frameCnt, _sceneController.Score);
+        frameCnt = -1;
     }
 
     // 定期的にロボット位置を記録する
