@@ -134,9 +134,10 @@ public class MainRobot : MonoBehaviour
     public void GameOver()
     {
         // 失敗アニメーション処理に遷移する
+        _move.ZeroForce();
         _status.GameOver();
 
-        // TODO：ロボットを非表示にするとかする（パージのパーツが飛び散るアニメーションに移る）
+        // ロボットを非表示にする（パージのパーツが飛び散るアニメーションに移る）
         gameObject.SetActive(false);
     }
     // カスタムメニューを開いたときの処理
@@ -145,6 +146,7 @@ public class MainRobot : MonoBehaviour
         // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
         if (_status.IsFlying)
         {
+            _move.ZeroForce();
             _status.OpenCustomMenu();
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）

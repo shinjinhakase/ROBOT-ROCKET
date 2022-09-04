@@ -72,9 +72,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (IsOpenableCustomMenu)
         {
+            bool IsNeedSetResult = false;
             if (scene == E_PlayScene.GamePlay)
             {
-                ReplayInputManager.Instance.SetResult();
+                IsNeedSetResult = true;
             }
             scene = E_PlayScene.CustomMenu;
 
@@ -85,6 +86,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
+            if (IsNeedSetResult) ReplayInputManager.Instance.SetResult();
 
             // TODO：カスタムメニューのオープン処理を実装
         }
@@ -118,8 +120,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
-            ReplayInputManager.Instance.SetResult();
             robot.GameClear();
+            ReplayInputManager.Instance.SetResult();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。
         }
     }
@@ -135,10 +137,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
-            ReplayInputManager.Instance.SetResult();
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
+            ReplayInputManager.Instance.SetResult();
             // TODO：ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             // TODO：結果表示のUIでやり直しボタンを押させるか、ゲームオーバーアニメーションの数秒後にまた開始/カスタム入りする？
         }

@@ -101,6 +101,15 @@ public class ForceMove : MonoBehaviour
     // 加える力を無くす
     public void ZeroForce()
     {
+        // メインロボットの力など、必要であればリプレイに残った力を保存しておく
+        if (IsMainRobot)
+        {
+            ReplayInputManager replayInputManager = ReplayInputManager.Instance;
+            foreach(var force in forces)
+            {
+                replayInputManager.SetForce(force);
+            }
+        }
         forces.Clear();
     }
 
