@@ -4,6 +4,7 @@ using UnityEngine;
 
 // ロボットの状態を管理するクラス。アニメーションなどを処理したりする。
 // 操作キャラ・リプレイ・シャドウの基盤。
+[RequireComponent(typeof(PurgeManager))]
 public class RobotStatus : MonoBehaviour
 {
     // ロボットの状態を示す列挙型
@@ -26,6 +27,14 @@ public class RobotStatus : MonoBehaviour
 
 
     [SerializeField] private Animator _animator;
+    private PurgeManager _purgeManager;
+
+    [SerializeField] private List<Rigidbody2D> GameOverRobotPurgeData = new List<Rigidbody2D>();
+
+    private void Awake()
+    {
+        _purgeManager = GetComponent<PurgeManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -128,5 +137,22 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.EndFly;
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
+        _purgeManager.AddParts(GameOverRobotPurgeData);
+    }
+
+    // カスタムメニューを開いた際に呼び出されるメソッド
+    public void OpenCustomMenu()
+    {
+        if (PlaySceneController.Instance.IsOpenableCustomMenu)
+        {
+            _status = E_RobotStatus.EndFly;
+        }
+    }
+
+    // 初めからやり直す際に呼び出されるメソッド
+    public void ResetStatus()
+    {
+        _status = E_RobotStatus.Ready;
+        cooltime = 0;
     }
 }

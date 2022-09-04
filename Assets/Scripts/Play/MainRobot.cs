@@ -7,10 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(ForceMove))]
 public class MainRobot : MonoBehaviour
 {
-    PartsInfo partsInfo;
-    PlayPartsManager playPartsManager;
-    RobotStatus _status;
-    ForceMove _move;
+    private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
+
+    private PartsInfo partsInfo;
+    private PlayPartsManager playPartsManager;
+    public RobotStatus _status;
+    public ForceMove _move;
 
     // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool IsUsePartsInForce = false;
@@ -40,19 +42,25 @@ public class MainRobot : MonoBehaviour
                 Debug.Log("アイテム使用ボタンを押した");
                 UseParts();
             }
+            // アイテムの手動パージ（グライダーでは実装？他のパーツではどうするか聞いてない）
+            if(playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
+            {
+                playPartsManager.IsUsingParts = false;
+            }
         }
-        if (Input.GetKey(KeyCode.A))
+
+        // ヒットストップデバッグ
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            Time.timeScale = 0.25f;
+            PlaySceneController.Instance.RequestHitStopBySlow(0.25f, 1f);
         }
-        else
+        else if(Input.GetKeyDown(KeyCode.S))
         {
-            Time.timeScale = 1;
+            PlaySceneController.Instance.RequestHitStopByStop(1f);
         }
     }
 
     // ゲーム開始メソッド
-    [ContextMenu("Debug/GameStart")]
     public void GameStart()
     {
         // ロボットの初期重量を設定する
@@ -106,6 +114,51 @@ public class MainRobot : MonoBehaviour
         {
             var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
             summonned.Summon(data, _transform);
+        }
+    }
+
+
+    // ゲームクリア時の処理
+    public void GameClear()
+    {
+        // 力を無くし、成功アニメーション処理に遷移する
+        _move.ZeroForce();
+        _status.GameClear();
+    }
+    // ゲームオーバー時の処理
+    public void GameOver()
+    {
+        // 失敗アニメーション処理に遷移する
+        _status.GameOver();
+
+        // TODO：ロボットを非表示にするとかする（パージのパーツが飛び散るアニメーションに移る）
+        gameObject.SetActive(false);
+    }
+    // カスタムメニューを開いたときの処理
+    public void OpenCustomMenu()
+    {
+        // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
+        if (_status.IsFlying)
+        {
+            _status.OpenCustomMenu();
+        }
+        // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
+    }
+    // リセットするときの処理
+    public void ResetToStart()
+    {
+        partsInfo = PartsInfo.Instance;
+        _move.ResetToFirst();
+        _status.ResetStatus();
+        gameObject.SetActive(true);
+    }
+
+    // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
+    public void CheckGameOverCollision(Collider2D other)
+    {
+        if (_status.IsFlying && other.CompareTag(GameOverColliderTag))
+        {
+            PlaySceneController.Instance.GameOver();
         }
     }
 }

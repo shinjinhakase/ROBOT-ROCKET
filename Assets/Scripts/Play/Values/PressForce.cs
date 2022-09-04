@@ -14,6 +14,8 @@ public class PressForce : IForce
     private int endFrame;   // 終了時間（フレーム）
     private Vector2 Fe;     // 前方向の基底ベクトル
 
+    private PlayPartsManager playPartsManager;
+
     public PressForce(float Angle, float F, float t, float k, float m = 0, bool IsPartsForce = false)
     {
         this.IsPartsForce = IsPartsForce;
@@ -27,12 +29,13 @@ public class PressForce : IForce
         float radAngle = Angle * Mathf.Deg2Rad;
         Fe = new Vector2(Mathf.Cos(radAngle), Mathf.Sin(radAngle));
 
+        playPartsManager = PlayPartsManager.Instance;
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Fe * (F - k * CalcFrontVelocity(velocity));
 
-    bool IForce.IsEnd() => cntFrame++ == endFrame;
+    bool IForce.IsEnd() => cntFrame++ == endFrame || (IsPartsForce && !playPartsManager.IsUsingParts);
 
     void IForce.StartPush() => cntFrame = 0;
 

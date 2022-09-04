@@ -16,7 +16,6 @@ public class items : MonoBehaviour{
     void Start(){
 
         isActive=true;
-        queue.nowActive++;
         mynumber=queue.nowActive;
 
         _renderer=GetComponent<SpriteRenderer>();

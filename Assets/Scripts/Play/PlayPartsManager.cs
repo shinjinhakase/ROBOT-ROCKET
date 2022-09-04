@@ -50,11 +50,21 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
                 force = null;
                 break;
             case PartsPerformance.E_ForceType.Glider:
+                force = new GliderForce(data.angle, performance.F, performance.t, performance.R, performance.m, true);
+                break;
             case PartsPerformance.E_ForceType.CollisionForce:
             default:
                 throw new Exception("ロボットに加える力を構築できません。");
         }
     }
+
+    // パーツを獲得する処理
+    public void GetParts(PartsInfo.PartsData data, out PartsPerformance performance)
+    {
+        partsInfo.AddParts(data);
+        performance = partsPerformanceData.getData(data.id);
+    }
+
 
     // デバッグ用。使用パーツリストにテストパーツを追加する。
     [ContextMenu("Debug/GetTestParts")]
@@ -64,5 +74,14 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         data.id = PartsPerformance.E_PartsID.TestParts;
         data.angle = 80;
         partsInfo.AddParts(data);
+    }
+
+    // パーツの使用状況をリセットする。
+    public void ResetPartsStatus()
+    {
+        // アイテムの使用状況をリセットし、カスタムパーツリストを保存した状態に戻す。
+        IsUsingParts = false;
+        partsInfo.Reset();
+        partsInfo = PartsInfo.Instance;
     }
 }

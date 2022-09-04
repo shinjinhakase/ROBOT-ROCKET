@@ -19,11 +19,13 @@ public class ForceMove : MonoBehaviour
     [SerializeField] private float testK;
 
     private Rigidbody2D rb;
+    private Vector3 firstPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        firstPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -59,6 +61,12 @@ public class ForceMove : MonoBehaviour
         ImpulseForce f = new ImpulseForce(testAngle, testF);
         AddForce(f);
     }
+    [ContextMenu("Debug/AddGliderForce")]
+    private void AddGliderForce()
+    {
+        GliderForce f = new GliderForce(testAngle, testF, testT, testK);
+        AddForce(f);
+    }
 
     // リストに力を追加する
     public void AddForce(IForce force)
@@ -72,6 +80,7 @@ public class ForceMove : MonoBehaviour
     public void SetWeight(float mass) {
         rb.mass = mass;
     }
+    public float GetWeight() => rb.mass;
 
     // 加える合力の計算
     private Vector2 CalcForce()
@@ -83,5 +92,19 @@ public class ForceMove : MonoBehaviour
             F = force.CalcForce(F, v);
         }
         return F;
+    }
+
+    // 加える力を無くす
+    public void ZeroForce()
+    {
+        forces.Clear();
+    }
+
+    // 初期状態にリセットする
+    public void ResetToFirst()
+    {
+        ZeroForce();
+        rb.velocity = Vector2.zero;
+        transform.position = firstPosition;
     }
 }

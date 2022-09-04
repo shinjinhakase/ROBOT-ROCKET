@@ -29,5 +29,9 @@ public class PartsPerformance : ScriptableObject
     public float R; // 抵抗力
     public float k; // 係数
     public float cooltime;  // 効果終了後のクールタイム
-    public List<SummonableObject> summonObjects = new List<SummonableObject>();
+    public List<SummonableObject> summonObjects = new List<SummonableObject>(); //召喚オブジェクトリスト
+
+    public string partsName;    //アイテム名前
+    [Tooltip("説明文。UIでパーツ説明に用います。"), TextArea(3, 5)]
+    public string description;  //アイテム説明
 }

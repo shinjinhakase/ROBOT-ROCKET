@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6455922188539376403}
   - component: {fileID: 6858129573786715790}
   - component: {fileID: 3986489337368776227}
+  - component: {fileID: -2052427304903768821}
   m_Layer: 0
   m_Name: icon_fireworks
   m_TagString: Untagged
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &-2052427304903768821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018791320898451136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9bf06654063bf4ba3534bcdc4f85a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
