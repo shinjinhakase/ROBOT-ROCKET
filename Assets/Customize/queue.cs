@@ -8,7 +8,7 @@ public class queue : MonoBehaviour{
     private List<PartsInfo.PartsData> myList; 
 
     //テスト用配列
-    private List<GameObject> testlist;
+    public static List<GameObject> testlist;
 
     public static float draw_position=4;
 

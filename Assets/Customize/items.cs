@@ -8,6 +8,7 @@ public class items : MonoBehaviour{
     private bool isActive=false;
 
     private int mynumber=0;
+    private float myangle=0;
 
     private bool change_alpha=false;
 
@@ -16,7 +17,7 @@ public class items : MonoBehaviour{
     void Start(){
 
         isActive=true;
-        mynumber=queue.nowActive;
+        mynumber=queue.testlist.Count;
 
         _renderer=GetComponent<SpriteRenderer>();
         
@@ -25,32 +26,48 @@ public class items : MonoBehaviour{
 
     void Update(){
 
+        if(mynumber==queue.nowActive){
+            
+            if(isActive==false){
+
+                customize.obj_angle=myangle;
+
+            }
+            
+            isActive=true;
+            change_alpha=false;
+
+        }else{
+
+            if(isActive==true){
+
+                this.transform.rotation=Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, myangle);
+
+            }
+            
+            isActive=false;
+
+        }
+        
         if(isActive){
 
             this.transform.rotation=Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, customize.obj_angle);
             _renderer.color=new Color32(255,255,255,255);
+            myangle=customize.obj_angle;
+            
 
         }else{
 
             if(change_alpha==false){
 
-                _renderer.color=new Color32(255,255,255,100);
+                _renderer.color=new Color32(255,255,255,50);
                 change_alpha=true;
 
             }
 
         }
 
-        if(mynumber==queue.nowActive){
-
-            isActive=true;
-            change_alpha=false;
-
-        }else{
-
-            isActive=false;
-
-        }
+        
         
     }
 

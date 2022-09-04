@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class icon_inqueue : MonoBehaviour{
 
@@ -16,9 +17,16 @@ public class icon_inqueue : MonoBehaviour{
     void Start(){
 
         isActive=true;
-        mynumber=queue.nowActive;
+        mynumber=queue.testlist.Count;
 
         _renderer=GetComponent<SpriteRenderer>();
+
+        this.gameObject.AddComponent<EventTrigger>();
+        EventTrigger _trigger=this.GetComponent<EventTrigger>();
+        EventTrigger.Entry _entry=new EventTrigger.Entry();
+        _entry.eventID=EventTriggerType.PointerClick;
+        _entry.callback.AddListener((eventData)=>{Click();});
+        _trigger.triggers.Add(_entry);
         
 
     }
@@ -51,6 +59,12 @@ public class icon_inqueue : MonoBehaviour{
 
         }
         
+    }
+
+    public void Click(){
+
+        queue.nowActive=mynumber;
+
     }
 
 }
