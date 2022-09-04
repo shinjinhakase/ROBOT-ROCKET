@@ -15,6 +15,9 @@ public class queue : MonoBehaviour{
 
     public float draw_position;
 
+    //今何番目のアイテムがアクティブになっているか
+    public static int nowActive=0;
+
     void Start(){
 
         partsInfo = PartsInfo.Instance;
@@ -42,7 +45,7 @@ public class queue : MonoBehaviour{
     //描画処理
     void Draw(){
 
-        GameObject draw_icon=Instantiate(catch_icon) as GameObject;
+        GameObject draw_icon=Instantiate (catch_icon) as GameObject;
         draw_icon.transform.position=new Vector2(8,draw_position);
         draw_position-=1.0f;
 
