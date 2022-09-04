@@ -16,18 +16,18 @@ MonoBehaviour:
   - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 100
     memo: TestData0
-  - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - thumbnail: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 200
     memo: TestData1
-  - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - thumbnail: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 300
     memo: TestData2
-  - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - thumbnail: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 400
     memo: TestData3
-  - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - thumbnail: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 500
     memo: TestData4
-  - thumbnail: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - thumbnail: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
     goalDistance: 600
     memo: TestData5
