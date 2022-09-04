@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StagesProgressSaveManager
+public class ProgressSaveManager
 {
-    private string keyStr = "StagesProgressSaveData";
+    private string keyStr = "ProgressData";
 
-    public void Save(StagesProgressSaveData saveData)
+    public void Save(ProgressData saveData)
     {
         // セーブデータ形式変換
         string jsonSaveDataStr = JsonUtility.ToJson(saveData);
@@ -16,13 +16,13 @@ public class StagesProgressSaveManager
         PlayerPrefs.Save();
     }
 
-    public StagesProgressSaveData Load()
+    public ProgressData Load()
     {
         string jsonSaveDataStr = PlayerPrefs.GetString(keyStr);
         Debug.Log($"jsonSaveDataStr -> {jsonSaveDataStr}");
 
-        StagesProgressSaveData saveData 
-            = JsonUtility.FromJson<StagesProgressSaveData>(jsonSaveDataStr);
+        ProgressData saveData 
+            = JsonUtility.FromJson<ProgressData>(jsonSaveDataStr);
         return saveData;
     }
 }

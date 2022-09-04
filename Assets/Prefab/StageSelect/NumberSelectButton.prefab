@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5393075291862608253}
   - component: {fileID: 4867546816740186638}
   m_Layer: 5
-  m_Name: StageButton
+  m_Name: NumberSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,3 +227,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41264056d9a22824380c22bfd1846c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numText: {fileID: 5393075291713430650}

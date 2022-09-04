@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StageButton : MonoBehaviour
+public class NumberSelectButton : MonoBehaviour
 {
+    [SerializeField] private Text numText;
+
     private Stage stage;
     private StageSelectManager stageSelectManager;
 
@@ -14,6 +17,8 @@ public class StageButton : MonoBehaviour
     ){
         this.stage = stage;
         this.stageSelectManager = stageSelectManager;
+
+        numText.text = (stage.StageNum + 1).ToString("00");
     }
 
     public void OnSelect()
