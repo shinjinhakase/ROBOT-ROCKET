@@ -11,6 +11,7 @@ public class MainRobot : MonoBehaviour
 
     private PartsInfo partsInfo;
     private ReplayInputManager replayInputManager;
+    private PlaySceneController playSceneController;
     private PlayPartsManager playPartsManager;
     public RobotStatus _status;
     public ForceMove _move;
@@ -20,6 +21,8 @@ public class MainRobot : MonoBehaviour
     // リプレイ操作に従うか
     // private bool ReplayMode = false;
 
+    // 最高到達距離
+    private float _highScore = 0;
 
     private void Awake()
     {
@@ -61,11 +64,27 @@ public class MainRobot : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        // 最高到達距離を確認する
+        if (_status.IsFlying && transform.position.x > _highScore)
+        {
+            _highScore = transform.position.x;
+            playSceneController.Score = _highScore;
+            // クリア判定
+            if (_highScore >= playSceneController.GoalXPoint)
+            {
+                playSceneController.GameClear();
+            }
+        }
+    }
+
     // ゲーム開始メソッド
     public void GameStart()
     {
         // ロボットの初期重量を設定する
         replayInputManager = ReplayInputManager.Instance;
+        playSceneController = PlaySceneController.Instance;
         playPartsManager = PlayPartsManager.Instance;
         float allWeight = playPartsManager.GetAllWeight();
         _move.SetWeight(allWeight + ForceMove.RobotWeight);
@@ -134,9 +153,10 @@ public class MainRobot : MonoBehaviour
     public void GameOver()
     {
         // 失敗アニメーション処理に遷移する
+        _move.ZeroForce();
         _status.GameOver();
 
-        // TODO：ロボットを非表示にするとかする（パージのパーツが飛び散るアニメーションに移る）
+        // ロボットを非表示にする（パージのパーツが飛び散るアニメーションに移る）
         gameObject.SetActive(false);
     }
     // カスタムメニューを開いたときの処理
@@ -145,6 +165,7 @@ public class MainRobot : MonoBehaviour
         // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
         if (_status.IsFlying)
         {
+            _move.ZeroForce();
             _status.OpenCustomMenu();
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
