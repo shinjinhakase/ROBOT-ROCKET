@@ -8,10 +8,13 @@ public class ReplayDatas : SavableSingletonBase<ReplayDatas>
     // リプレイデータのリスト
     public List<ReplayData> datas = new List<ReplayData>();
     public List<ReplayData> GetDatas() => datas;
+    public int Length => datas.Count;
+    public ReplayData GetData(int index) => datas[index];
 
     // リプレイデータを追加する
     public void RegisterData(ReplayData data)
     {
+        // TODO：古いものを消したりするなど、リプレイ最大数設定の処理を追加
         datas.Add(data);
     }
     // 指定のステージのリプレイデータを取得する

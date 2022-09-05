@@ -27,6 +27,9 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         return allWeight;
     }
 
+    // パーツIDからアイテム性能を返す
+    public PartsPerformance GetPerformance(PartsPerformance.E_PartsID id) => partsPerformanceData.getData(id);
+
     // パーツを使う（使うパーツのデータと、生まれる力を返す）
     public void UseParts(out PartsPerformance performance, out PartsInfo.PartsData data, out IForce force)
     {

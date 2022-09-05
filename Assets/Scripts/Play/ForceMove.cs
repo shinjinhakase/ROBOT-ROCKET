@@ -13,6 +13,7 @@ public class ForceMove : MonoBehaviour
     private List<IForce> forces = new List<IForce>();
     [SerializeField]
     private bool IsMainRobot = false;
+    public bool IsAcceptExternalForce = true;   // 外力を受け入れるかの判定（falseにするとCollisionForceから力が来なくなる）
 
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;

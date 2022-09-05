@@ -29,6 +29,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent startAnimation = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
+    private ShadowManager _shadowManager;
 
 
 
@@ -64,6 +65,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             scene = E_PlayScene.GamePlay;
 
             // リプレイの準備を完了させる
+            _shadowManager = ShadowManager.Instance;
             ReplayInputManager.Instance.Ready();
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
@@ -80,6 +82,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             if (scene == E_PlayScene.GamePlay)
             {
                 IsNeedSetResult = true;
+                _shadowManager.StopAllShadow();
             }
             scene = E_PlayScene.CustomMenu;
 
@@ -126,6 +129,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             cam.IsFollowRobot = false;
             robot.GameClear();
+            _shadowManager.StopAllShadow();
             ReplayInputManager.Instance.SetResult();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。
         }
@@ -145,6 +149,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
+            _shadowManager.StopAllShadow();
             ReplayInputManager.Instance.SetResult();
             // TODO：ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             // TODO：結果表示のUIでやり直しボタンを押させるか、ゲームオーバーアニメーションの数秒後にまた開始/カスタム入りする？
