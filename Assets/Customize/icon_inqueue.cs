@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class icon_inqueue : MonoBehaviour{
+public class Icon_inqueue : MonoBehaviour{
 
     //アクティブ状態かどうか
     private bool isActive=false;
 
-    private int mynumber=0;
+    public int mynumber=0;
 
     private bool change_alpha=false;
 
     SpriteRenderer _renderer;
     
-    void Start(){
+    void Awake(){
 
         isActive=true;
-        mynumber=queue.testlist.Count;
+        mynumber=Queue.testlist.Count;
 
         _renderer=GetComponent<SpriteRenderer>();
 
@@ -48,7 +48,7 @@ public class icon_inqueue : MonoBehaviour{
 
         }
 
-        if(mynumber==queue.nowActive){
+        if(mynumber==Queue.nowActive){
 
             isActive=true;
             change_alpha=false;
@@ -63,7 +63,13 @@ public class icon_inqueue : MonoBehaviour{
 
     public void Click(){
 
-        queue.nowActive=mynumber;
+        Queue.nowActive=mynumber;
+
+    }
+
+    public void Delete_icon(){
+        
+        Destroy(this.gameObject);
 
     }
 

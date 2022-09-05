@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class customize : MonoBehaviour{
+public class Customize : MonoBehaviour{
 
     //マウスの位置
     Vector2 mouse_position;
@@ -18,6 +18,9 @@ public class customize : MonoBehaviour{
     }
 
     void Update(){
+
+        //Debug.Log(delete_button.delete);
+
     }
 
     void OnMouseDrag(){

@@ -2,35 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class items : MonoBehaviour{
+public class Items : MonoBehaviour{
 
     //アクティブ状態かどうか
     private bool isActive=false;
 
-    private int mynumber=0;
+    public int mynumber=0;
     private float myangle=0;
 
     private bool change_alpha=false;
-
     SpriteRenderer _renderer;
     
-    void Start(){
+    void Awake(){
 
         isActive=true;
-        mynumber=queue.testlist.Count;
-
         _renderer=GetComponent<SpriteRenderer>();
-        
 
     }
 
     void Update(){
 
-        if(mynumber==queue.nowActive){
+        if(mynumber==Queue.nowActive){
             
             if(isActive==false){
 
-                customize.obj_angle=myangle;
+                Customize.obj_angle=myangle;
 
             }
             
@@ -51,9 +47,9 @@ public class items : MonoBehaviour{
         
         if(isActive){
 
-            this.transform.rotation=Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, customize.obj_angle);
+            this.transform.rotation=Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, Customize.obj_angle);
             _renderer.color=new Color32(255,255,255,255);
-            myangle=customize.obj_angle;
+            myangle=Customize.obj_angle;
             
 
         }else{
@@ -66,9 +62,13 @@ public class items : MonoBehaviour{
             }
 
         }
+        
+    }
 
+    public void Delete_items(){
         
-        
+        Destroy(this.gameObject);
+
     }
 
 }
