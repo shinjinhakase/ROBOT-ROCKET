@@ -63,21 +63,21 @@ public class ReplayData
         {
             PressForce pressForce = (PressForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.Rocket,
-                pressForce.Angle, t: force.frameCnt - 1, F: pressForce.F, k: pressForce.k);
+                pressForce.Angle, t: force.frameCnt - 1, F: pressForce.F, k: pressForce.k, m: pressForce.m);
             forceDatas.Add(forceData);
         }
         else if (typeof(ImpulseForce) == force.GetType())
         {
             ImpulseForce impulseForce = (ImpulseForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.Bomb,
-                impulseForce.Angle, F: impulseForce.F);
+                impulseForce.Angle, F: impulseForce.F, m: impulseForce.m);
             forceDatas.Add(forceData);
         }
         else if (typeof(GliderForce) == force.GetType())
         {
             GliderForce gliderForce = (GliderForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.Glider,
-                gliderForce.Angle, t: force.frameCnt - 1, F: gliderForce.F, k: gliderForce.R);
+                gliderForce.Angle, t: force.frameCnt - 1, F: gliderForce.F, k: gliderForce.R, m: gliderForce.m);
             forceDatas.Add(forceData);
         }
         else if (typeof(CollisionForce) == force.GetType())
@@ -85,7 +85,7 @@ public class ReplayData
             // 時間の対応がそもそもまだ
             CollisionForce collisionForce = (CollisionForce)force;
             ForceData forceData = new ForceData(frame, PartsPerformance.E_ForceType.CollisionForce,
-                collisionForce.Angle, t: force.frameCnt - 1, F: collisionForce.F, k: collisionForce.k);
+                collisionForce.Angle, t: force.frameCnt - 1, F: collisionForce.F, k: collisionForce.k, m: collisionForce.m);
             forceDatas.Add(forceData);
         }
         else
@@ -124,8 +124,9 @@ public class ReplayData
         public float Angle;
         public float F;
         public float k;
+        public float m;
         public ForceData(int frame, PartsPerformance.E_ForceType forceType, float Angle,
-            int t = 0, float F = 0, float k = 0)
+            int t = 0, float F = 0, float k = 0, float m = 0)
         {
             this.frame = frame;
             this.forceType = forceType;
@@ -133,6 +134,7 @@ public class ReplayData
             this.Angle = Angle;
             this.F = F;
             this.k = k;
+            this.m = m;
         }
         // データを元に力を構築する
         public IForce buildForce()
@@ -141,16 +143,16 @@ public class ReplayData
             {
                 // 瞬間的な力は角度とFだけで再現可能
                 case PartsPerformance.E_ForceType.Bomb:
-                    return new ImpulseForce(Angle, F);
+                    return new ImpulseForce(Angle, F, m);
                 // 継続的な力はパージしたタイミングを元に構築する
                 // 当たり判定についても力が加わった期間が分かっているので、PressForceで再現する
                 case PartsPerformance.E_ForceType.Rocket:
                 case PartsPerformance.E_ForceType.Propeller:
                 case PartsPerformance.E_ForceType.CollisionForce:
-                    return new PressForce(Angle, F, t, k);
+                    return new PressForce(Angle, F, t, k, m);
                 // グライダーは引数Rの情報をフィールドkに格納しているので、kでインスタンス化する
                 case PartsPerformance.E_ForceType.Glider:
-                    return new GliderForce(Angle, F, t, k);
+                    return new GliderForce(Angle, F, t, k, m);
                 // 力無しは対応していないのでエラー
                 case PartsPerformance.E_ForceType.NoForce:
                 default:

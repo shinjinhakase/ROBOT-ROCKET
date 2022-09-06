@@ -94,6 +94,7 @@ public class MainRobot : MonoBehaviour
 
         // 開始と同時にリプレイのフレームカウントをスタートさせる（仮の処理）
         replayInputManager.StartMemory();
+        ShadowManager.Instance.StartShadowReplay();
     }
 
     // アイテムを使用する処理

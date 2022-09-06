@@ -16,8 +16,7 @@ public class ForceGimick : MonoBehaviour
     public void StartPush(Collider2D collision)
     {
         // 力を加えられるオブジェクトか判定
-        if (!collision.TryGetComponent(out ForceMove move)) return;
-        if (targets.Contains(move)) return;
+        if (!collision.TryGetComponent(out ForceMove move) || !move.IsAcceptExternalForce || targets.Contains(move)) return;
 
         // 力を加え、管理リストに追加する
         targets.Add(move);

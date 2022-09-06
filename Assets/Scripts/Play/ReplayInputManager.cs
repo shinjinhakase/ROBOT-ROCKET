@@ -52,6 +52,14 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         _data.RegisterResult(frameCnt, _sceneController.Score);
         frameCnt = -1;
     }
+    // リプレイデータを保存する
+    [ContextMenu("Debug/Save")]
+    public void Save()
+    {
+        ReplayDatas datas = ReplayDatas.Instance;
+        datas.RegisterData(_data);
+        datas.Save();
+    }
 
     // 定期的にロボット位置を記録する
     private IEnumerator GetRobotTransformInterval()
