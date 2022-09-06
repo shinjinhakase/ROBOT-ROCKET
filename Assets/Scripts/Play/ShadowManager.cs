@@ -7,6 +7,7 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
 {
     // シャドウロボットのPrefab
     [SerializeField] private ShadowRobot shadowPrefab;
+    [SerializeField] private Vector2 firstPosition = new Vector2(0, -2.5f);
 
     // シーン上にあるシャドウロボットオブジェクトのリスト
     private bool IsStart = false;
@@ -21,7 +22,7 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
         if (IsStart) return;
         foreach(var index in replayIndexList)
         {
-            var shadow = Instantiate(shadowPrefab);
+            var shadow = Instantiate(shadowPrefab, firstPosition, Quaternion.identity);
             shadow.LoadReplayData(index);
             shadows.Add(shadow);
         }
@@ -43,7 +44,7 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
     {
         // シャドウをリストから削除し、オブジェクトを破棄する
         shadows.Remove(shadow);
-        if (shadow != null) Destroy(shadow);
+        if (shadow != null) Destroy(shadow.gameObject);
     }
 
     // 全てのシャドウを停止させる
@@ -51,7 +52,7 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
     {
         for(int i = 0; i < shadows.Count; i++)
         {
-            Destroy(shadows[i]);
+            Destroy(shadows[i].gameObject);
         }
         shadows.Clear();
         IsStart = false;

@@ -51,6 +51,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.StartAnimation;
 
+            _shadowManager = ShadowManager.Instance;
+            _shadowManager.RegisterShadow();
             _score = 0;
             // 開始アニメーション処理を呼び出す
             startAnimation.Invoke();
@@ -65,7 +67,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             scene = E_PlayScene.GamePlay;
 
             // リプレイの準備を完了させる
-            _shadowManager = ShadowManager.Instance;
             ReplayInputManager.Instance.Ready();
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
