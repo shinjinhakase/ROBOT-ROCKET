@@ -29,8 +29,18 @@ public class Icon : MonoBehaviour{
 
         GameObject draw_icon=Instantiate (add_queue) as GameObject;
         draw_icon.transform.parent=queue_obj.transform;
-        draw_icon.transform.position=new Vector2(8,Queue.draw_position);
-        Queue.draw_position-=1.0f;
+
+        if(Queue.icon_list.Count==0){
+            
+        }else{
+            
+            GameObject last_icon=Queue.icon_list[Queue.icon_list.Count-1];
+            Vector2 last_position=last_icon.transform.position;
+            Queue.draw_position=last_position.y-=1.0f;
+
+        }
+
+        draw_icon.transform.position=new Vector2(7.6f,Queue.draw_position);
 
         Queue.testlist.Add(pop_item);
         Queue.icon_list.Add(draw_icon);

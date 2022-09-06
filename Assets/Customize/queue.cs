@@ -18,6 +18,8 @@ public class Queue : MonoBehaviour{
     //今何番目のアイテムがアクティブになっているか
     public static int nowActive=0;
 
+    Vector2 height;
+
     void Start(){
 
         partsInfo = PartsInfo.Instance;
@@ -28,9 +30,20 @@ public class Queue : MonoBehaviour{
 
         icon_list=new List<GameObject>();
 
+        height=this.transform.position;
+
     }
 
     void Update(){
+
+        //10koijyou +0.7　soreikouha 1きざみ
+        if(testlist.Count>=10){
+
+            float max_height=0.7f+(testlist.Count-10f);
+            height.y=max_height-max_height*Scroll_bar.current_height;
+            transform.position=height;
+
+        }
 
     }
 
