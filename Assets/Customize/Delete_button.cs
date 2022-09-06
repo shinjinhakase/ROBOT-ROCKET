@@ -13,9 +13,7 @@ public class Delete_button : MonoBehaviour{
     }
 
     public void Click(){
-
         
-
         for(int i=Queue.testlist.Count-1;i>=Queue.nowActive;i--){
 
             Items _items=Queue.testlist[i].GetComponent<Items>();

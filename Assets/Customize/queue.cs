@@ -32,8 +32,6 @@ public class Queue : MonoBehaviour{
 
     void Update(){
 
-        Debug.Log("nowActive:"+nowActive);
-
     }
 
 }
