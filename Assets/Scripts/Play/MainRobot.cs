@@ -38,7 +38,11 @@ public class MainRobot : MonoBehaviour
         if (_status.IsFlying)
         {
             // アイテム使用終了判定
-            if (_status.IsUsingParts && !playPartsManager.IsUsingParts) _status.endUseParts();
+            if (_status.IsUsingParts && !playPartsManager.IsUsingParts)
+            {
+                _status.endUseParts();
+                replayInputManager.EndUseParts();
+            }
 
             // 仮の操作処理（アイテム使用）
             if (Input.GetKeyDown(KeyCode.Space))

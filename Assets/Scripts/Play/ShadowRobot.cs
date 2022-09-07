@@ -23,6 +23,7 @@ public class ShadowRobot : MonoBehaviour
     private PartsInfo.PartsData GetPartsData(int index) => index < readyPartsLength ? replayData.readyPartsList[index] : replayData.getPartsList[index - readyPartsLength].buildPartsData();
     private int partsNo = 0;    // 使用しているパーツの数
     private bool IsUsingParts => partsNo < readyPartsLength + getPartsLength && frameCnt >= replayData.usePartsFrame[partsNo];  // パーツを使用するフレームか判定
+    private bool IsEndUsing => partsNo - 1 < replayData.endUsePartsFrame.Count && frameCnt == replayData.endUsePartsFrame[partsNo - 1];
 
     // 位置情報関連
     private int transCnt = 0;   // 位置情報の参照インデックス
@@ -52,6 +53,7 @@ public class ShadowRobot : MonoBehaviour
         if (IsStart)
         {
             // パーツ使用モーション遷移の処理
+            if (_status.IsUsingParts && IsEndUsing) _status.endUseParts();
             if (IsUsingParts) UseParts();
 
             // 位置・速度などの定期的な修正
@@ -133,6 +135,8 @@ public class ShadowRobot : MonoBehaviour
         PartsPerformance performance = _playPartsManager.GetPerformance(data.id);
 
         // パーツの使用状態に移る（アニメーション遷移）
+        if (_status.IsUsingParts) _status.endUseParts();
+        _status.endCooltime();
         _status.startUseParts(performance, data);
 
         partsNo++;
@@ -177,5 +181,15 @@ public class ShadowRobot : MonoBehaviour
 
         // ロボットの重量を更新する
         _move.SetWeight(_move.GetWeight() + sumWeight);
+    }
+
+    // パーツの使用終了をRobotStatusに伝える
+    private IEnumerator CallUsePartsEnd(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (_status.IsUsingParts)
+        {
+            _status.endUseParts();
+        }
     }
 }
