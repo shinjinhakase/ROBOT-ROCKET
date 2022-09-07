@@ -27,7 +27,7 @@ public class PurgeManager : MonoBehaviour
         foreach (var prefab in purgePartsGroup)
         {
             // オブジェクトを生成し、初速度などを設定する
-            var purgeParts = Instantiate(prefab, position + Vector3.back, Quaternion.identity);
+            var purgeParts = Instantiate(prefab, position, Quaternion.identity);
             // 初期設定を済ませる
             SetFirstSettings(ref purgeParts);
         }
@@ -37,7 +37,7 @@ public class PurgeManager : MonoBehaviour
         if (purgePartsPrefab == null ) return;
         Vector3 position = transform.position;
         // オブジェクトを生成し、初速度などを設定する
-        var purgeParts = Instantiate(purgePartsPrefab, position + Vector3.back, Quaternion.identity);
+        var purgeParts = Instantiate(purgePartsPrefab, position, Quaternion.identity);
         // 初期設定を済ませる
         SetFirstSettings(ref purgeParts);
     }
@@ -50,7 +50,7 @@ public class PurgeManager : MonoBehaviour
         foreach(var sprite in purgePartsSprites)
         {
             // プレファブを生成し、見た目（スプライト）を指定されたものに変更する
-            var purgeParts = Instantiate(purgePartsPrefab, position + Vector3.back, Quaternion.identity);
+            var purgeParts = Instantiate(purgePartsPrefab, position, Quaternion.identity);
             purgeParts.GetComponent<SpriteRenderer>().sprite = sprite;
             // 初期設定を済ませる
             SetFirstSettings(ref purgeParts);
@@ -61,7 +61,7 @@ public class PurgeManager : MonoBehaviour
         if (purgePartsSprite == null) return;
         Vector3 position = transform.position;
         // プレファブを生成し、見た目（スプライト）を指定されたものに変更する
-        var purgeParts = Instantiate(purgePartsPrefab, position + Vector3.back, Quaternion.identity);
+        var purgeParts = Instantiate(purgePartsPrefab, position, Quaternion.identity);
         purgeParts.GetComponent<SpriteRenderer>().sprite = purgePartsSprite;
         // 初期設定を済ませる
         SetFirstSettings(ref purgeParts);
