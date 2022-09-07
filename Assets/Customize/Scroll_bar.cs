@@ -49,6 +49,6 @@ public class Scroll_bar : MonoBehaviour{
 
         }
 
-    } 
+    }
 
 }

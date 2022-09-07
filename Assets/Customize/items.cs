@@ -13,7 +13,7 @@ public class Items : MonoBehaviour{
     private bool change_alpha=false;
     SpriteRenderer _renderer;
     
-    void Awake(){
+    void Start(){
 
         isActive=true;
         _renderer=GetComponent<SpriteRenderer>();

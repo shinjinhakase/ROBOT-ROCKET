@@ -31,6 +31,8 @@ public class Icon : MonoBehaviour{
         draw_icon.transform.parent=queue_obj.transform;
 
         if(Queue.icon_list.Count==0){
+
+            Queue.draw_position=4.0f;
             
         }else{
             

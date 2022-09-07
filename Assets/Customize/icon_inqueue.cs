@@ -81,26 +81,41 @@ public class Icon_inqueue : MonoBehaviour{
             GameObject address_item=Queue.testlist[mynumber];
             GameObject address_icon=Queue.icon_list[mynumber];
 
+            //選択中のアイテムのスクリプトを取得
+            Items new_item=selected_item.GetComponent<Items>();
+            Icon_inqueue new_icon=selected_icon.GetComponent<Icon_inqueue>();
+
             //座標の入れ替え
-            Vector2 tmp_coodinate=selected_icon.transform.position;
-            selected_icon.transform.position=address_icon.transform.position;
-            address_icon.transform.position=tmp_coodinate;
+            //selected_icon.transform.position=address_icon.transform.position;
 
-            //Queue内の順番の入れ替え
-            Queue.testlist.Replace(Queue.nowActive,mynumber);
-            Queue.icon_list.Replace(Queue.nowActive,mynumber);
+            if(new_item.mynumber==mynumber){
 
-            //mynumberの入れ替え
-            Items selected_item_script=selected_item.GetComponent<Items>();
-            Icon_inqueue selected_icon_script=selected_icon.GetComponent<Icon_inqueue>();
-            Items address_item_script=address_item.GetComponent<Items>();
-            Icon_inqueue address_icon_script=address_icon.GetComponent<Icon_inqueue>();
-            int tmp_number=selected_item_script.mynumber;
-            selected_item_script.mynumber=address_item_script.mynumber;
-            selected_icon_script.mynumber=address_icon_script.mynumber;
-            address_item_script.mynumber=tmp_number;
-            address_icon_script.mynumber=tmp_number;
-            Queue.nowActive=address_item_script.mynumber;
+                return;
+
+            }else{
+
+                //元のアイテムを削除
+                Queue.testlist.RemoveAt(Queue.nowActive);
+                Queue.icon_list.RemoveAt(Queue.nowActive);
+                
+                //Queueに追加
+                Queue.testlist.Insert(mynumber,selected_item);
+                Queue.icon_list.Insert(mynumber,selected_icon);
+
+                for(int i=0;i<Queue.testlist.Count;i++){
+
+                    Items move_items=Queue.testlist[i].GetComponent<Items>();
+                    move_items.mynumber=i;
+                    
+
+                    Icon_inqueue move_icon=Queue.icon_list[i].GetComponent<Icon_inqueue>();
+                    move_icon.mynumber=i;
+                    Vector2 new_drawposition=new Vector2(7.6f,4.0f-i);
+                    move_icon.transform.position=new_drawposition;
+
+                }
+
+            }
 
             //入れ替えスイッチをオフにする
             Switch.selected=false;
