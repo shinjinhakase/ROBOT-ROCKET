@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,11 +26,15 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         set { if (_score <= _goalXPoint) _score = value; else _score = _goalXPoint; }
     }
 
+    [Header("イベント系統")]
     [Tooltip("カメラの移動終了後、ゲーム開始直前に呼び出されるメソッド")]
-    [SerializeField] private UnityEvent startAnimation = new UnityEvent();
+    [SerializeField] private UnityEvent startAnimationEvent = new UnityEvent();
+    [Tooltip("ゲーム開始と同時に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent startGameEvent = new UnityEvent();
+    [Tooltip("ゲーム終了した際、どのような終わり方でも共通して呼び出されるメソッド")]
+    [SerializeField] private UnityEvent endGameEvent = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
-    private ShadowManager _shadowManager;
 
 
 
@@ -50,12 +55,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (scene == E_PlayScene.FirstCameraMove)
         {
             scene = E_PlayScene.StartAnimation;
-
-            _shadowManager = ShadowManager.Instance;
-            _shadowManager.RegisterShadow();
             _score = 0;
+
             // 開始アニメーション処理を呼び出す
-            startAnimation.Invoke();
+            startAnimationEvent.Invoke();
         }
     }
     // ゲームが開始した際に呼び出されるメソッド
@@ -66,8 +69,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GamePlay;
 
-            // リプレイの準備を完了させる
-            ReplayInputManager.Instance.Ready();
+            // 開始時のイベントを呼び出す
+            startGameEvent.Invoke();
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();
@@ -83,18 +86,14 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             if (scene == E_PlayScene.GamePlay)
             {
                 IsNeedSetResult = true;
-                _shadowManager.StopAllShadow();
             }
             scene = E_PlayScene.CustomMenu;
 
-            // ヒットストップ処理を停止し、時間の流れを戻す
-            StopHitStopIfExists();
-            Time.timeScale = 1f;
+            if (IsNeedSetResult) endGameEvent.Invoke();
 
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
-            if (IsNeedSetResult) ReplayInputManager.Instance.SetResult();
 
             // TODO：カスタムメニューのオープン処理を実装
         }
@@ -124,14 +123,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GameEnd;
 
-            // ヒットストップ処理を停止し、時間の流れを戻す
-            StopHitStopIfExists();
-            Time.timeScale = 1f;
+            endGameEvent.Invoke();
 
             cam.IsFollowRobot = false;
             robot.GameClear();
-            _shadowManager.StopAllShadow();
-            ReplayInputManager.Instance.SetResult();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。
         }
     }
@@ -143,15 +138,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GameEnd;
 
-            // ヒットストップ処理を停止し、時間の流れを戻す
-            StopHitStopIfExists();
-            Time.timeScale = 1f;
+            endGameEvent.Invoke();
 
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
-            _shadowManager.StopAllShadow();
-            ReplayInputManager.Instance.SetResult();
             // TODO：ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             // TODO：結果表示のUIでやり直しボタンを押させるか、ゲームオーバーアニメーションの数秒後にまた開始/カスタム入りする？
         }
@@ -161,8 +152,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     public void ResetStage()
     {
         // ヒットストップ処理を停止し、時間の流れを戻す
-        StopHitStopIfExists();
-        Time.timeScale = 1f;
+        StopHitStopIfExists(true);
 
         // 使用パーツ状況とメインロボット状況をリセット
         PlayPartsManager.Instance.ResetPartsStatus();
@@ -195,18 +185,20 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     private void SetHitStop(float timeScale, float time)
     {
         // 実行していたヒットストップ処理を中断し、新たにヒットストップ処理を始める
-        StopHitStopIfExists();
+        StopHitStopIfExists(false);
         hitStopCoroutine = ChangeTimeScale(timeScale, time);
         StartCoroutine(hitStopCoroutine);
     }
-    // 実行しているヒットストップがあるなら、その処理を中断して止める（時間の流れは戻さない）
-    private void StopHitStopIfExists()
+    // 実行しているヒットストップがあるなら、その処理を中断して止める
+    public void StopHitStopIfExists(bool ResetTimeScale)
     {
         if (hitStopCoroutine != null)
         {
             StopCoroutine(hitStopCoroutine);
             hitStopCoroutine = null;
         }
+        // ResetTimeScaleがtrueなら、時間の速度を元に戻す
+        if (ResetTimeScale) Time.timeScale = 1f;
     }
 
     // 指定の秒数TimeScaleを変化させるメソッド
