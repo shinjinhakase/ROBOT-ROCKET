@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class tab : MonoBehaviour{
+public class Tab : MonoBehaviour{
     
     private Rigidbody2D body;
 

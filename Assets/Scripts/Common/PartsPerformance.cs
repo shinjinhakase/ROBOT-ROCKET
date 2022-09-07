@@ -18,7 +18,10 @@ public class PartsPerformance : ScriptableObject
     // アイテムを区別するIDの役割を果たす列挙型
     public enum E_PartsID
     {
-        TestParts
+        TestParts,
+        Rocket1,
+        Rocket2,
+        Rocket3
     }
 
     // 物理等プレイシーン関連
