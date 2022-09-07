@@ -1367,6 +1367,7 @@ GameObject:
   - component: {fileID: 1499356637}
   - component: {fileID: 1499356636}
   - component: {fileID: 1499356635}
+  - component: {fileID: 1499356638}
   m_Layer: 5
   m_Name: ReturnButton
   m_TagString: Untagged
@@ -1438,7 +1439,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1499356636}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1499356638}
+        m_TargetAssemblyTypeName: LoadSceneButton, Assembly-CSharp
+        m_MethodName: OnLoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1499356636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,6 +1490,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499356633}
   m_CullTransparentMesh: 1
+--- !u!114 &1499356638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499356633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87a4d05e33655a4899201b807741d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: TitleScene
 --- !u!1 &1508819710
 GameObject:
   m_ObjectHideFlags: 0
