@@ -58,6 +58,10 @@ public class PartsPerformanceEditor : Editor
         // UIä÷òAçÄñ⁄ÇÃï\é¶
         EditorGUILayout.LabelField("UIä÷òAçÄñ⁄");
         _target.partsName = EditorGUILayout.TextField(guiC_name, _target.partsName);
+        SerializedProperty partsSprite = serializedObject.FindProperty("partsSprite");
+        EditorGUILayout.PropertyField(partsSprite, true);
+        SerializedProperty iconSprite = serializedObject.FindProperty("iconSprite");
+        EditorGUILayout.PropertyField(iconSprite, true);
         SerializedProperty desc = serializedObject.FindProperty("description");
         EditorGUILayout.PropertyField(desc, true);
 
