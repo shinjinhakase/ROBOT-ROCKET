@@ -36,6 +36,11 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     {
         _data.RegisterUseParts(frameCnt);
     }
+    // パーツの使用終了を記録（ロボットの状態管理が使用終了状態に遷移した際に呼び出し）
+    public void EndUseParts()
+    {
+        _data.RegisterEndUseParts(frameCnt);
+    }
     // パーツの獲得を記録（パーツ管理がパーツを獲得した際に呼び出し）
     public void GetParts(PartsInfo.PartsData data)
     {

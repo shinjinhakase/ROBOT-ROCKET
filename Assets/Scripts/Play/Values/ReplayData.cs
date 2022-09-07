@@ -15,6 +15,8 @@ public class ReplayData
     public List<GetPartsData> getPartsList = new List<GetPartsData>();
     // アイテムの使用タイミングのリスト
     public List<int> usePartsFrame = new List<int>();
+    // アイテムの使用終了タイミングのリスト
+    public List<int> endUsePartsFrame = new List<int>();
 
     // ロボットの座標データのリスト
     public List<LocateData> locateDatas = new List<LocateData>();
@@ -33,6 +35,7 @@ public class ReplayData
         readyPartsList = new List<PartsInfo.PartsData>(PartsInfo.Instance.GetPartsList());
         getPartsList.Clear();
         usePartsFrame.Clear();
+        endUsePartsFrame.Clear();
         locateDatas.Clear();
         forceDatas.Clear();
         finishFrame = 0;
@@ -42,6 +45,11 @@ public class ReplayData
     public void RegisterUseParts(int frame)
     {
         usePartsFrame.Add(frame);
+    }
+    // パーツの使用終了タイミングを記録する
+    public void RegisterEndUseParts(int frame)
+    {
+        endUsePartsFrame.Add(frame);
     }
     // 獲得したパーツデータを記録する
     public void RegisterGetParts(int frame, PartsPerformance.E_PartsID id, float Angle)

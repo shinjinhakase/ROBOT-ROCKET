@@ -102,11 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7276a2c2a0c044580847a49efda31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  purgePartsPrefab: {fileID: -3521977866789243238, guid: baec86ace4e2e144088405c6f765c859, type: 3}
   DestroyDuration: 2
   initMaxVelocity: 4
   initMinVelocity: 2
   initAngleRange: 120
-  initAngleVelocity: 0
+  initAngleVelocity: 180
 --- !u!114 &5364773325347998154
 MonoBehaviour:
   m_ObjectHideFlags: 0
