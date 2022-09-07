@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: PartsDatabase
   m_EditorClassIdentifier: 
   dataList:
-  - {fileID: 11400000, guid: 549d4ef8481bb46459ecc9b5c14b73b1, type: 2}
+  - {fileID: 11400000, guid: 82289425123250447b4ce6de42de0125, type: 2}
+  - {fileID: 11400000, guid: c6b82ddf3e51cff40a863ae8fe92b735, type: 2}
+  - {fileID: 11400000, guid: 0b423a35055f43c4481d216a58d3bfdc, type: 2}

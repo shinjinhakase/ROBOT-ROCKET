@@ -19,6 +19,8 @@ public class RobotStatus : MonoBehaviour
     private E_RobotStatus _status = E_RobotStatus.Ready;
     private int cooltime = 0;       // クールタイム
 
+    private Sprite usingPartsSprite = null;
+
     // ロボットの状態判定メソッド
     public bool IsPartsUsable => _status == E_RobotStatus.Fly;  // 装備パーツの使用可能判定
     public bool IsUsingParts => _status == E_RobotStatus.UseParts;  // パーツの使用中判定
@@ -76,6 +78,9 @@ public class RobotStatus : MonoBehaviour
         // アイテム使用状態へ状態遷移
         _status = E_RobotStatus.UseParts;
 
+        // パージする際に投げ出すパーツの見た目
+        usingPartsSprite = performance.partsSprite;
+
         // クールタイムを計算しておく
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
@@ -94,6 +99,13 @@ public class RobotStatus : MonoBehaviour
         // 状態遷移（クールタイムがあれば待機状態へ移行する）
         if (cooltime > 0) _status = E_RobotStatus.Cooldown;
         else _status = E_RobotStatus.Fly;
+
+        // 使用し終わったパーツをパージして投げ出す
+        if (usingPartsSprite != null)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+        }
 
         // TODO：飛行orクールタイムのアニメーションに遷移する
     }
@@ -137,7 +149,7 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.EndFly;
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
-        _purgeManager.AddParts(GameOverRobotPurgeData);
+        _purgeManager.AddPartsByPrefab(GameOverRobotPurgeData);
     }
 
     // カスタムメニューを開いた際に呼び出されるメソッド

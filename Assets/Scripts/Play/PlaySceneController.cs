@@ -8,6 +8,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 {
     // シーンの処理場面を示す列挙型
     public E_PlayScene scene { get; private set; } = E_PlayScene.FirstCameraMove;
+    public int StageNum = -1;
 
     // カスタムメニューを開けるかの判定
     public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;
@@ -15,19 +16,20 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
 
-
     // ゴールのX座標
     [SerializeField] private float _goalXPoint;
-    public float GoalXPoint
-    {
-        get { return _goalXPoint; }
-        private set { _goalXPoint = value; }
+    public float GoalXPoint { get { return _goalXPoint; } private set { _goalXPoint = value; } }
+    [SerializeField] private float _score;
+    public float Score {
+        get { return _score; }
+        set { if (_score <= _goalXPoint) _score = value; else _score = _goalXPoint; }
     }
 
     [Tooltip("カメラの移動終了後、ゲーム開始直前に呼び出されるメソッド")]
     [SerializeField] private UnityEvent startAnimation = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
+    private ShadowManager _shadowManager;
 
 
 
@@ -41,7 +43,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         // (必要であればここで暗転の解除など)
     }
 
-
     // 最初のカメラ移動が終わった際に呼び出されるメソッド
     [ContextMenu("Scene/EndFirstCameraMove")]
     public void endFirstCameraMove()
@@ -50,6 +51,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.StartAnimation;
 
+            _shadowManager = ShadowManager.Instance;
+            _shadowManager.RegisterShadow();
+            _score = 0;
             // 開始アニメーション処理を呼び出す
             startAnimation.Invoke();
         }
@@ -62,6 +66,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GamePlay;
 
+            // リプレイの準備を完了させる
+            ReplayInputManager.Instance.Ready();
+
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();
         }
@@ -72,6 +79,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (IsOpenableCustomMenu)
         {
+            bool IsNeedSetResult = false;
+            if (scene == E_PlayScene.GamePlay)
+            {
+                IsNeedSetResult = true;
+                _shadowManager.StopAllShadow();
+            }
             scene = E_PlayScene.CustomMenu;
 
             // ヒットストップ処理を停止し、時間の流れを戻す
@@ -81,6 +94,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
+            if (IsNeedSetResult) ReplayInputManager.Instance.SetResult();
 
             // TODO：カスタムメニューのオープン処理を実装
         }
@@ -114,7 +128,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StopHitStopIfExists();
             Time.timeScale = 1f;
 
+            cam.IsFollowRobot = false;
             robot.GameClear();
+            _shadowManager.StopAllShadow();
+            ReplayInputManager.Instance.SetResult();
             // ロボットが着地したら、結果表示などの処理を呼ぶ。
         }
     }
@@ -133,6 +150,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
+            _shadowManager.StopAllShadow();
+            ReplayInputManager.Instance.SetResult();
             // TODO：ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             // TODO：結果表示のUIでやり直しボタンを押させるか、ゲームオーバーアニメーションの数秒後にまた開始/カスタム入りする？
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StagesProgressSaveData
+public class ProgressData
 {
     [SerializeField]
     private List<StageProgressData> stageProgressDatasList
@@ -11,7 +11,7 @@ public class StagesProgressSaveData
     [SerializeField]
     private int clearStageNum;
 
-    public StagesProgressSaveData(List<Stage> stageList)
+    public ProgressData(List<Stage> stageList)
     {
         int stageNum = 0;
         foreach(Stage stage in stageList)

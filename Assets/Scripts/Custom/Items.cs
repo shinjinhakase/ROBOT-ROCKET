@@ -8,7 +8,7 @@ public class Items : MonoBehaviour{
     private bool isActive=false;
 
     public int mynumber=0;
-    private float myangle=0;
+    public float myangle=0;
 
     private bool change_alpha=false;
     SpriteRenderer _renderer;

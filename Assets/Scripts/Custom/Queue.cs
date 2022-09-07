@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Queue : MonoBehaviour{
     
-    private PartsInfo partsInfo;
+    private PartsInfo _partsInfo;
     private List<PartsInfo.PartsData> myList; 
 
     //テスト用配列
@@ -22,8 +22,8 @@ public class Queue : MonoBehaviour{
 
     void Start(){
 
-        partsInfo = PartsInfo.Instance;
-        myList=partsInfo.GetPartsList();
+        _partsInfo = PartsInfo.Instance;
+        myList=_partsInfo.GetPartsList();
 
         //テスト用配列
         testlist=new List<GameObject>();
@@ -44,6 +44,26 @@ public class Queue : MonoBehaviour{
             transform.position=height;
 
         }
+
+    }
+
+    [ContextMenu("デバッグ")]
+    public void Update_PartsInfo(){
+
+        _partsInfo.GetPartsList().Clear();
+
+        for(int i=0;i<testlist.Count;i++){
+
+            PartsPerformance.E_PartsID id=icon_list[i].GetComponent<Icon_inqueue>().id;
+            float angle=testlist[i].GetComponent<Items>().myangle;
+            PartsInfo.PartsData newparts=new PartsInfo.PartsData();
+            newparts.id=id;
+            newparts.angle=angle+90;
+            _partsInfo.AddParts(newparts);
+
+        }
+
+        _partsInfo.Save();
 
     }
 

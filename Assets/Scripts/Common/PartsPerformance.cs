@@ -18,9 +18,13 @@ public class PartsPerformance : ScriptableObject
     // アイテムを区別するIDの役割を果たす列挙型
     public enum E_PartsID
     {
-        TestParts
+        TestParts,
+        Rocket1,
+        Rocket2,
+        Rocket3
     }
 
+    // 物理等プレイシーン関連
     public E_PartsID id;
     public E_ForceType forceType;
     public float m; // 質量
@@ -31,7 +35,12 @@ public class PartsPerformance : ScriptableObject
     public float cooltime;  // 効果終了後のクールタイム
     public List<SummonableObject> summonObjects = new List<SummonableObject>(); //召喚オブジェクトリスト
 
+    // UI関連項目
     public string partsName;    //アイテム名前
+    [Tooltip("装備時に表示される見た目。")]
+    public Sprite partsSprite;
+    [Tooltip("UI用にアイコンとして用いられる見た目。")]
+    public Sprite iconSprite;
     [Tooltip("説明文。UIでパーツ説明に用います。"), TextArea(3, 5)]
     public string description;  //アイテム説明
 }

@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 // ロケットやプロペラなど、同じ方向に持続的に力を加え続ける力のクラス
+[Serializable]
 public class PressForce : IForce
 {
     private bool IsPartsForce;
@@ -10,7 +12,7 @@ public class PressForce : IForce
     public float t;     // 力を加える時間（秒）
     public float k;     // 抵抗力（大きい程終端速度が遅くなる）
 
-    private int cntFrame;   // 経過時間（フレーム）
+    protected int cntFrame; // 経過時間（フレーム）
     private int endFrame;   // 終了時間（フレーム）
     private Vector2 Fe;     // 前方向の基底ベクトル
 
@@ -33,6 +35,10 @@ public class PressForce : IForce
         endFrame = Mathf.RoundToInt(t / Time.fixedDeltaTime);
     }
 
+    private bool _isMainRobot = false;
+    bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+    int IForce.frameCnt { get { return cntFrame; } set { cntFrame = value; } }
+
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Fe * (F - k * CalcFrontVelocity(velocity));
 
     bool IForce.IsEnd() => cntFrame++ == endFrame || (IsPartsForce && !playPartsManager.IsUsingParts);
@@ -44,6 +50,7 @@ public class PressForce : IForce
     void IForce.EndPress()
     {
         if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+        if (_isMainRobot) ReplayInputManager.Instance.SetForce(this);
     }
 
     // 前方向の速度を計算する（読まなくて良いけど解説↓）

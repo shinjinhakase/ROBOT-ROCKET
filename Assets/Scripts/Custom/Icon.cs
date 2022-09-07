@@ -8,10 +8,19 @@ public class Icon : MonoBehaviour{
     public GameObject add_queue;
 
     GameObject queue_obj;
+
+    public PartsPerformance.E_PartsID id;
+
+    public PartsPerformanceData _data;
+
+    private PartsPerformance _performance;
     
     void Start(){
 
         queue_obj=GameObject.Find("queue");
+        _performance=_data.getData(id);
+        SpriteRenderer _renderer=this.GetComponent<SpriteRenderer>();
+        _renderer.sprite=_performance.iconSprite;
 
     }
 
@@ -22,13 +31,17 @@ public class Icon : MonoBehaviour{
 
         GameObject pop_item=Instantiate(pop) as GameObject;
         Vector3 pop_position=new Vector3(3.5f,0f,0f);
+        pop_item.GetComponent<SpriteRenderer>().sprite=_performance.partsSprite;
         Items _items=pop_item.GetComponent<Items>();
         _items.mynumber=Queue.testlist.Count;
         pop_item.transform.position=pop_position;
         
 
         GameObject draw_icon=Instantiate (add_queue) as GameObject;
+        Icon_inqueue icon_script=draw_icon.GetComponent<Icon_inqueue>();
+        icon_script.id=id;
         draw_icon.transform.parent=queue_obj.transform;
+        draw_icon.GetComponent<SpriteRenderer>().sprite=_performance.iconSprite;
 
         if(Queue.icon_list.Count==0){
 

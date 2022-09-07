@@ -13,6 +13,7 @@ public class Icon_inqueue : MonoBehaviour{
     private bool change_alpha=false;
 
     SpriteRenderer _renderer;
+    public PartsPerformance.E_PartsID id;
     
     void Awake(){
 
