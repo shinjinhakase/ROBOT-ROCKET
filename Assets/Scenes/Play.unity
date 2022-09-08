@@ -729,7 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 00000000
+  replayIndexList: 
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 83f98607ccae4c548b16f022c8ee8ed7, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.36078432, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

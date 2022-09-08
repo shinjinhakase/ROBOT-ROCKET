@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5346312261245334907}
   - component: {fileID: 2591065100494002134}
   - component: {fileID: 6735901713704480786}
+  - component: {fileID: -6901455106758486061}
   - component: {fileID: 6666132527250339038}
   m_Layer: 10
   m_Name: TestShadow
@@ -189,6 +190,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _status: {fileID: 5364773325347998154}
+--- !u!114 &-6901455106758486061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8478727793972353363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a34f43421c5a1488b4023bdb301feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6735901713704480786}
+        m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
+        m_MethodName: UseParts
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  endUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6735901713704480786}
+        m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
+        m_MethodName: endUseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  getPartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6735901713704480786}
+        m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
+        m_MethodName: AddGettingPartsWeight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  endReplayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6735901713704480786}
+        m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
+        m_MethodName: ReplayFinish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &6666132527250339038
 BoxCollider2D:
   m_ObjectHideFlags: 0
