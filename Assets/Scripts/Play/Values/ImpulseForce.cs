@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class ImpulseForce : IForce
 {
     private bool IsPartsForce;   // アイテム産の力かのフラグ
@@ -23,6 +23,10 @@ public class ImpulseForce : IForce
         Force = new Vector2(Mathf.Cos(radAngle), Mathf.Sin(radAngle)) * F / Time.fixedDeltaTime;
     }
 
+    private bool _isMainRobot = false;
+    bool IForce.IsMainRobot { get { return _isMainRobot; } set { _isMainRobot = value; } }
+    int IForce.frameCnt { get { return 1; } set { } }
+
     Vector2 IForce.CalcForce(Vector2 nowForce, Vector2 velocity) => Force;
 
     bool IForce.IsEnd() => true;
@@ -34,5 +38,6 @@ public class ImpulseForce : IForce
     void IForce.EndPress()
     {
         if (IsPartsForce) PlayPartsManager.Instance.IsUsingParts = false;
+        if (_isMainRobot) ReplayInputManager.Instance.SetForce(this);
     }
 }

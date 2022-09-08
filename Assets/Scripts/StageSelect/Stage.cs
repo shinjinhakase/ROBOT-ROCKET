@@ -8,25 +8,21 @@ public class Stage
     public float goalDistance;
     public string memo;
 
-    private int stageNum;
-    private float bestDistance;
-    private float bestTime;
+    private int stageNum = -1;
+    private StageProgressData progressData = new StageProgressData();
 
+    public StageProgressData ProgressData
+    {
+        get { return progressData; }
+    }
+    
     public int StageNum
     {
         get { return stageNum; }
-        set { stageNum = value; }
-    }
-
-    public float BestDicetance
-    {
-        get { return bestDistance; }
-        set { bestDistance = value; }
-    }
-
-    public float BestTime
-    {
-        get { return bestTime; }
-        set { bestTime = value; }
+        set 
+        {
+            stageNum = value;
+            ProgressData.StageNum = value;
+        }
     }
 }

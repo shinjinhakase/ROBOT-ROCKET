@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 // プレイシーンで使用するアイテムを管理するComponent。
 // 道中でのアイテムの入手・使用、重量計算はこっちを介する。
@@ -10,6 +11,8 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
 
     private PartsInfo partsInfo;
     [SerializeField] private PartsPerformanceData partsPerformanceData;
+
+    [SerializeField] private UnityEvent<PartsInfo.PartsData> getPartsEvent = new UnityEvent<PartsInfo.PartsData>();
 
     private void Start()
     {
@@ -24,6 +27,9 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         datas.ForEach(data => allWeight += partsPerformanceData.getData(data.id).m);
         return allWeight;
     }
+
+    // パーツIDからアイテム性能を返す
+    public PartsPerformance GetPerformance(PartsPerformance.E_PartsID id) => partsPerformanceData.getData(id);
 
     // パーツを使う（使うパーツのデータと、生まれる力を返す）
     public void UseParts(out PartsPerformance performance, out PartsInfo.PartsData data, out IForce force)
@@ -63,6 +69,11 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
     {
         partsInfo.AddParts(data);
         performance = partsPerformanceData.getData(data.id);
+        getPartsEvent.Invoke(data);
+    }
+    public void GetParts(PartsInfo.PartsData data)
+    {
+        GetParts(data, out _);
     }
 
 

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // ロボットの状態を管理するクラス。アニメーションなどを処理したりする。
 // 操作キャラ・リプレイ・シャドウの基盤。
+[RequireComponent(typeof(PurgeManager))]
 public class RobotStatus : MonoBehaviour
 {
     // ロボットの状態を示す列挙型
@@ -18,7 +20,10 @@ public class RobotStatus : MonoBehaviour
     private E_RobotStatus _status = E_RobotStatus.Ready;
     private int cooltime = 0;       // クールタイム
 
+    private Sprite usingPartsSprite = null;
+
     // ロボットの状態判定メソッド
+    public bool IsWaitingForFly => _status == E_RobotStatus.Ready;  // 飛行未開始判定
     public bool IsPartsUsable => _status == E_RobotStatus.Fly;  // 装備パーツの使用可能判定
     public bool IsUsingParts => _status == E_RobotStatus.UseParts;  // パーツの使用中判定
     public bool IsFlying => _status != E_RobotStatus.Ready && _status != E_RobotStatus.EndFly;  // 飛行中判定（ゲーム中判定）
@@ -26,6 +31,20 @@ public class RobotStatus : MonoBehaviour
 
 
     [SerializeField] private Animator _animator;
+    private PurgeManager _purgeManager;
+
+    [SerializeField] private List<Rigidbody2D> GameOverRobotPurgeData = new List<Rigidbody2D>();
+
+    [Header("イベント系統")]
+    [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
+    [SerializeField] private UnityEvent startUsePartsEvent = new UnityEvent();
+    [Tooltip("パーツの使用終了時に呼ばれるメソッド")]
+    [SerializeField] private UnityEvent endUsePartsEvent = new UnityEvent();
+
+    private void Awake()
+    {
+        _purgeManager = GetComponent<PurgeManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -64,8 +83,13 @@ public class RobotStatus : MonoBehaviour
             return;
         }
 
+        startUsePartsEvent.Invoke();
+
         // アイテム使用状態へ状態遷移
         _status = E_RobotStatus.UseParts;
+
+        // パージする際に投げ出すパーツの見た目
+        usingPartsSprite = performance.partsSprite;
 
         // クールタイムを計算しておく
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
@@ -86,6 +110,14 @@ public class RobotStatus : MonoBehaviour
         if (cooltime > 0) _status = E_RobotStatus.Cooldown;
         else _status = E_RobotStatus.Fly;
 
+        // 使用し終わったパーツをパージして投げ出す
+        if (usingPartsSprite != null)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+        }
+
+        endUsePartsEvent.Invoke();
         // TODO：飛行orクールタイムのアニメーションに遷移する
     }
 
@@ -128,6 +160,7 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.EndFly;
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
+        _purgeManager.AddPartsByPrefab(GameOverRobotPurgeData);
     }
 
     // カスタムメニューを開いた際に呼び出されるメソッド

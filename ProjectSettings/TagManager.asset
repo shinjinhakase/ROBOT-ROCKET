@@ -17,7 +17,7 @@ TagManager:
   - 
   - Player
   - PlayerAttack
-  - 
+  - Shadow
   - 
   - 
   - 
@@ -40,6 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 2335153439
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Front
+    uniqueID: 810382639
+    locked: 0
+  - name: UI
+    uniqueID: 1146199475
     locked: 0

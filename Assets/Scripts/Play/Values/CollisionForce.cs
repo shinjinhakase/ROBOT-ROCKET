@@ -15,5 +15,9 @@ public class CollisionForce : PressForce, IForce
         this.target = target;
     }
 
-    public bool IsEnd() => !gimick.CheckCollision(target);
+    public bool IsEnd()
+    {
+        cntFrame++;
+        return !gimick.CheckCollision(target);
+    }
 }

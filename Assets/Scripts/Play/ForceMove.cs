@@ -11,6 +11,9 @@ public class ForceMove : MonoBehaviour
     // 今加えられている力のリスト
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();
+    [SerializeField]
+    private bool IsMainRobot = false;
+    public bool IsAcceptExternalForce = true;   // 外力を受け入れるかの判定（falseにするとCollisionForceから力が来なくなる）
 
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;
@@ -22,7 +25,7 @@ public class ForceMove : MonoBehaviour
     private Vector3 firstPosition;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         firstPosition = transform.position;
@@ -72,6 +75,7 @@ public class ForceMove : MonoBehaviour
     public void AddForce(IForce force)
     {
         if (force == null) return;
+        force.IsMainRobot = IsMainRobot;
         force.StartPush();
         forces.Add(force);
     }
@@ -81,6 +85,7 @@ public class ForceMove : MonoBehaviour
         rb.mass = mass;
     }
     public float GetWeight() => rb.mass;
+    public Vector2 GetVelocity() => rb.velocity;
 
     // 加える合力の計算
     private Vector2 CalcForce()
@@ -97,6 +102,15 @@ public class ForceMove : MonoBehaviour
     // 加える力を無くす
     public void ZeroForce()
     {
+        // メインロボットの力など、必要であればリプレイに残った力を保存しておく
+        if (IsMainRobot)
+        {
+            ReplayInputManager replayInputManager = ReplayInputManager.Instance;
+            foreach(var force in forces)
+            {
+                replayInputManager.SetForce(force);
+            }
+        }
         forces.Clear();
     }
 
