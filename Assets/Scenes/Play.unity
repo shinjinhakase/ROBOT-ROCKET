@@ -984,7 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 00000000
+  replayIndexList: 
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
