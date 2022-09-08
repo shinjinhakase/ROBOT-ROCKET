@@ -13,4 +13,10 @@ public class PartsPerformanceData : ScriptableObject
     }
 
     public PartsPerformance getData(PartsPerformance.E_PartsID id) => dataList.Find(data => data.id == id);
+
+    // “Á’è‚Ì—Í‚Ìí—Ş‚Ìƒp[ƒcID‚ğæ“¾‚·‚é
+    public List<PartsPerformance.E_PartsID> getIDByForceType(PartsPerformance.E_ForceType forceType)
+    {
+        return dataList.FindAll(data => data.forceType == forceType).ConvertAll(data => data.id);
+    }
 }
