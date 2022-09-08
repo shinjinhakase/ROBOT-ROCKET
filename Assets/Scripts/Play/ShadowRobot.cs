@@ -35,14 +35,13 @@ public class ShadowRobot : MonoBehaviour
     private List<ReplayData.ForceData> GetAddForces() => replayData.forceDatas.FindAll(data => frameCnt == data.frame); // このフレームで加えられる力のデータを取得
 
     // キャッシュ
-    private RobotStatus _status;
+    [SerializeField] private RobotStatus _status;
     private ForceMove _move;
     private PlayPartsManager _playPartsManager;
     private Rigidbody2D _rb;
 
     void Awake()
     {
-        _status = GetComponent<RobotStatus>();
         _move = GetComponent<ForceMove>();
         _move.IsAcceptExternalForce = false;    // リプレイ以外の外力は誤差の元となるため受け入れない設定にする
         _rb = GetComponent<Rigidbody2D>();

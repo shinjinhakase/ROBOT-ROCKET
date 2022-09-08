@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bad0c2288d01d44a8f79fa28d093f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _status: {fileID: 0}
+  _status: {fileID: 179471751}
   _move: {fileID: 0}
 --- !u!114 &179471751
 MonoBehaviour:
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 
+  replayIndexList: 00000000
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
