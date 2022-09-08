@@ -32,6 +32,7 @@ public class ReplayPlayer : MonoBehaviour
 
     // 呼び出す処理のイベント
     [Header("イベント系統")]
+    [SerializeField] private UnityEvent onLoadEvent = new UnityEvent();
     [SerializeField] private UnityEvent<PartsInfo.PartsData> startUsePartsEvent = new UnityEvent<PartsInfo.PartsData>();
     [SerializeField] private UnityEvent endUsePartsEvent = new UnityEvent();
     [SerializeField] private UnityEvent<PartsInfo.PartsData> getPartsEvent = new UnityEvent<PartsInfo.PartsData>();
@@ -126,6 +127,8 @@ public class ReplayPlayer : MonoBehaviour
         frameCnt = 0;
         _currentPartsNo = 0;
         _currentTransNo = 0;
+
+        onLoadEvent.Invoke();
     }
 
     // リプレイを再生する
