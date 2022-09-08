@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235f4e4fd6d152c4990f38382404d794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followPrefab: {fileID: 8029756687154529600, guid: 498b5da7c80ce3044a3f00624b065269, type: 3}
+  followPrefab: {fileID: 8029756687154529600, guid: 3b1f406ebe93fbf4689e38275c2a18a7, type: 3}
   replayPlayer: {fileID: -6901455106758486061}
 --- !u!50 &5346312261245334907
 Rigidbody2D:
