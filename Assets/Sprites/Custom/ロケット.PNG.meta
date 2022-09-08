@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9683c8b471de41d4aaceed70fb114b1e
+guid: 4629f07489445f24ba0a5ed6c232698c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rockets_0
+      name: "\u30ED\u30B1\u30C3\u30C8_0"
       rect:
         serializedVersion: 2
-        x: 36
-        y: 84
-        width: 120
-        height: 366
+        x: 30
+        y: 70
+        width: 100
+        height: 305
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da510f24060dd954d91d81f6e68bc02b
-      internalID: 1032194310
+      spriteID: 35cb1537a6458c24792e8b8208e9f8c3
+      internalID: -1394795050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rockets_1
+      name: "\u30ED\u30B1\u30C3\u30C8_1"
       rect:
         serializedVersion: 2
-        x: 198
-        y: 90
-        width: 162
-        height: 264
+        x: 165
+        y: 75
+        width: 135
+        height: 220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26cde5834b1258f45b0c6f74d2f1eb52
-      internalID: -1375080758
+      spriteID: 634437ae331574249abdad571c9f7aca
+      internalID: -609927487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rockets_2
+      name: "\u30ED\u30B1\u30C3\u30C8_2"
       rect:
         serializedVersion: 2
-        x: 390
-        y: 84
-        width: 78
-        height: 156
+        x: 310
+        y: 225
+        width: 75
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,8 +160,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09f40c9d8eff4014fbe05e448ae87299
-      internalID: -362770285
+      spriteID: 0625c03db90ffed49b0e27c6708e3e75
+      internalID: 587638089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u30ED\u30B1\u30C3\u30C8_3"
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 70
+        width: 65
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ebe8ddf891a8ee459bab6c88dd51b46
+      internalID: 1115919346
       vertices: []
       indices: 
       edges: []
@@ -177,9 +198,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      rockets_2: -362770285
-      rockets_1: -1375080758
-      rockets_0: 1032194310
+      "\u30ED\u30B1\u30C3\u30C8_1": -609927487
+      "\u30ED\u30B1\u30C3\u30C8_0": -1394795050
+      "\u30ED\u30B1\u30C3\u30C8_2": 587638089
+      "\u30ED\u30B1\u30C3\u30C8_3": 1115919346
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

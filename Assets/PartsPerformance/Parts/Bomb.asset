@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
-  m_Name: Rocket2
+  m_Name: Bomb
   m_EditorClassIdentifier: 
-  id: 2
-  forceType: 1
-  m: 0.2
-  F: 20
-  t: 5
-  R: 0.2
-  k: 1
-  cooltime: 1.2
+  id: 6
+  forceType: 0
+  m: 0
+  F: 0
+  t: 0
+  R: 0
+  k: 0
+  cooltime: 0
   summonObjects: []
   partsName: 
-  partsSprite: {fileID: -609927487, guid: 4629f07489445f24ba0a5ed6c232698c, type: 3}
-  iconSprite: {fileID: 21300000, guid: d3f4b484be642f042831d72a5c6f1931, type: 3}
+  partsSprite: {fileID: 587638089, guid: 4629f07489445f24ba0a5ed6c232698c, type: 3}
+  iconSprite: {fileID: 587638089, guid: 4629f07489445f24ba0a5ed6c232698c, type: 3}
   description: 

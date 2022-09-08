@@ -21,7 +21,11 @@ public class PartsPerformance : ScriptableObject
         TestParts,
         Rocket1,
         Rocket2,
-        Rocket3
+        Rocket3,
+        Propeller,
+        Glider,
+        Bomb
+
     }
 
     // 物理等プレイシーン関連
