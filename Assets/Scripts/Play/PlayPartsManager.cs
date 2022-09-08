@@ -76,6 +76,10 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         performance = partsPerformanceData.getData(data.id);
         getPartsEvent.Invoke(data);
     }
+    public void GetParts(PartsInfo.PartsData data)
+    {
+        GetParts(data, out _);
+    }
 
 
     // デバッグ用。使用パーツリストにテストパーツを追加する。

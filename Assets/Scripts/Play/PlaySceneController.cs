@@ -31,6 +31,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent startAnimationEvent = new UnityEvent();
     [Tooltip("ゲーム開始と同時に呼び出されるメソッド")]
     [SerializeField] private UnityEvent startGameEvent = new UnityEvent();
+    [Tooltip("ゲーム開始後ロボットが動き始めた際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent startRobotMove = new UnityEvent();
     [Tooltip("ゲーム終了した際、どのような終わり方でも共通して呼び出されるメソッド")]
     [SerializeField] private UnityEvent endGameEvent = new UnityEvent();
 
@@ -74,6 +76,14 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();
+        }
+    }
+    // ロボットが動き始めた際に呼び出されるメソッド
+    public void RobotStartMove()
+    {
+        if (scene == E_PlayScene.GamePlay)
+        {
+            startRobotMove.Invoke();
         }
     }
     // カスタムメニューを開く

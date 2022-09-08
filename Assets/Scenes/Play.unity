@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 179471746}
   - component: {fileID: 179471755}
   - component: {fileID: 179471754}
+  - component: {fileID: 179471756}
   - component: {fileID: 179471747}
   - component: {fileID: 179471745}
   - component: {fileID: 179471753}
@@ -300,6 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _status: {fileID: 179471751}
   _move: {fileID: 0}
+  ReplayMode: 0
+  ReplayIndex: 0
 --- !u!114 &179471751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +445,78 @@ MonoBehaviour:
   initMinVelocity: 2
   initAngleRange: 120
   initAngleVelocity: 180
+--- !u!114 &179471756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179471744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a34f43421c5a1488b4023bdb301feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 179471750}
+        m_TargetAssemblyTypeName: MainRobot, Assembly-CSharp
+        m_MethodName: UsePartsByReplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  endUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 179471750}
+        m_TargetAssemblyTypeName: MainRobot, Assembly-CSharp
+        m_MethodName: endUseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  getPartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 179471752}
+        m_TargetAssemblyTypeName: PlayPartsManager, Assembly-CSharp
+        m_MethodName: GetParts
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  endReplayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 179471750}
+        m_TargetAssemblyTypeName: MainRobot, Assembly-CSharp
+        m_MethodName: GameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &199935186
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 00000000
+  replayIndexList: 
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,7 +1215,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 83f98607ccae4c548b16f022c8ee8ed7, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.36078432, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1329,6 +1404,33 @@ MonoBehaviour:
       - m_Target: {fileID: 866832308}
         m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
         m_MethodName: Ready
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  startRobotMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: StartMemory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 866832310}
+        m_TargetAssemblyTypeName: ShadowManager, Assembly-CSharp
+        m_MethodName: StartShadowReplay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
