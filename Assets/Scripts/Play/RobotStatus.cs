@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // ロボットの状態を管理するクラス。アニメーションなどを処理したりする。
 // 操作キャラ・リプレイ・シャドウの基盤。
@@ -32,6 +33,12 @@ public class RobotStatus : MonoBehaviour
     private PurgeManager _purgeManager;
 
     [SerializeField] private List<Rigidbody2D> GameOverRobotPurgeData = new List<Rigidbody2D>();
+
+    [Header("イベント系統")]
+    [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
+    [SerializeField] private UnityEvent startUsePartsEvent = new UnityEvent();
+    [Tooltip("パーツの使用終了時に呼ばれるメソッド")]
+    [SerializeField] private UnityEvent endUsePartsEvent = new UnityEvent();
 
     private void Awake()
     {
@@ -84,6 +91,7 @@ public class RobotStatus : MonoBehaviour
         // クールタイムを計算しておく
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
+        startUsePartsEvent.Invoke();
         // TODO：アイテムの種類によって特有のアニメーションへ遷移
     }
 
@@ -107,6 +115,7 @@ public class RobotStatus : MonoBehaviour
             usingPartsSprite = null;
         }
 
+        endUsePartsEvent.Invoke();
         // TODO：飛行orクールタイムのアニメーションに遷移する
     }
 
