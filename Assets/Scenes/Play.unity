@@ -262,6 +262,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 179471759}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: UseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &166251958
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -386,6 +398,7 @@ GameObject:
   - component: {fileID: 179471750}
   - component: {fileID: 179471746}
   - component: {fileID: 179471756}
+  - component: {fileID: 179471759}
   - component: {fileID: 179471747}
   - component: {fileID: 179471758}
   - component: {fileID: 179471757}
@@ -500,6 +513,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 179471759}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: GetParts
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &179471756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a34f43421c5a1488b4023bdb301feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onLoadEvent:
+    m_PersistentCalls:
+      m_Calls: []
   startUsePartsEvent:
     m_PersistentCalls:
       m_Calls:
@@ -547,6 +575,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 179471752}
         m_TargetAssemblyTypeName: PlayPartsManager, Assembly-CSharp
+        m_MethodName: GetParts
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 179471759}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
         m_MethodName: GetParts
         m_Mode: 0
         m_Arguments:
@@ -631,6 +671,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &179471759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179471744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235f4e4fd6d152c4990f38382404d794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followPrefab: {fileID: 8029756687154529600, guid: 498b5da7c80ce3044a3f00624b065269, type: 3}
+  replayPlayer: {fileID: 179471756}
 --- !u!1 &199935186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,6 +1761,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 179471759}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: InitFollowerByPartsInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   startGameEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2278,7 +2344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1865460701
 Transform:
   m_ObjectHideFlags: 0

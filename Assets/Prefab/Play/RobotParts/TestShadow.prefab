@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 6735901713704480786}
   - component: {fileID: 2591065100494002134}
   - component: {fileID: -6901455106758486061}
+  - component: {fileID: 2686121090419367529}
   - component: {fileID: 5346312261245334907}
   m_Layer: 10
   m_Name: TestShadow
@@ -233,7 +234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1959813857
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
   m_FlipX: 0
@@ -292,6 +293,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a34f43421c5a1488b4023bdb301feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onLoadEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2686121090419367529}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: InitFunctionForReplayPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   startUsePartsEvent:
     m_PersistentCalls:
       m_Calls:
@@ -322,12 +338,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2686121090419367529}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: UseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   getPartsEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6735901713704480786}
         m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
         m_MethodName: AddGettingPartsWeight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2686121090419367529}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: GetParts
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -352,6 +392,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2686121090419367529}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: DestroyAllFollowers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2686121090419367529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8478727793972353363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235f4e4fd6d152c4990f38382404d794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followPrefab: {fileID: 8029756687154529600, guid: 498b5da7c80ce3044a3f00624b065269, type: 3}
+  replayPlayer: {fileID: -6901455106758486061}
 --- !u!50 &5346312261245334907
 Rigidbody2D:
   serializedVersion: 4
