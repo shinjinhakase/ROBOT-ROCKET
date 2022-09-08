@@ -9,7 +9,6 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
     // 現在パーツ使用中かのフラグ
     [NonSerialized] public bool IsUsingParts = false;
 
-    private ReplayInputManager replayInputManager;
     private PartsInfo partsInfo;
     [SerializeField] private PartsPerformanceData partsPerformanceData;
 
@@ -17,7 +16,6 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
 
     private void Start()
     {
-        replayInputManager = ReplayInputManager.Instance;
         partsInfo = PartsInfo.Instance;
     }
 
@@ -43,9 +41,6 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         performance = partsPerformanceData.getData(data.id);
         // リストからアイテムを除外する
         partsInfo.RemoveParts();
-
-        // リプレイにアイテムを使用したことを記録する
-        replayInputManager.UseParts();
 
         // 加える力を構築する
         switch (performance.forceType)
