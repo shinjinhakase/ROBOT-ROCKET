@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bad0c2288d01d44a8f79fa28d093f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _status: {fileID: 0}
+  _status: {fileID: 179471751}
   _move: {fileID: 0}
 --- !u!114 &179471751
 MonoBehaviour:
@@ -319,6 +319,24 @@ MonoBehaviour:
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
+  startUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: EndUseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &179471752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +350,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partsPerformanceData: {fileID: 11400000, guid: 95337da6147298f43934ed34d0386d8f, type: 2}
+  getPartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: GetParts
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &179471753
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -696,7 +729,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 
+  replayIndexList: 00000000
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,12 +1296,78 @@ MonoBehaviour:
   robot: {fileID: 179471750}
   _goalXPoint: 30
   _score: 0
-  startAnimation:
+  startAnimationEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 866832310}
+        m_TargetAssemblyTypeName: ShadowManager, Assembly-CSharp
+        m_MethodName: RegisterShadow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1303854463}
+        m_TargetAssemblyTypeName: PlaySceneController, Assembly-CSharp
+        m_MethodName: GameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  startGameEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: Ready
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  endGameEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1303854463}
         m_TargetAssemblyTypeName: PlaySceneController, Assembly-CSharp
-        m_MethodName: GameStart
+        m_MethodName: StopHitStopIfExists
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 866832310}
+        m_TargetAssemblyTypeName: ShadowManager, Assembly-CSharp
+        m_MethodName: StopAllShadow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: SetResult
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

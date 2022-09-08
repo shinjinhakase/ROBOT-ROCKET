@@ -127,6 +127,12 @@ MonoBehaviour:
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
+  startUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  endUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &5346312261245334907
 Rigidbody2D:
   serializedVersion: 4
@@ -182,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92fff632e885f543ad3f742672ad04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _status: {fileID: 5364773325347998154}
 --- !u!61 &6666132527250339038
 BoxCollider2D:
   m_ObjectHideFlags: 0

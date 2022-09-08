@@ -14,7 +14,7 @@ public class MainRobot : MonoBehaviour
     private PlaySceneController playSceneController;
     private PlayPartsManager playPartsManager;
     public RobotStatus _status;
-    public ForceMove _move;
+    [HideInInspector] public ForceMove _move;
 
     // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool IsUsePartsInForce = false;
@@ -27,7 +27,6 @@ public class MainRobot : MonoBehaviour
     private void Awake()
     {
         partsInfo = PartsInfo.Instance;
-        _status = GetComponent<RobotStatus>();
         _move = GetComponent<ForceMove>();
     }
 
