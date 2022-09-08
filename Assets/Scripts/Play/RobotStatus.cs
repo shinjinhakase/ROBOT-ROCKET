@@ -23,6 +23,7 @@ public class RobotStatus : MonoBehaviour
     private Sprite usingPartsSprite = null;
 
     // ロボットの状態判定メソッド
+    public bool IsWaitingForFly => _status == E_RobotStatus.Ready;  // 飛行未開始判定
     public bool IsPartsUsable => _status == E_RobotStatus.Fly;  // 装備パーツの使用可能判定
     public bool IsUsingParts => _status == E_RobotStatus.UseParts;  // パーツの使用中判定
     public bool IsFlying => _status != E_RobotStatus.Ready && _status != E_RobotStatus.EndFly;  // 飛行中判定（ゲーム中判定）
@@ -82,6 +83,8 @@ public class RobotStatus : MonoBehaviour
             return;
         }
 
+        startUsePartsEvent.Invoke();
+
         // アイテム使用状態へ状態遷移
         _status = E_RobotStatus.UseParts;
 
@@ -91,7 +94,6 @@ public class RobotStatus : MonoBehaviour
         // クールタイムを計算しておく
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
-        startUsePartsEvent.Invoke();
         // TODO：アイテムの種類によって特有のアニメーションへ遷移
     }
 

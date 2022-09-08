@@ -246,7 +246,19 @@ MonoBehaviour:
   - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
   startUsePartsEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: UseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   endUsePartsEvent:
     m_PersistentCalls:
       m_Calls:
@@ -972,7 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  replayIndexList: 
+  replayIndexList: 00000000
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0

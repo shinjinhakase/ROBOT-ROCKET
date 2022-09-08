@@ -19,6 +19,8 @@ public class MainRobot : MonoBehaviour
     // 最高到達距離
     private float _highScore = 0;
 
+    private bool IsNotStart = false;
+
     // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool IsUsePartsInForce = false;
     // リプレイ操作に従うか
@@ -52,10 +54,17 @@ public class MainRobot : MonoBehaviour
                 UsePartsByControl();
             }
             // アイテムの手動パージ
-            if(playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
+            if (playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
             {
                 playPartsManager.IsUsingParts = false;
             }
+        }
+        // 飛行し始め判定
+        else if (IsNotStart &&  playSceneController.scene == PlaySceneController.E_PlayScene.GamePlay && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
+        {
+            IsNotStart = false;
+            RobotStartMove();
+            UsePartsByControl();
         }
 
         // ヒットストップデバッグ
@@ -97,13 +106,14 @@ public class MainRobot : MonoBehaviour
             _player.LoadReplayData(ReplayIndex);
             partsInfo.partsList = _player.InitialPartsDatas;
             IsUsePartsInForce = true;
+            IsNotStart = false;
             RobotStartMove();
         }
         else
         {
-            // 操作する際の処理（仮）
+            // 操作する際の処理
             IsUsePartsInForce = false;
-            RobotStartMove();
+            IsNotStart = true;  // まだ飛行を開始していないフラグをtrueにする
         }
     }
     // ロボットが動き始めた際に呼ばれるメソッド
