@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // アイテムを使用して力を加えて動く、ゲームのメインロボット
-[RequireComponent(typeof(RobotStatus))]
 [RequireComponent(typeof(ForceMove))]
 [RequireComponent(typeof(ReplayPlayer))]
 public class MainRobot : MonoBehaviour

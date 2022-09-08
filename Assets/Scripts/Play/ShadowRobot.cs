@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // シャドウの動きを処理するComponent（動きの軌跡だけ再現する）
-[RequireComponent(typeof(RobotStatus))]
 [RequireComponent(typeof(ForceMove))]
 [RequireComponent(typeof(ReplayPlayer))]
 public class ShadowRobot : MonoBehaviour
