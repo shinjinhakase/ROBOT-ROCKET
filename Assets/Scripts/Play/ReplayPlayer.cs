@@ -10,13 +10,15 @@ using UnityEngine.Events;
 public class ReplayPlayer : MonoBehaviour
 {
     // 読み込んだリプレイデータ
-    private bool IsLoaded = false;
-    private bool IsPlaying = false;
-    private bool IsEnd = false;
+    private bool _isLoaded = false;
+    public bool IsLoaded { get { return _isLoaded; } private set { _isLoaded = value; } }
+    private bool _isPlaying = false;
+    public bool IsPlaying { get { return _isPlaying; } private set { _isPlaying = value; } }
     private ReplayData _replayData;
 
     // 準備してきたパーツのIDリストを取得する（初期重量計算用）
     public List<PartsPerformance.E_PartsID> ReadyPartsIDList => _replayData.readyPartsList.ConvertAll(data => data.id);
+    public List<PartsInfo.PartsData> InitialPartsDatas => _replayData.readyPartsList;
 
     // 再生用変数
     private int frameCnt = 0;
@@ -47,7 +49,7 @@ public class ReplayPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsPlaying && !IsEnd)
+        if (_isPlaying)
         {
             // 更新の有無を判定
             UpdateCheckPerFrame(out bool IsStartUsing, out bool IsEndUsing, out bool IsTransUpdate,
@@ -91,7 +93,8 @@ public class ReplayPlayer : MonoBehaviour
             // リプレイの終了判定
             if(frameCnt >= _replayData.finishFrame)
             {
-                IsEnd = true;
+                _isLoaded = false;
+                _isPlaying = false;
                 endReplayEvent.Invoke();
             }
         }
@@ -106,11 +109,11 @@ public class ReplayPlayer : MonoBehaviour
         {
             throw new Exception("リプレイデータが読み込めません。");
         }
-        else if (IsLoaded)
+        else if (_isLoaded)
         {
             throw new Exception("既にリプレイデータを読み込んでいます。");
         }
-        IsLoaded = true;
+        _isLoaded = true;
         _replayData = replayDatas.GetData(index);
 
         // データのリスト長を取得
@@ -118,19 +121,24 @@ public class ReplayPlayer : MonoBehaviour
         _startUseLength = _replayData.usePartsFrame.Count;
         _endUseLength = _replayData.endUsePartsFrame.Count;
         _transformLength= _replayData.locateDatas.Count;
+
+        // カウンタを初期化
+        frameCnt = 0;
+        _currentPartsNo = 0;
+        _currentTransNo = 0;
     }
 
     // リプレイを再生する
     public void StartReplay()
     {
-        if (!IsLoaded)
+        if (!_isLoaded)
         {
             throw new Exception("データを読み込んでいない状態ではリプレイを再生できません。");
-        } else if (IsPlaying)
+        } else if (_isPlaying)
         {
             throw new Exception("既にリプレイの再生を開始しています。");
         }
-        IsPlaying = true;
+        _isPlaying = true;
     }
 
     // 更新の有無を判定する
@@ -151,4 +159,15 @@ public class ReplayPlayer : MonoBehaviour
 
     // 次の座標更新データを取得する
     private ReplayData.LocateData GetLocateData => _replayData.locateDatas[_currentTransNo];
+
+    // 開始時の初期質量を設定する
+    public float GetInitialWeight(PlayPartsManager _playPartsManager)
+    {
+        float sumWeight = 0;
+        foreach (var readyPartsID in ReadyPartsIDList)
+        {
+            sumWeight += _playPartsManager.GetPerformance(readyPartsID).m;
+        }
+        return sumWeight + ForceMove.RobotWeight;
+    }
 }

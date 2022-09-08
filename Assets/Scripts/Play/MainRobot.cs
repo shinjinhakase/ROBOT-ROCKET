@@ -5,51 +5,54 @@ using UnityEngine;
 // アイテムを使用して力を加えて動く、ゲームのメインロボット
 [RequireComponent(typeof(RobotStatus))]
 [RequireComponent(typeof(ForceMove))]
+[RequireComponent(typeof(ReplayPlayer))]
 public class MainRobot : MonoBehaviour
 {
     private static string GameOverColliderTag = "GameOverCollider"; // ゲームオーバーとなる当たり判定に付けるタグの名前
 
+    private ReplayPlayer _player;
     private PartsInfo partsInfo;
-    private ReplayInputManager replayInputManager;
     private PlaySceneController playSceneController;
     private PlayPartsManager playPartsManager;
     public RobotStatus _status;
     [HideInInspector] public ForceMove _move;
 
+    // 最高到達距離
+    private float _highScore = 0;
+
     // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool IsUsePartsInForce = false;
     // リプレイ操作に従うか
-    // private bool ReplayMode = false;
-
-    // 最高到達距離
-    private float _highScore = 0;
+    [Header("リプレイ関係")]
+    [SerializeField] private bool ReplayMode = false;
+    [SerializeField] private int ReplayIndex;
 
     private void Awake()
     {
         partsInfo = PartsInfo.Instance;
         _move = GetComponent<ForceMove>();
+        _player = GetComponent<ReplayPlayer>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         // 飛行中の処理
-        if (_status.IsFlying)
+        if (_status.IsFlying && !_player.IsPlaying)
         {
             // アイテム使用終了判定
             if (_status.IsUsingParts && !playPartsManager.IsUsingParts)
             {
-                _status.endUseParts();
-                replayInputManager.EndUseParts();
+                endUseParts();
             }
 
             // 仮の操作処理（アイテム使用）
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Debug.Log("アイテム使用ボタンを押した");
-                UseParts();
+                UsePartsByControl();
             }
-            // アイテムの手動パージ（グライダーでは実装？他のパーツではどうするか聞いてない）
+            // アイテムの手動パージ
             if(playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
             {
                 playPartsManager.IsUsingParts = false;
@@ -85,24 +88,58 @@ public class MainRobot : MonoBehaviour
     // ゲーム開始メソッド
     public void GameStart()
     {
-        // ロボットの初期重量を設定する
-        replayInputManager = ReplayInputManager.Instance;
+        // キャッシュを取得
         playSceneController = PlaySceneController.Instance;
         playPartsManager = PlayPartsManager.Instance;
+
+        if (ReplayMode)
+        {
+            // リプレイの初期設定
+            _player.LoadReplayData(ReplayIndex);
+            partsInfo.partsList = _player.InitialPartsDatas;
+            IsUsePartsInForce = true;
+            RobotStartMove();
+        }
+        else
+        {
+            // 操作する際の処理（仮）
+            IsUsePartsInForce = false;
+            RobotStartMove();
+        }
+    }
+    // ロボットが動き始めた際に呼ばれるメソッド
+    private void RobotStartMove()
+    {
+        // ロボットの初期重量を設定する
         float allWeight = playPartsManager.GetAllWeight();
         _move.SetWeight(allWeight + ForceMove.RobotWeight);
 
         // 状態を変化させる
         _status.startGame();
 
-        // 開始と同時にリプレイのフレームカウントをスタートさせる（仮の処理）
-        replayInputManager.StartMemory();
-        ShadowManager.Instance.StartShadowReplay();
+        // ロボットが動き始めた際のイベントを呼ぶ
+        playSceneController.RobotStartMove();
+        if (_player.IsLoaded) _player.StartReplay();
     }
 
-    // アイテムを使用する処理
+    // 操作によってアイテムを使用する処理
     [ContextMenu("Debug/UseParts")]
-    public void UseParts()
+    private void UsePartsByControl()
+    {
+        if (_player.IsPlaying) return;
+        else if (!partsInfo.HasNext) return;
+        else if (!_status.IsPartsUsable) return;
+        playPartsManager.UseParts(out PartsPerformance performance, out PartsInfo.PartsData data, out IForce force);
+        UseParts(data, performance, force);
+    }
+    // リプレイによってアイテムを使用する処理
+    public void UsePartsByReplay(PartsInfo.PartsData data)
+    {
+        if (!_player.IsPlaying) return;
+        UseParts(data, playPartsManager.GetPerformance(data.id));
+    }
+    // パーツ使用時の共通処理
+    private void UseParts(PartsInfo.PartsData data, PartsPerformance performance, IForce force = null)
     {
         // アイテムが使えるか判定
         if (!_status.IsFlying)
@@ -110,24 +147,13 @@ public class MainRobot : MonoBehaviour
             Debug.LogWarning("飛行中以外にアイテムを使用しようとしています！");
             return;
         }
-        else if (!partsInfo.HasNext) return;
-        else if (!_status.IsPartsUsable)
+        // アイテムが使用できない状態のとき
+        else if (!_status.IsPartsUsable && IsUsePartsInForce)
         {
-            // アイテムが使用できない状態のとき
-            if (!IsUsePartsInForce) return;
-            else
-            {
-                // アイテムを使用できる状態に強制的に移行する
-                if (_status.IsUsingParts) _status.endUseParts();
-                _status.endCooltime();
-            }
+            // アイテムを使用できる状態に強制的に移行する
+            if (_status.IsUsingParts) _status.endUseParts();
+            _status.endCooltime();
         }
-
-        // アイテム管理にアイテムの使用を伝え、必要な情報を貰う
-        PartsPerformance performance;
-        PartsInfo.PartsData data;
-        IForce force;
-        playPartsManager.UseParts(out performance, out data, out force);
 
         // 状態管理にアイテムの使用を伝える
         _status.startUseParts(performance, data);
@@ -138,11 +164,16 @@ public class MainRobot : MonoBehaviour
         // 召喚オブジェクトを召喚する
         Transform _transform = transform;
         Vector3 nowPosition = _transform.position;
-        foreach(SummonableObject summonObject in performance.summonObjects)
+        foreach (SummonableObject summonObject in performance.summonObjects)
         {
             var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
             summonned.Summon(data, _transform);
         }
+    }
+    // パーツの使用が終わった際の処理
+    public void endUseParts()
+    {
+        _status.endUseParts();
     }
 
 
@@ -186,7 +217,7 @@ public class MainRobot : MonoBehaviour
     // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
     public void CheckGameOverCollision(Collider2D other)
     {
-        if (_status.IsFlying && other.CompareTag(GameOverColliderTag))
+        if (!_player.IsPlaying && _status.IsFlying && other.CompareTag(GameOverColliderTag))
         {
             PlaySceneController.Instance.GameOver();
         }

@@ -84,11 +84,6 @@ public class ShadowRobot : MonoBehaviour
     // ŠJn‚Ì‰Šú¿—Ê‚ğİ’è‚·‚é
     private void SetInitialWeight()
     {
-        float sumWeight = 0;
-        foreach (var readyPartsID in _player.ReadyPartsIDList)
-        {
-            sumWeight += _playPartsManager.GetPerformance(readyPartsID).m;
-        }
-        _move.SetWeight(sumWeight + ForceMove.RobotWeight);
+        _move.SetWeight(_player.GetInitialWeight(_playPartsManager));
     }
 }
