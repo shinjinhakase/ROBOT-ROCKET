@@ -23,7 +23,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private float _score;
     public float Score {
         get { return _score; }
-        set { if (_score <= _goalXPoint) _score = value; else _score = _goalXPoint; }
+        set { if (value <= _goalXPoint) _score = value; else _score = _goalXPoint; }
     }
 
     [Header("イベント系統")]
@@ -35,6 +35,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent startRobotMove = new UnityEvent();
     [Tooltip("ゲーム終了した際、どのような終わり方でも共通して呼び出されるメソッド")]
     [SerializeField] private UnityEvent endGameEvent = new UnityEvent();
+    [Tooltip("ゲームオーバーとなった際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent gameOverEvent = new UnityEvent();
+    [Tooltip("ゲームクリアした際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent gameClearEvent = new UnityEvent();
+    [Tooltip("カスタムメニューを出す際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent OpenCustomMenuEvent = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
 
@@ -105,7 +111,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
 
-            // TODO：カスタムメニューのオープン処理を実装
+            // カスタムメニューのオープン処理
+            OpenCustomMenuEvent.Invoke();
         }
     }
     // カスタムメニューを閉じたときの処理
@@ -137,7 +144,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             cam.IsFollowRobot = false;
             robot.GameClear();
-            // ロボットが着地したら、結果表示などの処理を呼ぶ。
+
+            gameClearEvent.Invoke();
         }
     }
     // ゲームオーバー処理を行う
@@ -153,8 +161,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
-            // TODO：ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
-            // TODO：結果表示のUIでやり直しボタンを押させるか、ゲームオーバーアニメーションの数秒後にまた開始/カスタム入りする？
+            
+            // ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
+            gameOverEvent.Invoke();
         }
     }
     // リセットの処理を行う
