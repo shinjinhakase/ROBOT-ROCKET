@@ -6,18 +6,6 @@ public class GimickManager : SingletonMonoBehaviourInSceneBase<GimickManager>
 {
     private List<GimickBase> gimickList = new List<GimickBase>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // ギミックを管理リストに追加する
     public void SaveGimick(GimickBase gimick)
     {
