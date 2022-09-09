@@ -217,6 +217,7 @@ public class MainRobot : MonoBehaviour
     // ƒŠƒZƒbƒg‚·‚é‚Æ‚«‚Ìˆ—
     public void ResetToStart()
     {
+        _highScore = 0;
         partsInfo = PartsInfo.Instance;
         _move.ResetToFirst();
         _status.ResetStatus();
