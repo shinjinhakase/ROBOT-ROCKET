@@ -102,20 +102,15 @@ public class ReplayPlayer : MonoBehaviour
     }
 
     // リプレイデータを読み込む
-    public void LoadReplayData(int index)
+    public void LoadReplayData(ReplayData data)
     {
         // リプレイデータを取得する
-        ReplayDatas replayDatas = ReplayDatas.Instance;
-        if (index >= replayDatas.Length)
-        {
-            throw new Exception("リプレイデータが読み込めません。");
-        }
-        else if (_isLoaded)
+        if (_isLoaded)
         {
             throw new Exception("既にリプレイデータを読み込んでいます。");
         }
         _isLoaded = true;
-        _replayData = replayDatas.GetData(index);
+        _replayData = data;
 
         // データのリスト長を取得
         _readyPartsLength = _replayData.readyPartsList.Count;

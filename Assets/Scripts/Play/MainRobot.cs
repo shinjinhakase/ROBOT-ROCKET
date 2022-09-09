@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,7 +104,12 @@ public class MainRobot : MonoBehaviour
         if (ReplayMode)
         {
             // リプレイの初期設定
-            _player.LoadReplayData(ReplayIndex);
+            ReplayDatas _replayDatas = ReplayDatas.Instance;
+            if (_replayDatas == null || ReplayIndex >= _replayDatas.Length)
+            {
+                throw new Exception("MainRobotのリプレイデータを読み込めませんでした。");
+            }
+            _player.LoadReplayData(_replayDatas.GetData(ReplayIndex));
             partsInfo.partsList = _player.InitialPartsDatas;
             IsUsePartsInForce = true;
             IsNotStart = false;

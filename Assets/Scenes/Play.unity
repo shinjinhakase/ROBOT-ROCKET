@@ -612,8 +612,8 @@ MonoBehaviour:
   endReplayEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 179471750}
-        m_TargetAssemblyTypeName: MainRobot, Assembly-CSharp
+      - m_Target: {fileID: 1303854463}
+        m_TargetAssemblyTypeName: PlaySceneController, Assembly-CSharp
         m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
@@ -1168,7 +1168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4603e5bd7564a86409f1ce308f487aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrashDuration: 0
 --- !u!61 &885559087
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1801,18 +1800,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 179471759}
-        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
-        m_MethodName: InitFollowerByPartsInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   startRobotMove:
     m_PersistentCalls:
       m_Calls:
@@ -1843,6 +1830,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1303854465}
         m_TargetAssemblyTypeName: GimickManager, Assembly-CSharp
         m_MethodName: StartGimick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 179471759}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: InitFollowerByPartsInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
