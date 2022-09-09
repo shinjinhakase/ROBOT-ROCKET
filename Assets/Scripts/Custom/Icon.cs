@@ -14,6 +14,8 @@ public class Icon : MonoBehaviour{
     public PartsPerformanceData _data;
 
     private PartsPerformance _performance;
+
+    public int tabnumber;
     
     void Start(){
 
@@ -25,6 +27,17 @@ public class Icon : MonoBehaviour{
     }
 
     void Update(){
+
+        if(tabnumber==Tab.tabnumber){
+
+            this.gameObject.GetComponent<BoxCollider2D>().enabled=true;
+
+        }else{
+
+            this.gameObject.GetComponent<BoxCollider2D>().enabled=false;
+
+        }
+
     }
 
     public void Click(){

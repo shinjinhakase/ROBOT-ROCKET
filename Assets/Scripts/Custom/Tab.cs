@@ -12,6 +12,8 @@ public class Tab : MonoBehaviour{
     public GameObject tab3;
 
     GameObject[] tabs;
+
+    public static int tabnumber=0;
     
     void Start(){
 
@@ -55,6 +57,8 @@ public class Tab : MonoBehaviour{
             }
 
         }
+
+        tabnumber=tab_select;
 
     }
 

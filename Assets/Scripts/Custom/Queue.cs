@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//テスト用
+using UnityEngine.SceneManagement;
 
 public class Queue : MonoBehaviour{
     
@@ -64,6 +66,9 @@ public class Queue : MonoBehaviour{
         }
 
         _partsInfo.Save();
+
+        //テスト用
+        SceneManager.LoadScene("Play");
 
     }
 
