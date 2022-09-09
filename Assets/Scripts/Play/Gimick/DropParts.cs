@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class DropParts : MonoBehaviour
+public class DropParts : GimickBase
 {
     // 取得するパーツの情報
     [SerializeField] private PartsInfo.PartsData partsData;
     private bool Picked = false;
+
+    // ギミックをリセットするメソッド
+    public override void ResetGimick() {
+        gameObject.SetActive(true);
+        Picked = false;
+    }
 
     // 他の当たり判定と衝突した際のアイテムを拾う処理
     public void PickItem(Collider2D other)
@@ -19,7 +25,7 @@ public class DropParts : MonoBehaviour
         ForceMove move = robot._move;
         move.SetWeight(move.GetWeight() + performance.m);
 
-        // 自身を破棄する
-        Destroy(gameObject);
+        // 自身を無効化する
+        gameObject.SetActive(false);
     }
 }
