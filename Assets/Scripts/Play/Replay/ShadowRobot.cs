@@ -24,7 +24,12 @@ public class ShadowRobot : MonoBehaviour
     // リプレイデータを読み込む
     public void LoadReplayData(int index)
     {
-        _player.LoadReplayData(index);
+        ReplayDatas _replayDatas = ReplayDatas.Instance;
+        if (_replayDatas == null || index >= _replayDatas.Length)
+        {
+            throw new Exception("Shadowのリプレイデータを読み込めませんでした。");
+        }
+        _player.LoadReplayData(_replayDatas.GetData(index));
     }
 
     // リプレイの再現を開始する

@@ -2,13 +2,10 @@ using UnityEngine;
 
 // 破壊可能なオブジェクトの動作を定義するComponent。
 [RequireComponent(typeof(Collider2D))]
-public class CrashableObject : MonoBehaviour
+public class CrashableObject : GimickBase
 {
     // ギミック攻撃タグの指定
     static private string AttackerTag = "StageAttacker";
-
-    [Tooltip("破壊されてから完全にオブジェクトが消えるまでの時間")]
-    [SerializeField] private float CrashDuration = 0f;
 
     public bool IsAlive { get; private set; } = true;
     private Collider2D _collider;
@@ -16,6 +13,13 @@ public class CrashableObject : MonoBehaviour
     void Awake()
     {
         _collider = GetComponent<Collider2D>();
+    }
+
+    // ギミックをリセットするメソッド
+    public override void ResetGimick() {
+        gameObject.SetActive(true);
+        _collider.enabled = true;
+        IsAlive = true;
     }
 
     // 何かと衝突した際、呼ばれるメソッド
@@ -36,7 +40,7 @@ public class CrashableObject : MonoBehaviour
         // 当たり判定を無効化
         _collider.enabled = false;
 
-        // 指定秒数後に自身を破壊する（アニメーション用の待機時間）
-        Destroy(gameObject, CrashDuration);
+        // 自身を破棄する
+        gameObject.SetActive(false);
     }
 }

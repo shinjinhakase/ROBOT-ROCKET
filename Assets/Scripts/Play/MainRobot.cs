@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,9 @@ public class MainRobot : MonoBehaviour
     // リプレイ操作に従うか
     [Header("リプレイ関係")]
     [SerializeField] private bool ReplayMode = false;
+    [SerializeField] private bool UseReplayIndexForDebug = false;
     [SerializeField] private int ReplayIndex;
+    private ReplayData _useReplayData;
 
     private void Awake()
     {
@@ -81,7 +84,7 @@ public class MainRobot : MonoBehaviour
     private void FixedUpdate()
     {
         // 最高到達距離を確認する
-        if (_status.IsFlying && transform.position.x > _highScore)
+        if (_status.IsFlying && !_player.IsPlaying && transform.position.x > _highScore)
         {
             _highScore = transform.position.x;
             playSceneController.Score = _highScore;
@@ -103,8 +106,26 @@ public class MainRobot : MonoBehaviour
         if (ReplayMode)
         {
             // リプレイの初期設定
-            _player.LoadReplayData(ReplayIndex);
+            if (UseReplayIndexForDebug)
+            {
+                // ReplayDataをReplayDatasのインデックスを指定して読み込む（デバッグ用？）
+                ReplayDatas _replayDatas = ReplayDatas.Instance;
+                if (_replayDatas == null || ReplayIndex >= _replayDatas.Length)
+                {
+                    throw new Exception("MainRobotのリプレイデータを読み込めませんでした。");
+                }
+                _useReplayData = _replayDatas.GetData(ReplayIndex);
+            }
+            else if (_useReplayData == null) throw new Exception("リプレイ用のデータが設定されていません。");
+            _player.LoadReplayData(_useReplayData);
+
+            // 用意してきたパーツをリプレイのものに変更
             partsInfo.partsList = _player.InitialPartsDatas;
+
+            // スコアをリプレイのものに変更
+            playSceneController.Score = _useReplayData.score;
+
+            // リプレイ用の処理モードに変更
             IsUsePartsInForce = true;
             IsNotStart = false;
             RobotStartMove();
@@ -114,6 +135,7 @@ public class MainRobot : MonoBehaviour
             // 操作する際の処理
             IsUsePartsInForce = false;
             IsNotStart = true;  // まだ飛行を開始していないフラグをtrueにする
+            _useReplayData = null;
         }
     }
     // ロボットが動き始めた際に呼ばれるメソッド
@@ -189,6 +211,7 @@ public class MainRobot : MonoBehaviour
     // ゲームクリア時の処理
     public void GameClear()
     {
+        ReplayMode = false;
         // 力を無くし、成功アニメーション処理に遷移する
         _move.ZeroForce();
         _status.GameClear();
@@ -196,6 +219,7 @@ public class MainRobot : MonoBehaviour
     // ゲームオーバー時の処理
     public void GameOver()
     {
+        ReplayMode = false;
         // 失敗アニメーション処理に遷移する
         _move.ZeroForce();
         _status.GameOver();
@@ -209,6 +233,7 @@ public class MainRobot : MonoBehaviour
         // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
         if (_status.IsFlying)
         {
+            ReplayMode = false;
             _move.ZeroForce();
             _status.OpenCustomMenu();
         }
@@ -217,10 +242,21 @@ public class MainRobot : MonoBehaviour
     // リセットするときの処理
     public void ResetToStart()
     {
+        _highScore = 0;
         partsInfo = PartsInfo.Instance;
         _move.ResetToFirst();
         _status.ResetStatus();
         gameObject.SetActive(true);
+    }
+    // リプレイを再生する際の準備
+    public void SetReplayMode()
+    {
+        ReplayMode = true;
+        if (_useReplayData == null)
+        {
+            // リプレイデータが空なら、現在のリプレイデータを取得する
+            _useReplayData = ReplayInputManager.Instance.Data;
+        }
     }
 
     // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
