@@ -25,4 +25,10 @@ public class Tweeter : MonoBehaviour
         // Twitter投稿画面の起動
         Application.OpenURL(url);
     }
+
+    // スコアをツイートする
+    public void TweetScore()
+    {
+        OpenTwitter(ReplayInputManager.Instance.GetTweetText());
+    }
 }

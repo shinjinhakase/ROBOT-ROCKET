@@ -1066,8 +1066,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 576538683}
         m_TargetAssemblyTypeName: Tweeter, Assembly-CSharp
-        m_MethodName: OpenTwitter
-        m_Mode: 5
+        m_MethodName: TweetScore
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

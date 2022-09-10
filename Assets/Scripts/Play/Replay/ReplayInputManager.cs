@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 // 現在のリプレイ用のデータを格納する
 public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputManager>
 {
@@ -70,7 +70,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        _data.RegisterResult(frameCnt, _sceneController.Score);
+        if (!NoMemoryMode) _data.RegisterResult(frameCnt, _sceneController.Score);
         IsGamePlay = false;
         NoMemoryMode = false;
     }
@@ -97,5 +97,11 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
             _data.RegisterRobotTransform(frameCnt, position, velocity);
             yield return waitForSeconds;
         }
+    }
+
+    public string GetTweetText()
+    {
+        float finishTime = _data.finishFrame * Time.fixedDeltaTime;
+        return "ステージ" + _data.StageNum + "にて、" + _data.readyPartsList.Count + "個のパーツを用いて" + finishTime + "秒で" + _data.score + "mまで飛べました！\n";
     }
 }
