@@ -186,7 +186,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // TODO：カメラの調整などの処理
             cam.IsFollowRobot = true;
 
-            endFirstCameraMove();
+            Invoke("endFirstCameraMove", 0.1f);
         }
     }
     // リセットの処理を行う
