@@ -128,7 +128,7 @@ public class MainRobot : MonoBehaviour
             // リプレイ用の処理モードに変更
             IsUsePartsInForce = true;
             IsNotStart = false;
-            RobotStartMove();
+            Invoke("RobotStartMove", 1f);
         }
         else
         {
