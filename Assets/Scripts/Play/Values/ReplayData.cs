@@ -65,7 +65,7 @@ public class ReplayData
     public void RegisterRobotForce(int frame, IForce force)
     {
         // 力を加え始めたフレームを計算する
-        frame = frame - force.frameCnt;
+        frame = frame - force.frameCnt + 1;
         // それぞれの力のタイプに合わせてデータを記録する
         if (typeof(PressForce) == force.GetType())
         {

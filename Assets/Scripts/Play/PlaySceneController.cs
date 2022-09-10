@@ -41,6 +41,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent gameClearEvent = new UnityEvent();
     [Tooltip("カスタムメニューを出す際に呼び出されるメソッド")]
     [SerializeField] private UnityEvent OpenCustomMenuEvent = new UnityEvent();
+    [Tooltip("現在のリプレイを確認する処理に以降した際に、ステージリセット直前に呼び出される処理")]
+    [SerializeField] private UnityEvent CheckReplayEvent = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
 
@@ -105,11 +107,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             }
             scene = E_PlayScene.CustomMenu;
 
-            if (IsNeedSetResult) endGameEvent.Invoke();
-
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
+
+            if (IsNeedSetResult) endGameEvent.Invoke();
 
             // カスタムメニューのオープン処理
             OpenCustomMenuEvent.Invoke();
@@ -140,10 +142,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GameEnd;
 
-            endGameEvent.Invoke();
-
             cam.IsFollowRobot = false;
             robot.GameClear();
+
+            endGameEvent.Invoke();
 
             gameClearEvent.Invoke();
         }
@@ -156,14 +158,35 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GameEnd;
 
-            endGameEvent.Invoke();
-
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
+
+            endGameEvent.Invoke();
             
             // ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             gameOverEvent.Invoke();
+        }
+    }
+    // 現在のプレイをリプレイで確認する
+    [ContextMenu("Scene/CheckReplay")]
+    public void CheckReplay()
+    {
+        if (scene == E_PlayScene.GameEnd)
+        {
+            scene = E_PlayScene.FirstCameraMove;
+
+            // ロボットをリプレイモードに設定する
+            CheckReplayEvent.Invoke();
+            robot.SetReplayMode();
+
+            // ステージをリセットし、最初からやり直す。
+            ResetStage();
+
+            // TODO：カメラの調整などの処理
+            cam.IsFollowRobot = true;
+
+            endFirstCameraMove();
         }
     }
     // リセットの処理を行う
