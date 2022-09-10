@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneButton : MonoBehaviour
 {
-    [SerializeField] private string sceneName;
-
-    public void OnLoadScene()
+    public void OnLoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
