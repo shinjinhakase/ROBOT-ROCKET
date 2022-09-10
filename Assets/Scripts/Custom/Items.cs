@@ -12,7 +12,7 @@ public class Items : MonoBehaviour{
 
     private bool change_alpha=false;
     SpriteRenderer _renderer;
-    
+
     void Start(){
 
         isActive=true;
