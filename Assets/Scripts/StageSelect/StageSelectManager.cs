@@ -29,11 +29,11 @@ public class StageSelectManager : MonoBehaviour
             // スクロールビューに追加
             numberSelectButton.transform.SetParent(scrollViewContent.transform);
 
-            // ボタン初期化
-            numberSelectButton.Init(stage, this);
-
             // ステージ番号格納
             stage.StageNum = stageNum;
+
+            // ボタン初期化
+            numberSelectButton.Init(stage, this);
 
             stageNum++;
         }
