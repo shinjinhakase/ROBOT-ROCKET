@@ -6,10 +6,12 @@ using UnityEngine.Events;
 // （生成時に自身を非アクティブに設定するので、都合の良いタイミングでアクティブにする必要がある）
 public class SummonableObject : MonoBehaviour
 {
-    [Tooltip("召喚されたときに初期設定のため呼び出される関数。引数はパーツデータ(PartsInfo.PartsData)とロボットの位置(Transform)")]
+    [Tooltip("召喚されたときに初期設定のため呼び出される関数。引数はパーツデータ(PartsInfo.PartsData)と召喚者の位置(Transform)")]
     [SerializeField] public SummonActionEvent action;
     [Tooltip("召喚時にactionが実行された後に実行される関数。引数なし。")]
     [SerializeField] public UnityEvent afterAction;
+
+    [SerializeField] private bool IsActiveWhenSummon = true;
 
     void Awake()
     {
@@ -20,7 +22,7 @@ public class SummonableObject : MonoBehaviour
     // 召喚された際に呼び出されるメソッド
     public void Summon(PartsInfo.PartsData data, Transform robotTransform)
     {
-        gameObject.SetActive(true);
+        if (IsActiveWhenSummon) gameObject.SetActive(true);
         action.Invoke(data, robotTransform);
         afterAction.Invoke();
     }
