@@ -129,6 +129,8 @@ MonoBehaviour:
   add_queue: {fileID: 5284806547025047913, guid: a556a5d49e44e3148a2edd7be9605a8d, type: 3}
   id: 0
   _data: {fileID: 11400000, guid: 95337da6147298f43934ed34d0386d8f, type: 2}
+  tabnumber: 0
+  custom_panel: {fileID: 7032684975812003575, guid: a788f306020840147b042e3fa37baee5, type: 3}
 --- !u!114 &-3167475622873131686
 MonoBehaviour:
   m_ObjectHideFlags: 0

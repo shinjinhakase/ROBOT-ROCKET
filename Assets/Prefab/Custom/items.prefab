@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mynumber: 0
   myangle: 0
+  custom_panel: {fileID: 7032684975812003575, guid: a788f306020840147b042e3fa37baee5, type: 3}

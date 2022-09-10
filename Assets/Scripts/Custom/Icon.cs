@@ -10,12 +10,12 @@ public class Icon : MonoBehaviour{
     GameObject queue_obj;
 
     public PartsPerformance.E_PartsID id;
-
     public PartsPerformanceData _data;
-
     private PartsPerformance _performance;
 
     public int tabnumber;
+
+    public GameObject custom_panel;
     
     void Start(){
 
@@ -48,13 +48,16 @@ public class Icon : MonoBehaviour{
         Items _items=pop_item.GetComponent<Items>();
         _items.mynumber=Queue.testlist.Count;
         pop_item.transform.position=pop_position;
+        pop_item.transform.parent=custom_panel.transform;
         
 
         GameObject draw_icon=Instantiate (add_queue) as GameObject;
         Icon_inqueue icon_script=draw_icon.GetComponent<Icon_inqueue>();
         icon_script.id=id;
+        icon_script.mynumber=Queue.testlist.Count;
         draw_icon.transform.parent=queue_obj.transform;
         draw_icon.GetComponent<SpriteRenderer>().sprite=_performance.iconSprite;
+        draw_icon.transform.parent=custom_panel.transform;
 
         if(Queue.icon_list.Count==0){
 

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Queue : MonoBehaviour{
     
     private PartsInfo _partsInfo;
+    public PartsPerformanceData _data;
     private List<PartsInfo.PartsData> myList; 
 
     //テスト用配列
@@ -22,6 +23,11 @@ public class Queue : MonoBehaviour{
 
     Vector2 height;
 
+    public GameObject item;
+    public GameObject icon;
+
+    public GameObject custom_panel;
+
     void Start(){
 
         _partsInfo = PartsInfo.Instance;
@@ -29,8 +35,58 @@ public class Queue : MonoBehaviour{
 
         //テスト用配列
         testlist=new List<GameObject>();
-
         icon_list=new List<GameObject>();
+
+        //myListをGameObjectの配列に変形
+        for(int i=0;i<myList.Count;i++){
+            
+            GameObject newitem=Instantiate(item) as GameObject;
+            SpriteRenderer newitem_renderer=newitem.GetComponent<SpriteRenderer>();
+            newitem_renderer.sprite=_data.getData(myList[i].id).partsSprite;
+            Items newitem_script=newitem.GetComponent<Items>();
+            newitem_script.mynumber=testlist.Count;
+
+            if(myList[i].angle==180){
+
+                newitem_script.myangle=0;
+
+            }else{
+
+                newitem_script.myangle=myList[i].angle-90f;
+                
+            }
+
+            newitem.transform.parent=custom_panel.transform;
+            newitem.transform.position=new Vector3(3.5f,0f,0f);
+
+            GameObject newicon=Instantiate(icon) as GameObject;
+            Icon_inqueue newicon_script=newicon.GetComponent<Icon_inqueue>();
+            newicon_script.mynumber=testlist.Count;
+            newicon_script.id=myList[i].id;
+            SpriteRenderer newicon_renderer=newicon.GetComponent<SpriteRenderer>();
+            newicon_renderer.sprite=_data.getData(myList[i].id).iconSprite;
+            newicon.transform.parent=custom_panel.transform;
+
+            if(icon_list.Count==0){
+
+                draw_position=4.0f;
+            
+            }else{
+            
+                GameObject last_icon=icon_list[icon_list.Count-1];
+                Vector2 last_position=last_icon.transform.position;
+                draw_position=last_position.y-=1.0f;
+
+            }
+
+            newicon.transform.position=new Vector2(7.6f,draw_position);
+
+            testlist.Add(newitem);
+            icon_list.Add(newicon);
+
+            nowActive=testlist.Count-1;
+
+        }
 
         height=this.transform.position;
 
@@ -38,7 +94,6 @@ public class Queue : MonoBehaviour{
 
     void Update(){
 
-        //10koijyou +0.7　soreikouha 1きざみ
         if(testlist.Count>=10){
 
             float max_height=0.7f+(testlist.Count-10f);
@@ -67,8 +122,12 @@ public class Queue : MonoBehaviour{
 
         _partsInfo.Save();
 
+        Custom_button.panel_on=false;
+
+        Destroy(custom_panel);
+
         //テスト用
-        SceneManager.LoadScene("Play");
+        //SceneManager.LoadScene("Play");
 
     }
 
