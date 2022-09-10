@@ -15,10 +15,9 @@ public class Icon_inqueue : MonoBehaviour{
     SpriteRenderer _renderer;
     public PartsPerformance.E_PartsID id;
     
-    void Awake(){
+    void Start(){
 
         isActive=true;
-        mynumber=Queue.testlist.Count;
 
         _renderer=GetComponent<SpriteRenderer>();
 
@@ -28,7 +27,6 @@ public class Icon_inqueue : MonoBehaviour{
         _entry.eventID=EventTriggerType.PointerClick;
         _entry.callback.AddListener((eventData)=>{Click();});
         _trigger.triggers.Add(_entry);
-        
 
     }
 
