@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressData
+public class ProgressData : SavableSingletonBase<ProgressData>
 {
     [SerializeField]
     private List<StageProgressData> stageProgressDatasList
@@ -11,7 +11,17 @@ public class ProgressData
     [SerializeField]
     private int clearStageNum;
 
-    public ProgressData(List<Stage> stageList)
+    public List<StageProgressData> StageProgressDataList
+    {
+        get { return stageProgressDatasList; }
+    }
+
+    public int ClearStageNum
+    {
+        get { return clearStageNum; }
+    }
+
+    public void SetStageList(List<Stage> stageList)
     {
         int stageNum = 0;
         foreach(Stage stage in stageList)
