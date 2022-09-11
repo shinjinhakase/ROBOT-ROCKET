@@ -11,7 +11,6 @@ public class ForceMove : MonoBehaviour
     // 今加えられている力のリスト
     [SerializeReference]
     private List<IForce> forces = new List<IForce>();
-    [SerializeField]
     private bool IsMainRobot = false;
     public bool IsAcceptExternalForce = true;   // 外力を受け入れるかの判定（falseにするとCollisionForceから力が来なくなる）
 
@@ -29,6 +28,7 @@ public class ForceMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         firstPosition = transform.position;
+        IsMainRobot = TryGetComponent<MainRobot>(out _);
     }
 
     private void FixedUpdate()

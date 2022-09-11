@@ -17,18 +17,11 @@ public class MainRobot : MonoBehaviour
     public RobotStatus _status;
     [HideInInspector] public ForceMove _move;
 
-    // 最高到達距離
-    private float _highScore = 0;
+    private float _highScore = 0;   // 最高到達距離
 
-    private bool IsNotStart = false;
-
-    // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
-    private bool IsUsePartsInForce = false;
-    // リプレイ操作に従うか
-    [Header("リプレイ関係")]
-    [SerializeField] private bool ReplayMode = false;
-    [SerializeField] private bool UseReplayIndexForDebug = false;
-    [SerializeField] private int ReplayIndex;
+    private bool IsNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
+    private bool IsUsePartsInForce = false; // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
+    private bool ReplayMode = false;        // リプレイ操作に移るかのフラグ
     private ReplayData _useReplayData;
 
     private void Awake()
@@ -106,17 +99,7 @@ public class MainRobot : MonoBehaviour
         if (ReplayMode)
         {
             // リプレイの初期設定
-            if (UseReplayIndexForDebug)
-            {
-                // ReplayDataをReplayDatasのインデックスを指定して読み込む（デバッグ用？）
-                ReplayDatas _replayDatas = ReplayDatas.Instance;
-                if (_replayDatas == null || ReplayIndex >= _replayDatas.Length)
-                {
-                    throw new Exception("MainRobotのリプレイデータを読み込めませんでした。");
-                }
-                _useReplayData = _replayDatas.GetData(ReplayIndex);
-            }
-            else if (_useReplayData == null) throw new Exception("リプレイ用のデータが設定されていません。");
+            if (_useReplayData == null) throw new Exception("リプレイ用のデータが設定されていません。");
             _player.LoadReplayData(_useReplayData);
 
             // 用意してきたパーツをリプレイのものに変更
@@ -216,6 +199,7 @@ public class MainRobot : MonoBehaviour
         _move.ZeroForce();
         _status.GameClear();
     }
+
     // ゲームオーバー時の処理
     public void GameOver()
     {
@@ -227,6 +211,7 @@ public class MainRobot : MonoBehaviour
         // ロボットを非表示にする（パージのパーツが飛び散るアニメーションに移る）
         gameObject.SetActive(false);
     }
+
     // カスタムメニューを開いたときの処理
     public void OpenCustomMenu()
     {
@@ -239,6 +224,7 @@ public class MainRobot : MonoBehaviour
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
     }
+
     // リセットするときの処理
     public void ResetToStart()
     {
@@ -248,6 +234,7 @@ public class MainRobot : MonoBehaviour
         _status.ResetStatus();
         gameObject.SetActive(true);
     }
+
     // リプレイを再生する際の準備
     public void SetReplayMode()
     {
@@ -258,6 +245,7 @@ public class MainRobot : MonoBehaviour
             _useReplayData = ReplayInputManager.Instance.Data;
         }
     }
+
 
     // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
     public void CheckGameOverCollision(Collider2D other)
