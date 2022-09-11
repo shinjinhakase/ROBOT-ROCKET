@@ -239,11 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   GameOverRobotPurgeData:
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
+  - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1875956871, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1176732188, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1888264551, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 558496154, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   startUsePartsEvent:
     m_PersistentCalls:
       m_Calls:
@@ -434,7 +435,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forces: []
-  IsMainRobot: 1
   IsAcceptExternalForce: 1
   testAngle: 80
   testF: 30
@@ -495,9 +495,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _status: {fileID: 166251957}
   _move: {fileID: 0}
-  ReplayMode: 0
-  UseReplayIndexForDebug: 0
-  ReplayIndex: 0
 --- !u!114 &179471752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,8 +1182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
-  SelectReplayDataByIndex: 0
-  replayIndexList: 
 --- !u!1 &876449469
 GameObject:
   m_ObjectHideFlags: 0
