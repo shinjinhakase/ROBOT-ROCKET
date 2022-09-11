@@ -21,17 +21,15 @@ public class ProgressData : SavableSingletonBase<ProgressData>
         get { return clearStageNum; }
     }
 
-    public void SetStageList(List<Stage> stageList)
+    public void SetStageList(List<Stage> stageList, int clearStageNum)
     {
-        int stageNum = 0;
         foreach(Stage stage in stageList)
         {
             // 個々のステージの進行状況を作成
             StageProgressData progressData = stage.ProgressData;
             stageProgressDatasList.Add(progressData);
 
-            // クリアしているステージ番号格納
-            if (stage.ProgressData.IsClear) clearStageNum = stageNum;
+            this.clearStageNum = clearStageNum;
         }
     }
 }
