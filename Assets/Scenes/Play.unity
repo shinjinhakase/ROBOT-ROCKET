@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   purgePartsPrefab: {fileID: -3521977866789243238, guid: baec86ace4e2e144088405c6f765c859, type: 3}
-  DestroyDuration: 2
+  DestroyDuration: 1.3
   initMaxVelocity: 4
   initMinVelocity: 2
   initAngleRange: 120
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6735901713704480786, guid: df1c45e66e099a84c9814c67c7e5263b, type: 3}
   firstPosition: {x: 0, y: -2.5}
+  SelectReplayDataByIndex: 0
   replayIndexList: 
 --- !u!1 &876449469
 GameObject:
@@ -1749,7 +1750,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -300, y: -100}
+  m_SizeDelta: {x: -129.78, y: -100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065970563
 MonoBehaviour:

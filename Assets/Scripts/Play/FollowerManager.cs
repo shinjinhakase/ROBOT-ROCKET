@@ -20,7 +20,7 @@ public class FollowerManager : MonoBehaviour
         PlayPartsManager _playPartsManager = PlayPartsManager.Instance;
         foreach(var id in IDList)
         {
-            var follower = Instantiate(followPrefab, transform.position, Quaternion.identity);
+            var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
             follower.SetSprite(_playPartsManager.GetPerformance(id).iconSprite);
             if (followers.Count == 0) follower.target = transform;
             else follower.target = followers[^1].transform;
@@ -35,7 +35,7 @@ public class FollowerManager : MonoBehaviour
         PlayPartsManager _playPartsManager = PlayPartsManager.Instance;
         foreach (var data in PartsInfo.Instance.GetPartsList())
         {
-            var follower = Instantiate(followPrefab, transform.position, Quaternion.identity);
+            var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
             follower.SetSprite(_playPartsManager.GetPerformance(data.id).iconSprite);
             if (followers.Count == 0) follower.target = transform;
             else follower.target = followers[^1].transform;
@@ -47,9 +47,9 @@ public class FollowerManager : MonoBehaviour
     public void UseParts()
     {
         if (followers.Count == 0) return;
-        for (int i = 1; i < followers.Count; i++)
+        if (followers.Count >= 2)
         {
-            followers[i].target = followers[i - 1].target;
+            followers[1].target = followers[0].target;
         }
         followers[0].DestroyMyself();
         followers.RemoveAt(0);

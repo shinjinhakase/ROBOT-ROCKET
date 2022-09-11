@@ -70,7 +70,12 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        if (!NoMemoryMode) _data.RegisterResult(frameCnt, _sceneController.Score);
+        if (!NoMemoryMode)
+        {
+            // リプレイモードではない時は、取得したデータを自動で保存させてみる
+            _data.RegisterResult(frameCnt, _sceneController.Score);
+            Save();
+        }
         IsGamePlay = false;
         NoMemoryMode = false;
     }
