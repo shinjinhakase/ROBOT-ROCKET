@@ -9,7 +9,7 @@ public class ProgressData : SavableSingletonBase<ProgressData>
         = new List<StageProgressData>();
     
     [SerializeField]
-    private int clearStageNum;
+    private int clearStageNum = -1;
 
     public List<StageProgressData> StageProgressDataList
     {
@@ -21,7 +21,7 @@ public class ProgressData : SavableSingletonBase<ProgressData>
         get { return clearStageNum; }
     }
 
-    public void SetStageList(List<Stage> stageList)
+    public void CreateSaveData(List<Stage> stageList)
     {
         int stageNum = 0;
         foreach(Stage stage in stageList)
@@ -30,8 +30,8 @@ public class ProgressData : SavableSingletonBase<ProgressData>
             StageProgressData progressData = stage.ProgressData;
             stageProgressDatasList.Add(progressData);
 
-            // クリアしているステージ番号格納
             if (stage.ProgressData.IsClear) clearStageNum = stageNum;
+            stageNum++;
         }
     }
 }
