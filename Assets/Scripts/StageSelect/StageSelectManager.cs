@@ -39,12 +39,22 @@ public class StageSelectManager : MonoBehaviour
         }
 
         // セーブとロードの動作確認
+        ProgressData progressData1 = ProgressData.Instance;
+        progressData1.SetStageList(stageDataBase.stageList);
+        progressData1.Save();
+
+        progressData1.Reset();
+
+        ProgressData progressData2 = ProgressData.Instance;
+        Debug.Log(progressData2.StageProgressDataList);
+
         /*
         StagesProgressSaveManager saveManager = new StagesProgressSaveManager();
         saveManager.Save(new StagesProgressSaveData(stageDataBase.stageList));
         StagesProgressSaveData saveData = saveManager.Load();
         Debug.Log($"Operation check : saveData -> {saveData}");
         */
+
     }
 
     public void SelectStage(Stage stage)

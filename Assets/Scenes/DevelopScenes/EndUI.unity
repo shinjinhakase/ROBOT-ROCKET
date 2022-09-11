@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEndPanel: {fileID: 1623304148}
-  isGameSuccess: 1
+  isGameSuccess: 0
 --- !u!4 &237939555
 Transform:
   m_ObjectHideFlags: 0
@@ -445,6 +445,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1623304147}
     m_Modifications:
+    - target: {fileID: 2418218968553184016, guid: aa95cec2b7b4af0418d05525c196ef70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Play
+      objectReference: {fileID: 0}
     - target: {fileID: 5811561599659771620, guid: aa95cec2b7b4af0418d05525c196ef70, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -824,6 +828,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultText: {fileID: 1605733861}
   scoreText: {fileID: 1533561092}
+--- !u!1 &1717120453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717120454}
+  - component: {fileID: 1717120455}
+  m_Layer: 0
+  m_Name: Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717120454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717120453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1717120455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717120453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87a4d05e33655a4899201b807741d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2836120634103688889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -831,6 +879,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1623304147}
     m_Modifications:
+    - target: {fileID: 2418218968553184016, guid: aa95cec2b7b4af0418d05525c196ef70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Stage_Select
+      objectReference: {fileID: 0}
     - target: {fileID: 5811561599659771620, guid: aa95cec2b7b4af0418d05525c196ef70, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
