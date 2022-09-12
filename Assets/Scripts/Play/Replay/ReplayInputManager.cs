@@ -74,7 +74,6 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         {
             // リプレイモードではない時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);
-            Save();
         }
         IsGamePlay = false;
         NoMemoryMode = false;
