@@ -14,7 +14,10 @@ public class ReplayDatas : SavableSingletonBase<ReplayDatas>
     // リプレイデータを追加する
     public void RegisterData(ReplayData data)
     {
-        // TODO：古いものを消したりするなど、リプレイ最大数設定の処理を追加
+        // 古いものを消し、リプレイ最大数を設定する
+        List<ReplayData> nowDataList = GetStageReplay(data.StageNum);
+        if (nowDataList?.Count > 4) datas.Remove(nowDataList[0]);
+
         datas.Add(data);
     }
     // 指定のステージのリプレイデータを取得する

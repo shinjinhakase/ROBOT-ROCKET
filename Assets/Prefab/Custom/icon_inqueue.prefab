@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1754405225958572327}
   - component: {fileID: 8081362280103446922}
   - component: {fileID: 2661714235214987938}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: icon_inqueue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1146199475
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -126,4 +126,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mynumber: 0
   id: 0
-  custom_panel: {fileID: 7032684975812003575, guid: a788f306020840147b042e3fa37baee5, type: 3}

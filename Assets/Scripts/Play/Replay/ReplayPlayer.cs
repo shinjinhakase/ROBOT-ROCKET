@@ -71,7 +71,15 @@ public class ReplayPlayer : MonoBehaviour
             // アイテムの使用開始処理
             if (IsStartUsing)
             {
-                startUsePartsEvent.Invoke(GetPartsData);
+                try
+                {
+                    PartsInfo.PartsData getParts = GetPartsData;
+                    startUsePartsEvent.Invoke(getParts);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new Exception("リプレイデータから使用したパーツの性能を取得できません。");
+                }
                 _currentPartsNo++;
             }
 

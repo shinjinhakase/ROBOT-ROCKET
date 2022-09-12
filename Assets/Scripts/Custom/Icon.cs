@@ -48,20 +48,17 @@ public class Icon : MonoBehaviour{
 
     public void Click(){
 
-        GameObject pop_item=Instantiate(pop) as GameObject;
+        GameObject pop_item=Instantiate(pop, custom_panel.transform) as GameObject;
         Vector3 pop_position=new Vector3(3.5f,0f,0f);
         pop_item.GetComponent<SpriteRenderer>().sprite=_performance.partsSprite;
         Items _items=pop_item.GetComponent<Items>();
         _items.mynumber=Queue.itemlist.Count;
-        pop_item.transform.position=pop_position;
-        pop_item.transform.parent=custom_panel.transform;
-        
+        pop_item.transform.localPosition=pop_position;
 
-        GameObject draw_icon=Instantiate (add_queue) as GameObject;
+        GameObject draw_icon=Instantiate (add_queue, queue_obj.transform) as GameObject;
         Icon_inqueue icon_script=draw_icon.GetComponent<Icon_inqueue>();
         icon_script.id=id;
         icon_script.mynumber=Queue.itemlist.Count;
-        draw_icon.transform.parent=queue_obj.transform;
         draw_icon.GetComponent<SpriteRenderer>().sprite=_performance.iconSprite;
 
         if(Queue.icon_list.Count==0){
@@ -71,12 +68,12 @@ public class Icon : MonoBehaviour{
         }else{
             
             GameObject last_icon=Queue.icon_list[Queue.icon_list.Count-1];
-            Vector2 last_position=last_icon.transform.position;
-            Queue.draw_position=last_position.y-1.0f;
+            Vector2 last_position=last_icon.transform.localPosition;
+            Queue.draw_position=last_position.y-=1.0f;
 
         }
 
-        draw_icon.transform.position=new Vector2(7.6f,Queue.draw_position);
+        draw_icon.transform.localPosition=new Vector2(7.6f,Queue.draw_position);
 
         Queue.itemlist.Add(pop_item);
         Queue.icon_list.Add(draw_icon);

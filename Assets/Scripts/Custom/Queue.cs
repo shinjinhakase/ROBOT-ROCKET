@@ -88,7 +88,7 @@ public class Queue : MonoBehaviour{
 
         }
 
-        height=this.transform.position;
+        height=this.transform.localPosition;
 
     }
 
@@ -100,7 +100,7 @@ public class Queue : MonoBehaviour{
             
             height=this.transform.position;
             height.y=max_height-max_height*Scroll_bar.current_height;
-            transform.position=height;
+            transform.localPosition = height;
 
         }
 

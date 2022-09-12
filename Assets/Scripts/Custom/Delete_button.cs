@@ -30,9 +30,9 @@ public class Delete_button : MonoBehaviour{
 
             }else if(_items.mynumber>Queue.nowActive){
 
-                Vector2 nowposition=Queue.icon_list[i].transform.position;
+                Vector2 nowposition = Queue.icon_list[i].transform.localPosition;
                 nowposition.y+=1.0f;
-                Queue.icon_list[i].transform.position=nowposition;
+                Queue.icon_list[i].transform.localPosition = nowposition;
 
                 _items.mynumber--;
                 _icon_inqueue.mynumber--;
