@@ -39,14 +39,16 @@ public class Scroll_bar : MonoBehaviour{
 
     void OnMouseDrag(){
 
+        var high = transform.parent.TransformPoint(Vector3.up * 4);
+        var under = transform.parent.TransformPoint(Vector3.down * 1.85f);
         Vector3 currentScreenPoint=new Vector3(screenPoint.x,Input.mousePosition.y,screenPoint.z);
         Vector3 currentPosition=Camera.main.ScreenToWorldPoint(currentScreenPoint);
 
-        if(-1.85<currentPosition.y&&currentPosition.y<4){
-            
-            transform.position=currentPosition;
-            current_height=(currentPosition.y+1.85f)/5.85f;
+        if(under.y<currentPosition.y&&currentPosition.y<high.y){
 
+            transform.position = currentPosition;
+            currentPosition = transform.parent.InverseTransformPoint(currentPosition);
+            current_height=(currentPosition.y+1.85f)/5.85f;
         }
 
     }

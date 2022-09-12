@@ -110,7 +110,7 @@ public class Icon_inqueue : MonoBehaviour{
                     Icon_inqueue move_icon=Queue.icon_list[i].GetComponent<Icon_inqueue>();
                     move_icon.mynumber=i;
                     Vector2 new_drawposition=new Vector2(7.6f,4.0f-i);
-                    move_icon.transform.position=new_drawposition;
+                    move_icon.transform.localPosition = new_drawposition;
 
                 }
 

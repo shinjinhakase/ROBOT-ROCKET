@@ -27,7 +27,7 @@ public class Customize : MonoBehaviour{
         
         Vector2 getMouseposition=new Vector2(Input.mousePosition.x,Input.mousePosition.y);
         mouse_position=Camera.main.ScreenToWorldPoint(getMouseposition);
-        obj_angle=GetAngle(new Vector2(3.5f,0f),mouse_position);
+        obj_angle = GetAngle(transform.TransformPoint(Vector3.right * 3.5f), mouse_position);
 
     }
 
