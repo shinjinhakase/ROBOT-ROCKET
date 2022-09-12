@@ -43,6 +43,14 @@ public class Queue : MonoBehaviour{
             GameObject newitem=Instantiate(item) as GameObject;
             SpriteRenderer newitem_renderer=newitem.GetComponent<SpriteRenderer>();
             newitem_renderer.sprite=_data.getData(myList[i].id).partsSprite;
+
+            //グライダーの場合大きさを修正
+            if(myList[i].id==PartsPerformance.E_PartsID.Glider){
+
+                newitem.transform.localScale=new Vector3(5,5,1);
+
+            }
+
             Items newitem_script=newitem.GetComponent<Items>();
             newitem_script.mynumber=itemlist.Count;
 
@@ -94,6 +102,7 @@ public class Queue : MonoBehaviour{
 
     void Update(){
 
+        /*
         if(itemlist.Count>=10){
 
             float max_height=0.7f+(itemlist.Count-10f);
@@ -110,6 +119,7 @@ public class Queue : MonoBehaviour{
             reset_flag=false;
             
         }
+        */
 
     }
 
