@@ -154,7 +154,7 @@ public class ReplayPlayer : MonoBehaviour
         IsStartUsing = _currentPartsNo < _startUseLength && frameCnt == _replayData.usePartsFrame[_currentPartsNo];
         IsEndUsing = _currentPartsNo != 0 && _currentPartsNo - 1 < _endUseLength && frameCnt == _replayData.endUsePartsFrame[_currentPartsNo - 1];
         IsTransUpdate = _currentTransNo < _transformLength && frameCnt >= _replayData.locateDatas[_currentTransNo].frame;
-        getPartsData = _replayData.getPartsList.FindAll(data => frameCnt >= data.frame).ConvertAll(data => data.buildPartsData());
+        getPartsData = _replayData.getPartsList.FindAll(data => frameCnt == data.frame).ConvertAll(data => data.buildPartsData());
         addForceList = _replayData.forceDatas.FindAll(data => frameCnt == data.frame);
         frameCnt++;
     }
