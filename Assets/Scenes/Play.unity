@@ -568,6 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e0245a094b1e34c89a8bef95edb86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyCollider: {fileID: 166251958}
   _animator: {fileID: 0}
   GameOverRobotPurgeData:
   - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
@@ -767,6 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forces: []
   IsAcceptExternalForce: 1
+  customCraneVelocity: 10
   testAngle: 80
   testF: 30
   testT: 3
@@ -2295,6 +2297,7 @@ MonoBehaviour:
   robot: {fileID: 179471750}
   _goalXPoint: 30
   _score: 0
+  OpenCustomWhenPlayDuration: 1
   startAnimationEvent:
     m_PersistentCalls:
       m_Calls:

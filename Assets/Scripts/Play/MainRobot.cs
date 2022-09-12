@@ -220,7 +220,7 @@ public class MainRobot : MonoBehaviour
         {
             ReplayMode = false;
             _player.StopReplayInForce();
-            _move.ZeroForce();
+            _move.OpenCustomMove();
             _status.OpenCustomMenu();
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）

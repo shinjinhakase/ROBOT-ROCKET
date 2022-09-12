@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e0245a094b1e34c89a8bef95edb86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyCollider: {fileID: 2680677857970551468}
   _animator: {fileID: 0}
   GameOverRobotPurgeData:
   - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
@@ -221,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forces: []
   IsAcceptExternalForce: 0
+  customCraneVelocity: 10
   testAngle: 0
   testF: 0
   testT: 0
