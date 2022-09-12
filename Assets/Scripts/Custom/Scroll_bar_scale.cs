@@ -14,7 +14,7 @@ public class Scroll_bar_scale : MonoBehaviour{
 
     void Update(){
 
-        if(Queue.testlist.Count<10){
+        if(Queue.itemlist.Count<10){
 
             _renderer.color=new Color32(255,255,255,0);
 

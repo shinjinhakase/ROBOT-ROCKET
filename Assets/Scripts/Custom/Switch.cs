@@ -26,7 +26,7 @@ public class Switch : MonoBehaviour{
 
     public void Click(){
 
-        if(Queue.testlist.Count==0){
+        if(Queue.itemlist.Count==0){
 
             return;
 
