@@ -242,7 +242,7 @@ public class MainRobot : MonoBehaviour
         if (_useReplayData == null)
         {
             // リプレイデータが空なら、現在のリプレイデータを取得する
-            _useReplayData = ReplayInputManager.Instance.Data;
+            _useReplayData = new ReplayData(ReplayInputManager.Instance.Data);
         }
     }
 
