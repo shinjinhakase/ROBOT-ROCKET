@@ -147,6 +147,13 @@ public class ReplayPlayer : MonoBehaviour
         _isPlaying = true;
     }
 
+    // 再生を強制終了する
+    public void StopReplayInForce()
+    {
+        _isLoaded = false;
+        _isPlaying = false;
+    }
+
     // 更新の有無を判定する
     private void UpdateCheckPerFrame(out bool IsStartUsing, out bool IsEndUsing, out bool IsTransUpdate,
         out List<PartsInfo.PartsData> getPartsData, out List<ReplayData.ForceData> addForceList)

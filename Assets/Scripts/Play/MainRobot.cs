@@ -219,6 +219,7 @@ public class MainRobot : MonoBehaviour
         if (_status.IsFlying)
         {
             ReplayMode = false;
+            _player.StopReplayInForce();
             _move.ZeroForce();
             _status.OpenCustomMenu();
         }
