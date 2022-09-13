@@ -21,6 +21,7 @@ public class Icon_inqueue : MonoBehaviour{
 
         _renderer=GetComponent<SpriteRenderer>();
 
+        //自身にクリックされたら反応するEventTriggerを追加
         this.gameObject.AddComponent<EventTrigger>();
         EventTrigger _trigger=this.GetComponent<EventTrigger>();
         EventTrigger.Entry _entry=new EventTrigger.Entry();
@@ -32,6 +33,7 @@ public class Icon_inqueue : MonoBehaviour{
 
     void Update(){
 
+        //透明度の更新
         if(isActive){
 
             _renderer.color=new Color32(255,255,255,255);
@@ -62,10 +64,12 @@ public class Icon_inqueue : MonoBehaviour{
 
     public void Click(){
 
+        //入れ替え中でなければアクティブ状態の番号にmynumberを渡す
         if(Switch.selected==false){
 
             Queue.nowActive=mynumber;
 
+        //入れ替え中であればアイコンの入れ替え処理を行う
         }else{
 
             //--------------------
@@ -73,38 +77,34 @@ public class Icon_inqueue : MonoBehaviour{
             //--------------------
 
             //選択中のアイテムの情報を取り出す
-            GameObject selected_item=Queue.testlist[Queue.nowActive];
+            GameObject selected_item=Queue.itemlist[Queue.nowActive];
             GameObject selected_icon=Queue.icon_list[Queue.nowActive];
 
-            //宛先のアイテムの情報を取り出す
-            GameObject address_item=Queue.testlist[mynumber];
-            GameObject address_icon=Queue.icon_list[mynumber];
-
             //選択中のアイテムのスクリプトを取得
-            Items new_item=selected_item.GetComponent<Items>();
-            Icon_inqueue new_icon=selected_icon.GetComponent<Icon_inqueue>();
+            Items selected_item_script=selected_item.GetComponent<Items>();
+            Icon_inqueue selected_icon_script=selected_icon.GetComponent<Icon_inqueue>();
 
-            //座標の入れ替え
-            //selected_icon.transform.position=address_icon.transform.position;
-
-            if(new_item.mynumber==mynumber){
+            if(selected_item_script.mynumber==mynumber){
 
                 return;
 
             }else{
 
                 //元のアイテムを削除
-                Queue.testlist.RemoveAt(Queue.nowActive);
+                Queue.itemlist.RemoveAt(Queue.nowActive);
                 Queue.icon_list.RemoveAt(Queue.nowActive);
                 
                 //Queueに追加
-                Queue.testlist.Insert(mynumber,selected_item);
+                Queue.itemlist.Insert(mynumber,selected_item);
                 Queue.icon_list.Insert(mynumber,selected_icon);
 
-                for(int i=0;i<Queue.testlist.Count;i++){
+                Scroll_bar.reset_flag=true;
+                Queue.reset_flag=true;
 
-                    Items move_items=Queue.testlist[i].GetComponent<Items>();
-                    move_items.mynumber=i;
+                for(int i=0;i<Queue.itemlist.Count;i++){
+
+                    Items move_item_script=Queue.itemlist[i].GetComponent<Items>();
+                    move_item_script.mynumber=i;
                     
 
                     Icon_inqueue move_icon=Queue.icon_list[i].GetComponent<Icon_inqueue>();

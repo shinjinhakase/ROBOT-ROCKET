@@ -19,7 +19,7 @@ public class Icon : MonoBehaviour{
     
     void Start(){
 
-        queue_obj=GameObject.Find("queue");
+        queue_obj=null;
         _performance=_data.getData(id);
         SpriteRenderer _renderer=this.GetComponent<SpriteRenderer>();
         _renderer.sprite=_performance.iconSprite;
@@ -38,6 +38,12 @@ public class Icon : MonoBehaviour{
 
         }
 
+        if(queue_obj==null){
+
+            queue_obj=custom_panel.transform.Find("queue").gameObject;
+            
+        }
+
     }
 
     public void Click(){
@@ -46,18 +52,14 @@ public class Icon : MonoBehaviour{
         Vector3 pop_position=new Vector3(3.5f,0f,0f);
         pop_item.GetComponent<SpriteRenderer>().sprite=_performance.partsSprite;
         Items _items=pop_item.GetComponent<Items>();
-        _items.mynumber=Queue.testlist.Count;
+        _items.mynumber=Queue.itemlist.Count;
         pop_item.transform.localPosition=pop_position;
-        //pop_item.transform.parent=custom_panel.transform;
-        
 
         GameObject draw_icon=Instantiate (add_queue, queue_obj.transform) as GameObject;
         Icon_inqueue icon_script=draw_icon.GetComponent<Icon_inqueue>();
         icon_script.id=id;
-        icon_script.mynumber=Queue.testlist.Count;
-        //draw_icon.transform.parent=queue_obj.transform;
+        icon_script.mynumber=Queue.itemlist.Count;
         draw_icon.GetComponent<SpriteRenderer>().sprite=_performance.iconSprite;
-        //draw_icon.transform.parent=custom_panel.transform;
 
         if(Queue.icon_list.Count==0){
 
@@ -73,10 +75,10 @@ public class Icon : MonoBehaviour{
 
         draw_icon.transform.localPosition=new Vector2(7.6f,Queue.draw_position);
 
-        Queue.testlist.Add(pop_item);
+        Queue.itemlist.Add(pop_item);
         Queue.icon_list.Add(draw_icon);
 
-        Queue.nowActive=Queue.testlist.Count-1;
+        Queue.nowActive=Queue.itemlist.Count-1;
 
     }
 

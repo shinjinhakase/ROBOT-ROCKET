@@ -18,9 +18,6 @@ public class Customize : MonoBehaviour{
     }
 
     void Update(){
-
-        //Debug.Log(delete_button.delete);
-
     }
 
     void OnMouseDrag(){

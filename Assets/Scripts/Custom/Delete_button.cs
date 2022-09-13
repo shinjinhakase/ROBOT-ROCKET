@@ -14,16 +14,15 @@ public class Delete_button : MonoBehaviour{
 
     public void Click(){
         
-        for(int i=Queue.testlist.Count-1;i>=Queue.nowActive;i--){
+        //末尾から選択中のアイテムまでに対して処理を実行
+        for(int i=Queue.itemlist.Count-1;i>=Queue.nowActive;i--){
 
-            Items _items=Queue.testlist[i].GetComponent<Items>();
+            Items _items=Queue.itemlist[i].GetComponent<Items>();
             Icon_inqueue _icon_inqueue=Queue.icon_list[i].GetComponent<Icon_inqueue>();
-
-            Debug.Log(_icon_inqueue.mynumber);
 
             if(_items.mynumber==Queue.nowActive){
 
-                Queue.testlist.RemoveAt(i);
+                Queue.itemlist.RemoveAt(i);
                 _items.Delete_items();
 
                 Queue.icon_list.RemoveAt(i);
