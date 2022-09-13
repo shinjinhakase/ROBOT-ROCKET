@@ -26,6 +26,7 @@ public class Queue : MonoBehaviour{
 
     public GameObject custom_panel;
 
+    public static bool reset_flag = false;
     [SerializeField] private bool IsDestroyAfterUpdate = true;
 
     void Awake(){
