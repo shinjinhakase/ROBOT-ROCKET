@@ -58,7 +58,7 @@ public class FollowerManager : MonoBehaviour
     // 獲得したパーツのアイコンを増やす処理
     public void GetParts(PartsInfo.PartsData data)
     {
-        var follower = Instantiate(followPrefab, transform.position, Quaternion.identity);
+        var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
         follower.SetSprite(PlayPartsManager.Instance.GetPerformance(data.id).iconSprite);
         if (followers.Count == 0) follower.target = transform;
         else follower.target = followers[^1].transform;

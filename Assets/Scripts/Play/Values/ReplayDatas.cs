@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // リプレイデータをまとめて保管するシングルトン
+[Serializable]
 public class ReplayDatas : SavableSingletonBase<ReplayDatas>
 {
     // リプレイデータのリスト
@@ -18,7 +20,7 @@ public class ReplayDatas : SavableSingletonBase<ReplayDatas>
         List<ReplayData> nowDataList = GetStageReplay(data.StageNum);
         if (nowDataList?.Count > 4) datas.Remove(nowDataList[0]);
 
-        datas.Add(data);
+        datas.Add(new ReplayData(data));
     }
     // 指定のステージのリプレイデータを取得する
     public List<ReplayData> GetStageReplay(int StageNum)

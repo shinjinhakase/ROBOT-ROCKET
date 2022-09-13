@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // ゲーム終了時に表示されるウィンドウUIを管理するComponent
-public class GameEndPanel : MonoBehaviour
+public class GameEndPanel : UIOpener
 {
     [SerializeField] private Text resultText;
     [SerializeField] private Text scoreText;
@@ -26,11 +26,6 @@ public class GameEndPanel : MonoBehaviour
         PlaySceneController _playSceneController = PlaySceneController.Instance;
         resultText.text = resultMessage;
         scoreText.text = "Score：" + _playSceneController.Score + "\nHigh Score：???";
-        gameObject.SetActive(true);
-    }
-    // パネルを閉じる
-    public void ClosePanel()
-    {
-        gameObject.SetActive(false);
+        base.OpenPanel();
     }
 }

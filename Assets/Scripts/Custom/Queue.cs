@@ -26,9 +26,9 @@ public class Queue : MonoBehaviour{
 
     public GameObject custom_panel;
 
-    public static bool reset_flag=false;
+    [SerializeField] private bool IsDestroyAfterUpdate = true;
 
-    void Start(){
+    void Awake(){
 
         _partsInfo = PartsInfo.Instance;
         myList=_partsInfo.GetPartsList();
@@ -40,7 +40,7 @@ public class Queue : MonoBehaviour{
         //myListをGameObjectの配列に変形
         for(int i=0;i<myList.Count;i++){
             
-            GameObject newitem=Instantiate(item) as GameObject;
+            GameObject newitem=Instantiate(item, custom_panel.transform) as GameObject;
             SpriteRenderer newitem_renderer=newitem.GetComponent<SpriteRenderer>();
             newitem_renderer.sprite=_data.getData(myList[i].id).partsSprite;
 
@@ -64,10 +64,9 @@ public class Queue : MonoBehaviour{
                 
             }
 
-            newitem.transform.parent=custom_panel.transform;
-            newitem.transform.position=new Vector3(3.5f,0f,0f);
+            newitem.transform.localPosition=new Vector3(3.5f,0f,0f);
 
-            GameObject newicon=Instantiate(icon) as GameObject;
+            GameObject newicon=Instantiate(icon, transform) as GameObject;
             Icon_inqueue newicon_script=newicon.GetComponent<Icon_inqueue>();
             newicon_script.mynumber=itemlist.Count;
             newicon_script.id=myList[i].id;
@@ -82,12 +81,12 @@ public class Queue : MonoBehaviour{
             }else{
             
                 GameObject last_icon=icon_list[icon_list.Count-1];
-                Vector2 last_position=last_icon.transform.position;
+                Vector2 last_position=last_icon.transform.localPosition;
                 draw_position=last_position.y-=1.0f;
 
             }
 
-            newicon.transform.position=new Vector2(7.6f,draw_position);
+            newicon.transform.localPosition=new Vector2(7.6f,draw_position);
 
             itemlist.Add(newitem);
             icon_list.Add(newicon);
@@ -143,7 +142,7 @@ public class Queue : MonoBehaviour{
 
         Custom_button.panel_on=false;
 
-        Destroy(custom_panel);
+        if (IsDestroyAfterUpdate) Destroy(custom_panel);
 
         //テスト用
         //SceneManager.LoadScene("Play");

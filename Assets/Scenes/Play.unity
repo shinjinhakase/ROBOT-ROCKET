@@ -216,6 +216,58 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1902095544}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1303854463}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ClosePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: CloseCustomMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIOpener, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlaySceneController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 376683007813691299, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 376683007813691326, guid: a788f306020840147b042e3fa37baee5, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -368,6 +420,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1146199475
       objectReference: {fileID: 0}
+    - target: {fileID: 7032684976403692476, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: IsDestroyAfterUpdate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7032684976403692477, guid: a788f306020840147b042e3fa37baee5, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -472,7 +528,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7032684976866807339, guid: a788f306020840147b042e3fa37baee5, type: 3}
+    - {fileID: 7032684977288661731, guid: a788f306020840147b042e3fa37baee5, type: 3}
+    - {fileID: 7032684977123255874, guid: a788f306020840147b042e3fa37baee5, type: 3}
+    - {fileID: 7032684975836016288, guid: a788f306020840147b042e3fa37baee5, type: 3}
+    - {fileID: 7032684977699049191, guid: a788f306020840147b042e3fa37baee5, type: 3}
+    - {fileID: 376683007813691325, guid: a788f306020840147b042e3fa37baee5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a788f306020840147b042e3fa37baee5, type: 3}
 --- !u!1 &166251956
 GameObject:
@@ -1890,7 +1952,7 @@ GameObject:
   - component: {fileID: 990573747}
   - component: {fileID: 990573748}
   - component: {fileID: 990573746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UnderStageLine
   m_TagString: GameOverCollider
   m_Icon: {fileID: 0}
@@ -2424,6 +2486,30 @@ MonoBehaviour:
       - m_Target: {fileID: 179471759}
         m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
         m_MethodName: DestroyAllFollowers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 866832308}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1902095544}
+        m_TargetAssemblyTypeName: UIOpener, Assembly-CSharp
+        m_MethodName: OpenPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3567,6 +3653,7 @@ GameObject:
   - component: {fileID: 1902095541}
   - component: {fileID: 1902095543}
   - component: {fileID: 1902095542}
+  - component: {fileID: 1902095544}
   m_Layer: 5
   m_Name: CustomPanel
   m_TagString: Untagged
@@ -3633,6 +3720,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902095540}
   m_CullTransparentMesh: 1
+--- !u!114 &1902095544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902095540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94cd26f4abbb2be43a7cfc442a28c05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944738011
 GameObject:
   m_ObjectHideFlags: 0
