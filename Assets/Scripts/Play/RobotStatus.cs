@@ -30,6 +30,7 @@ public class RobotStatus : MonoBehaviour
     public bool IsEndFly => _status == E_RobotStatus.EndFly;    // 飛行終了判定
 
 
+    [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private Animator _animator;
     private PurgeManager _purgeManager;
 
@@ -168,6 +169,7 @@ public class RobotStatus : MonoBehaviour
     {
         if (PlaySceneController.Instance.IsOpenableCustomMenu)
         {
+            bodyCollider.enabled = false;
             _status = E_RobotStatus.EndFly;
         }
     }
@@ -175,6 +177,7 @@ public class RobotStatus : MonoBehaviour
     // 初めからやり直す際に呼び出されるメソッド
     public void ResetStatus()
     {
+        bodyCollider.enabled = true;
         _status = E_RobotStatus.Ready;
         cooltime = 0;
     }

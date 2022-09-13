@@ -219,7 +219,8 @@ public class MainRobot : MonoBehaviour
         if (_status.IsFlying)
         {
             ReplayMode = false;
-            _move.ZeroForce();
+            _player.StopReplayInForce();
+            _move.OpenCustomMove();
             _status.OpenCustomMenu();
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
@@ -242,7 +243,7 @@ public class MainRobot : MonoBehaviour
         if (_useReplayData == null)
         {
             // リプレイデータが空なら、現在のリプレイデータを取得する
-            _useReplayData = ReplayInputManager.Instance.Data;
+            _useReplayData = new ReplayData(ReplayInputManager.Instance.Data);
         }
     }
 

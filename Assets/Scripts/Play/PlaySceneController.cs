@@ -27,6 +27,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     }
 
     [Header("イベント系統")]
+    [Tooltip("ゲーム中にカスタム画面へ以降した際にカスタム画面が開くまでの遅延時間")]
+    [SerializeField] private float OpenCustomWhenPlayDuration = 1f;
     [Tooltip("カメラの移動終了後、ゲーム開始直前に呼び出されるメソッド")]
     [SerializeField] private UnityEvent startAnimationEvent = new UnityEvent();
     [Tooltip("ゲーム開始と同時に呼び出されるメソッド")]
@@ -113,8 +115,17 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             if (IsNeedSetResult) endGameEvent.Invoke();
 
+            // パーツの状態をカスタム時に戻す
+            PartsInfo.Instance.Reset();
+
             // カスタムメニューのオープン処理
-            OpenCustomMenuEvent.Invoke();
+            if (IsNeedSetResult && robot._status.IsFlying) {
+                CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
+            }
+            else
+            {
+                OpenCustomMenuEvent.Invoke();
+            }
         }
     }
     // カスタムメニューを閉じたときの処理
@@ -249,6 +260,17 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         Time.timeScale = timeScale;
         yield return new WaitForSecondsRealtime(time);
         Time.timeScale = 1f;
+    }
+    // 指定のメソッドを指定時間後に呼び出すメソッド
+    private void CallMethodAfterDuration(Action action, float time)
+    {
+        StartCoroutine(CallMethodAfterDurationEnumerator(action, time));
+    }
+    private IEnumerator CallMethodAfterDurationEnumerator(Action action, float time)
+    {
+        if (time > 0) yield return new WaitForSeconds(time);
+        action();
+        yield break;
     }
 
     // シーンの処理場面を示す列挙型
