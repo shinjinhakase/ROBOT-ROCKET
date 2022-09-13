@@ -115,8 +115,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             if (IsNeedSetResult) endGameEvent.Invoke();
 
+            // パーツの状態をカスタム時に戻す
+            PartsInfo.Instance.Reset();
+
             // カスタムメニューのオープン処理
-            if (IsNeedSetResult) {
+            if (IsNeedSetResult && robot._status.IsFlying) {
                 CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
             }
             else
