@@ -10,10 +10,12 @@ public class LoadStage : MonoBehaviour
     [SerializeField] private string scenePrefix;
 
     private int stageNum = -1;
+    private Stage stage = new Stage();
 
-    public void SetStageNum(int stageNum)
+    public void SetStageNum(Stage stage)
     {
-        this.stageNum = stageNum;
+        this.stageNum = stage.StageNum;
+        this.stage = stage;
     }
 
     public void OnLoadStage()
@@ -21,6 +23,7 @@ public class LoadStage : MonoBehaviour
         Debug.Log($"Push loadStage : stageNum -> {stageNum}");
         Debug.Log("OnLoadStage : Debug—pˆ—");
         string sceneName = scenePrefix + stageNum;
+        StageSelectGlobal.Instance.Stage = stage;
         sceneName = "Play";
         SceneManager.LoadScene(sceneName);
     }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class StageSelectGlobal : SingletonDontDestroy<StageSelectGlobal>
 {
-    private int stageNum = -1;
+    private Stage stage = new Stage();
 
-    public int StageNum
+    public Stage Stage
     {
-        get { return stageNum; }
-        set { stageNum = value; }
+        get { return stage; }
+        set { stage = value; }
     }
 }
