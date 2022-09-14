@@ -27,6 +27,20 @@ public class ReplayData
     public int finishFrame = 0;
     public float score = 0f;
 
+    public ReplayData() { }
+    // コピーコンストラクタ
+    public ReplayData(ReplayData originalData)
+    {
+        StageNum = originalData.StageNum;
+        readyPartsList = new List<PartsInfo.PartsData>(originalData.readyPartsList);
+        getPartsList = new List<GetPartsData>(originalData.getPartsList);
+        usePartsFrame = new List<int>(originalData.usePartsFrame);
+        endUsePartsFrame = new List<int>(originalData.endUsePartsFrame);
+        locateDatas = new List<LocateData>(originalData.locateDatas);
+        forceDatas = new List<ForceData>(originalData.forceDatas);
+        finishFrame = originalData.finishFrame;
+        score = originalData.score;
+    }
 
     // データを初期化して、準備したパーツデータを読み込む
     public void ReadyPartsInfo(int StageNum)
@@ -65,7 +79,7 @@ public class ReplayData
     public void RegisterRobotForce(int frame, IForce force)
     {
         // 力を加え始めたフレームを計算する
-        frame = frame - force.frameCnt;
+        frame = frame - force.frameCnt + 1;
         // それぞれの力のタイプに合わせてデータを記録する
         if (typeof(PressForce) == force.GetType())
         {

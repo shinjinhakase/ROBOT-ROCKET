@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
   m_Name: engineTest
   m_EditorClassIdentifier: 
-  id: 1
+  id: 9
   forceType: 1
   m: 1
   F: 50

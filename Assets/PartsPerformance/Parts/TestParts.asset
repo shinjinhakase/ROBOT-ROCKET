@@ -23,6 +23,6 @@ MonoBehaviour:
   summonObjects:
   - {fileID: 9189922234437165178, guid: 22d0f9f0825994442ab35bce63a23d72, type: 3}
   partsName: "\u30C6\u30B9\u30C8\u30D1\u30FC\u30C4"
-  partsSprite: {fileID: -362770285, guid: 9683c8b471de41d4aaceed70fb114b1e, type: 3}
-  iconSprite: {fileID: -362770285, guid: 9683c8b471de41d4aaceed70fb114b1e, type: 3}
+  partsSprite: {fileID: 882917364, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  iconSprite: {fileID: 21300000, guid: a7bcd74bbbb0f1f40bea0e15ec2834af, type: 3}
   description: "\u30C7\u30D0\u30C3\u30B0\u7528\u306E\u88C5\u5099\u30D1\u30FC\u30C4\u3067\u3059\u3002"

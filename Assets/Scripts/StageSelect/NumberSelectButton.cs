@@ -21,6 +21,12 @@ public class NumberSelectButton : MonoBehaviour
         numText.text = (stage.StageNum + 1).ToString("00");
     }
 
+    public void ButtonInteract(bool isInteractable)
+    {
+        Button button = GetComponent<Button>();
+        button.interactable = isInteractable;
+    }
+
     public void OnSelect()
     {
         stageSelectManager.SelectStage(stage);

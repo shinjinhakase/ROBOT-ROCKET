@@ -18,7 +18,7 @@ TagManager:
   - Player
   - PlayerAttack
   - Shadow
-  - 
+  - StageWall
   - 
   - 
   - 
@@ -48,4 +48,7 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 810382639
+    locked: 0
+  - name: UI
+    uniqueID: 1146199475
     locked: 0
