@@ -23,7 +23,8 @@ public class SummonableObject : MonoBehaviour
     [Header("Rigidbody2D関連")]
     [Tooltip("Rigidbody2Dがアタッチされていた際、召喚時に加える初速設定")]
     [SerializeField] private Vector2 initVelocity = Vector2.zero;
-    private bool HaveRigidbody2D;
+    private bool _haveRigidbody2D;
+    public bool HaveRigidbody2D { get { return _haveRigidbody2D; } private set { _haveRigidbody2D = value; } }
     private Rigidbody2D _rb;
 
     void Awake()
@@ -36,6 +37,17 @@ public class SummonableObject : MonoBehaviour
 
     // 召喚された際に呼び出されるメソッド
     public void Summon(PartsInfo.PartsData data, Transform robotTransform)
+    {
+        if (IsActiveWhenSummon) gameObject.SetActive(true);
+        action.Invoke(data, robotTransform);
+        if (HaveRigidbody2D) _rb.velocity = initVelocity;   // Ridigbody2Dがアタッチされていれば設定された初速を加える
+        afterAction.Invoke();
+
+        // 設定がされていれば、指定秒数後に自身を破棄する
+        if (IsDestroyAfterSeconds) Destroy(gameObject, _destroyDuration);
+    }
+    // 召喚された際に呼び出されるメソッド（初速も設定する）
+    public void Summon(PartsInfo.PartsData data, Transform robotTransform, Vector2 initVelocity)
     {
         if (IsActiveWhenSummon) gameObject.SetActive(true);
         action.Invoke(data, robotTransform);
