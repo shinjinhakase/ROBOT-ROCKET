@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WindPropeller
+  m_Name: MoveWallAnim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -550631577, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
+      value: {fileID: 397662722, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
     - time: 0.083333336
-      value: {fileID: 234075661, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
+      value: {fileID: 1455747805, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
     - time: 0.16666667
-      value: {fileID: 1067561721, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
+      value: {fileID: -2146520814, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -550631577, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
-    - {fileID: 234075661, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
-    - {fileID: 1067561721, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
+    - {fileID: 397662722, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
+    - {fileID: 1455747805, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
+    - {fileID: -2146520814, guid: aeb4f83eba500194f9528f28c4dfaebf, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

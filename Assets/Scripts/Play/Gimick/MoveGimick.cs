@@ -50,7 +50,7 @@ public class MoveGimick : GimickBase
 
     // シーンが開始した際に呼ばれるメソッド
     public override void OnSceneStart() {
-        homePosition = transform.position;
+        homePosition = new Vector3(transform.position.x, transform.position.y);
         if (Length > 0) transform.position = homePosition + moveTransformDatas[0]._position;
     }
 
@@ -70,7 +70,9 @@ public class MoveGimick : GimickBase
     [Serializable]
     private class MoveTransformData
     {
+        [Tooltip("初期位置からの相対座標")]
         public Vector2 _position;
+        [Tooltip("今の位置から次の位置に移動するのに掛ける時間")]
         public float _time;
     }
 }
