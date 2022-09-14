@@ -12,4 +12,16 @@ public class SoundBeep : MonoBehaviour
     {
         sound.Play();
     }
+
+    // 音を一時停止するメソッド
+    public void PauseBeep()
+    {
+        sound.Pause();
+    }
+
+    // 音を止めるメソッド
+    public void StopBeep()
+    {
+        sound.Stop();
+    }
 }
