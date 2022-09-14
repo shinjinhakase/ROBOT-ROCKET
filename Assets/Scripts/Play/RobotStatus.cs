@@ -30,10 +30,11 @@ public class RobotStatus : MonoBehaviour
     public bool IsEndFly => _status == E_RobotStatus.EndFly;    // 飛行終了判定
 
 
+    [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private Animator _animator;
     private PurgeManager _purgeManager;
 
-    [SerializeField] private List<Rigidbody2D> GameOverRobotPurgeData = new List<Rigidbody2D>();
+    [SerializeField] private List<Sprite> GameOverRobotPurgeData = new List<Sprite>();
 
     [Header("イベント系統")]
     [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
@@ -160,7 +161,7 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.EndFly;
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
-        _purgeManager.AddPartsByPrefab(GameOverRobotPurgeData);
+        _purgeManager.AddPartsBySprite(GameOverRobotPurgeData);
     }
 
     // カスタムメニューを開いた際に呼び出されるメソッド
@@ -168,6 +169,7 @@ public class RobotStatus : MonoBehaviour
     {
         if (PlaySceneController.Instance.IsOpenableCustomMenu)
         {
+            bodyCollider.enabled = false;
             _status = E_RobotStatus.EndFly;
         }
     }
@@ -175,6 +177,7 @@ public class RobotStatus : MonoBehaviour
     // 初めからやり直す際に呼び出されるメソッド
     public void ResetStatus()
     {
+        bodyCollider.enabled = true;
         _status = E_RobotStatus.Ready;
         cooltime = 0;
     }

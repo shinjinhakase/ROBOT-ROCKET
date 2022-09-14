@@ -14,6 +14,7 @@ public class Stage
     public StageProgressData ProgressData
     {
         get { return progressData; }
+        set { progressData = value; }
     }
     
     public int StageNum

@@ -19,9 +19,15 @@ public class PartsPerformance : ScriptableObject
     public enum E_PartsID
     {
         TestParts,
-        Rocket1,
-        Rocket2,
-        Rocket3
+        TestParts2,
+        TestRock1,
+        TestPro1,
+        TestG1
+        ,Big_P
+        ,L_Rocket
+        ,Glider
+        ,Bomb
+        ,engineTest
     }
 
     // 物理等プレイシーン関連

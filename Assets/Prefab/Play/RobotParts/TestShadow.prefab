@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1959813857
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 55
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_FlipX: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   purgePartsPrefab: {fileID: -3521977866789243238, guid: baec86ace4e2e144088405c6f765c859, type: 3}
-  DestroyDuration: 2
+  DestroyDuration: 1
   initMaxVelocity: 4
   initMinVelocity: 2
   initAngleRange: 120
@@ -117,13 +117,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e0245a094b1e34c89a8bef95edb86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyCollider: {fileID: 2680677857970551468}
   _animator: {fileID: 0}
   GameOverRobotPurgeData:
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
-  - {fileID: 2245628689667146367, guid: e6c909a2d7bce454ebc6d48e839de55c, type: 3}
+  - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1875956871, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1176732188, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 558496154, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1888264551, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   startUsePartsEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -165,7 +167,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102143307357755459}
-  - component: {fileID: 6467780201638960953}
   - component: {fileID: 6735901713704480786}
   - component: {fileID: 2591065100494002134}
   - component: {fileID: -6901455106758486061}
@@ -194,58 +195,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6467780201638960953
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8478727793972353363}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1959813857
-  m_SortingLayer: -1
-  m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!114 &6735901713704480786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,8 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forces: []
-  IsMainRobot: 0
   IsAcceptExternalForce: 0
+  customCraneVelocity: 10
   testAngle: 0
   testF: 0
   testT: 0
@@ -383,18 +332,6 @@ MonoBehaviour:
       - m_Target: {fileID: 6735901713704480786}
         m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
         m_MethodName: ReplayFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2686121090419367529}
-        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
-        m_MethodName: DestroyAllFollowers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

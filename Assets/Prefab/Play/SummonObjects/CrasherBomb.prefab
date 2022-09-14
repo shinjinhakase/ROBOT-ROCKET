@@ -305,3 +305,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  IsActiveWhenSummon: 1
+  IsDestroyAfterSeconds: 0
+  _destroyDuration: 0
+  initVelocity: {x: 5, y: 5}

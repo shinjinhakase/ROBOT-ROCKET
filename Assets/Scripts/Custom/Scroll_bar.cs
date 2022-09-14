@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Scroll_bar : MonoBehaviour{
     
-    private Vector3 screenPoint;
-    
+    public static bool reset_flag=false;
+
     public static float current_height;
+
+    private Vector3 screenPoint;
 
     SpriteRenderer _renderer;
     
@@ -19,13 +21,20 @@ public class Scroll_bar : MonoBehaviour{
 
     void Update(){
 
-        if(Queue.testlist.Count<10){
+        if(Queue.itemlist.Count<10){
 
             _renderer.color=new Color32(255,255,255,0);
 
         }else{
 
             _renderer.color=new Color32(255,255,255,255);
+
+        }
+
+        if(reset_flag){
+
+            Reset();
+            reset_flag=false;
 
         }
 
@@ -38,16 +47,29 @@ public class Scroll_bar : MonoBehaviour{
     }
 
     void OnMouseDrag(){
-
+        
+        var high = transform.parent.TransformPoint(Vector3.up * 4.0f);
+        var under = transform.parent.TransformPoint(Vector3.down * 1.85f);
         Vector3 currentScreenPoint=new Vector3(screenPoint.x,Input.mousePosition.y,screenPoint.z);
-        Vector3 currentPosition=Camera.main.ScreenToWorldPoint(currentScreenPoint);
+        Vector3 currentPosition=transform.localPosition;
 
-        if(-1.85<currentPosition.y&&currentPosition.y<4){
-            
-            transform.position=currentPosition;
+
+        if(under.y<currentPosition.y&&currentPosition.y<high.y){
+
+            Debug.Log("canmove");
+            this.transform.position = currentPosition;
+            currentPosition = transform.parent.InverseTransformPoint(currentPosition);
             current_height=(currentPosition.y+1.85f)/5.85f;
 
         }
+
+    }
+
+    void Reset(){
+
+        Vector3 currentPosition=this.transform.position;
+        currentPosition.y=4.0f;
+        this.transform.position=currentPosition;
 
     }
 

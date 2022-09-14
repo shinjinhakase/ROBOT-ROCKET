@@ -22,6 +22,6 @@ MonoBehaviour:
   cooltime: 1.2
   summonObjects: []
   partsName: 
-  partsSprite: {fileID: -1375080758, guid: 9683c8b471de41d4aaceed70fb114b1e, type: 3}
+  partsSprite: {fileID: -609927487, guid: 4629f07489445f24ba0a5ed6c232698c, type: 3}
   iconSprite: {fileID: 21300000, guid: d3f4b484be642f042831d72a5c6f1931, type: 3}
   description: 
