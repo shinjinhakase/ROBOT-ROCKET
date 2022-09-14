@@ -5,9 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class DropParts : GimickBase
 {
+    [SerializeField] private SpriteRenderer _iconSpriteRenderer;
+
     // 取得するパーツの情報
     [SerializeField] private PartsInfo.PartsData partsData;
     private bool Picked = false;
+
+    public override void OnSceneStart()
+    {
+        if (_iconSpriteRenderer) StartCoroutine(SetIconSprite());
+    }
 
     // ギミックをリセットするメソッド
     public override void ResetGimick() {
@@ -27,5 +34,20 @@ public class DropParts : GimickBase
 
         // 自身を無効化する
         gameObject.SetActive(false);
+    }
+
+    // アイコンのスプライトを設定する
+    public IEnumerator SetIconSprite()
+    {
+        while (true)
+        {
+            PlayPartsManager _instance = PlayPartsManager.Instance;
+            if (_instance)
+            {
+                _iconSpriteRenderer.sprite = _instance.GetPerformance(partsData.id).iconSprite;
+                yield break;
+            }
+            yield return null;
+        }
     }
 }
