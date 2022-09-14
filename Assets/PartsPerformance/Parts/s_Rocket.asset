@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
-  m_Name: engineTest
+  m_Name: s_Rocket
   m_EditorClassIdentifier: 
-  id: 13
+  id: 10
   forceType: 1
-  m: 1
-  F: 50
-  t: 10
+  m: 0.01
+  F: 5
+  t: 5
   R: 0
   k: 0
-  cooltime: 0
+  cooltime: 1
   summonObjects: []
-  partsName: 
-  partsSprite: {fileID: 0}
+  partsName: "\u30ED\u30B1\u30C3\u30C8\u82B1\u706B"
+  partsSprite: {fileID: -1837160464, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
   iconSprite: {fileID: 0}
-  description: 
+  description: "\u7C21\u5358\u306A\u56FA\u4F53\u30ED\u30B1\u30C3\u30C8\u3002\u3082\u306E\u3059\u3054\u304F\u5F31\u3044\u304C\u8EFD\u3044\u3057\u624B\u8EFD\u306B\u88C5\u5099\u51FA\u6765\u308B\u3002"

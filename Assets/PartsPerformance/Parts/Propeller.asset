@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
   m_Name: Propeller
   m_EditorClassIdentifier: 
-  id: 4
+  id: 3
   forceType: 2
   m: 0
   F: 0

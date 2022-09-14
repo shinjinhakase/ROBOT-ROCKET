@@ -24,10 +24,17 @@ public class PartsPerformance : ScriptableObject
         TestPro1,
         TestG1
         ,Big_P
+        ,mid_P
+        ,small_P
         ,L_Rocket
+        ,m_Rocket
+        ,s_Rocket
         ,Glider
         ,Bomb
         ,engineTest
+        ,speed_Glider
+        ,big_Glider
+       
     }
 
     // 物理等プレイシーン関連
