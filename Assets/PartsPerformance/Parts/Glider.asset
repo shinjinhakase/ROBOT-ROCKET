@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
   m_Name: Glider
   m_EditorClassIdentifier: 
-  id: 7
+  id: 11
   forceType: 3
   m: 0
   F: 0
