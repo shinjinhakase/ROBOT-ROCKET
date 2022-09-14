@@ -2606,6 +2606,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372531673}
   m_CullTransparentMesh: 1
+--- !u!212 &1381244231 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8484677868766976831, guid: 2577a8cc9b714984ebf9880e15d6cd27, type: 3}
+  m_PrefabInstance: {fileID: 4942813718091129686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1413338559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7032684975812003574, guid: a788f306020840147b042e3fa37baee5, type: 3}
@@ -3444,6 +3449,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4942813717348904425, guid: 2577a8cc9b714984ebf9880e15d6cd27, type: 3}
+      propertyPath: _iconSpriteRenderer
+      value: 
+      objectReference: {fileID: 1381244231}
     - target: {fileID: 4942813717348904427, guid: 2577a8cc9b714984ebf9880e15d6cd27, type: 3}
       propertyPath: m_Name
       value: DropParts

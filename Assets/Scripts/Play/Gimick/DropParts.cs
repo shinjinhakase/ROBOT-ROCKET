@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider2D))]
 public class DropParts : GimickBase
 {
+    [SerializeField] private SpriteRenderer _iconSpriteRenderer;
+
     // 取得するパーツの情報
     [SerializeField] private PartsInfo.PartsData partsData;
     private bool Picked = false;
@@ -27,5 +30,15 @@ public class DropParts : GimickBase
 
         // 自身を無効化する
         gameObject.SetActive(false);
+    }
+
+    // 始まった際にスプライトをセットする
+    public override void OnSceneStart()
+    {
+        StartCoroutine(PlayPartsManager.ActionAfterSetInstance(SetSprite));
+    }
+    private void SetSprite()
+    {
+        _iconSpriteRenderer.sprite = PlayPartsManager.Instance.GetPerformance(partsData.id).iconSprite;
     }
 }
