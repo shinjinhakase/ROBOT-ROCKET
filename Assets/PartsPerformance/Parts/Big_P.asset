@@ -9,9 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354b91b154c20044d95f35c5f8832240, type: 3}
-  m_Name: PartsDatabase
+  m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
+  m_Name: Big_P
   m_EditorClassIdentifier: 
-  dataList:
-  - {fileID: 11400000, guid: 549d4ef8481bb46459ecc9b5c14b73b1, type: 2}
-  - {fileID: 11400000, guid: df959b19288030142bd9b5b9494985ff, type: 2}
+  id: 5
+  forceType: 2
+  m: 10
+  F: 100
+  t: 6
+  R: 0
+  k: 80
+  cooltime: 2
+  summonObjects: []
+  partsName: 
+  partsSprite: {fileID: 0}
+  iconSprite: {fileID: 0}
+  description: 
