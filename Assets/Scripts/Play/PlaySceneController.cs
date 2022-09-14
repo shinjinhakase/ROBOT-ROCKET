@@ -48,6 +48,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
     private IEnumerator hitStopCoroutine;
 
+    private Stage _currentStage = new Stage();
+    public Stage CurrentStage { get { return _currentStage; } private set { _currentStage = value; } }
 
 
     protected override void Awake()
@@ -58,6 +60,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         cam.CameraReady();
 
         // (必要であればここで暗転の解除など)
+        InitStageInfo();
     }
 
     // 最初のカメラ移動が終わった際に呼び出されるメソッド
@@ -271,6 +274,13 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (time > 0) yield return new WaitForSeconds(time);
         action();
         yield break;
+    }
+    // ステージ情報を受け取るメソッド
+    private void InitStageInfo()
+    {
+        CurrentStage = StageSelectGlobal.Instance.Stage;
+        StageNum = CurrentStage.StageNum;
+        /* ゴール座標はどうするか */
     }
 
     // シーンの処理場面を示す列挙型

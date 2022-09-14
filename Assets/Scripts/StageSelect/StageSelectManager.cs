@@ -65,7 +65,7 @@ public class StageSelectManager : MonoBehaviour
     public void SelectStage(Stage stage)
     {
         Debug.Log($"Push stageButton : stageNum -> {stage.StageNum}");
-        loadStage.SetStageNum(stage.StageNum);
+        loadStage.SetStageNum(stage);
         uIManager.SelectStage(stage);
     }
 }
