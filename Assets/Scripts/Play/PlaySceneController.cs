@@ -299,6 +299,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         ProgressData progressData = ProgressData.Instance;
         var stageList = stageDataBase.stageList;
 
+        if(stageDataBase == null)
+        {
+            Debug.Log("SceneControllerのPlaySceneControllerにStageDataBaseを代入すると進捗がセーブされます");
+            return;
+        }
+
         if (CurrentStage != null)
         {
             Debug.Log("進捗をセーブします");
