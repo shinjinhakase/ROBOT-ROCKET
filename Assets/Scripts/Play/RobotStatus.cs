@@ -205,6 +205,12 @@ public class RobotStatus : MonoBehaviour
 
         // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
         _purgeManager.AddPartsBySprite(GameOverRobotPurgeData);
+        if (_partsObject)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+            Destroy(_partsObject.gameObject);
+        }
     }
 
     // カスタムメニューを開いた際に呼び出されるメソッド
@@ -214,6 +220,12 @@ public class RobotStatus : MonoBehaviour
         {
             bodyCollider.enabled = false;
             _status = E_RobotStatus.EndFly;
+        }
+        if (_partsObject)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+            Destroy(_partsObject.gameObject);
         }
     }
 
