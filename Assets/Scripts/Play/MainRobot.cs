@@ -230,8 +230,8 @@ public class MainRobot : MonoBehaviour
         _highScore = 0;
         partsInfo = PartsInfo.Instance;
         _move.ResetToFirst();
-        _status.ResetStatus();
         gameObject.SetActive(true);
+        _status.ResetStatus();
     }
 
     // ƒŠƒvƒŒƒC‚ğÄ¶‚·‚éÛ‚Ì€”õ
