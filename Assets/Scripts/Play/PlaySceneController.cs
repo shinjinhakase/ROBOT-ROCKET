@@ -122,7 +122,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             PartsInfo.Instance.Reset();
 
             // カスタムメニューのオープン処理
-            if (IsNeedSetResult && robot._status.IsFlying) {
+            if (IsNeedSetResult && !robot.IsNotStart) {
                 CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
             }
             else
@@ -278,9 +278,13 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     // ステージ情報を受け取るメソッド
     private void InitStageInfo()
     {
-        CurrentStage = StageSelectGlobal.Instance.Stage;
-        StageNum = CurrentStage.StageNum;
-        /* ゴール座標はどうするか */
+        StageSelectGlobal _stageSelectGlobal = StageSelectGlobal.Instance;
+        if (_stageSelectGlobal)
+        {
+            CurrentStage = _stageSelectGlobal.Stage;
+            StageNum = CurrentStage.StageNum;
+            /* ゴール座標はどうするか */
+        }
     }
 
     // シーンの処理場面を示す列挙型
