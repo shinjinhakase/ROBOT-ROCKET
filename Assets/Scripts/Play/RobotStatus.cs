@@ -34,6 +34,8 @@ public class RobotStatus : MonoBehaviour
     [SerializeField] private Animator _animator;
     private PurgeManager _purgeManager;
 
+    [SerializeField] private ParticleSystem _usePartsEffect = null;
+
     // ゲームオーバー時のパージロボットスプライトデータ
     [SerializeField] private List<Sprite> GameOverRobotPurgeData = new List<Sprite>();
 
@@ -106,6 +108,11 @@ public class RobotStatus : MonoBehaviour
 
         // アイテムの種類によって特有のアニメーションへ遷移
         BuildUsePartsObject(performance, data);
+        if (_usePartsEffect)
+        {
+            _usePartsEffect.gameObject.SetActive(true);
+            _usePartsEffect.Play();
+        }
         if (performance.forceType == PartsPerformance.E_ForceType.Rocket)
         {
             _animator.SetTrigger("Rocket");
