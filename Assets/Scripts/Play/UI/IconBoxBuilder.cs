@@ -45,15 +45,18 @@ public class IconBoxBuilder : MonoBehaviour
                 iconBoxes[i].SetSprite(GetPerformance(dataList[i]));
             }
         }
-        // 削除したオブジェクトをリストから削除する
-        iconBoxes.RemoveAll(data => data == null);
         // 新しく箱を生成する
-        if(iconBoxes.Count < length)
+        if (iconBoxes.Count < length)
         {
             for (int i = iconBoxes.Count; i < length; i++)
             {
                 BuildBox(dataList[i]);
             }
+        }
+        // 削除したオブジェクトをリストから削除する
+        else if (iconBoxes.Count > length)
+        {
+            iconBoxes.RemoveRange(length, iconBoxes.Count - length);
         }
     }
 
