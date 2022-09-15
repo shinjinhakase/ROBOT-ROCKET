@@ -7,9 +7,11 @@ public class Measure : UIOpener
 {
     [SerializeField] private Transform needle;
 
+    [SerializeField] private Shaker measureSprite;
     [SerializeField] private IconBoxBuilder iconBuilder;
 
     [Header("jÝ’è")]
+    [SerializeField] private float _warningWeight = 2f;
     [SerializeField] private float _maxWeight = 5f;
     [SerializeField] private float _maxAngle = 340f;
 
@@ -23,6 +25,12 @@ public class Measure : UIOpener
         UpdateRender();
     }
 
+    public override void OpenPanel()
+    {
+        base.OpenPanel();
+        UpdateRender();
+    }
+
     // •`‰æ‚ðXV‚·‚éƒƒ\ƒbƒh
     public void UpdateRender()
     {
@@ -33,10 +41,14 @@ public class Measure : UIOpener
     // j‚ÌŠp“x‚ðXV‚·‚é
     public void NeedleUpdate()
     {
+        // j‚ÌŠp“x’²®
         if (needle == null) return;
         float weight = PlayPartsManager.Instance.GetAllWeight() + ForceMove.RobotWeight;
         float angle = weight * _maxAngle / _maxWeight;
         if (angle > _maxAngle) angle = _maxWeight;
         needle.rotation = Quaternion.Euler(0, 0, -angle);
+
+        // ”‰‚ÌU“®§Œä
+        measureSprite.DoShake = weight >= _warningWeight;
     }
 }

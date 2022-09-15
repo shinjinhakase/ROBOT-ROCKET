@@ -95,11 +95,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GamePlay;
 
-            // 開始時のイベントを呼び出す
-            startGameEvent.Invoke();
-
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
             robot.GameStart();
+
+            // 開始時のイベントを呼び出す
+            startGameEvent.Invoke();
         }
     }
     // ロボットが動き始めた際に呼び出されるメソッド
