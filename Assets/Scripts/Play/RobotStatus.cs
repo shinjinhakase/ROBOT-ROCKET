@@ -196,14 +196,14 @@ public class RobotStatus : MonoBehaviour
     // 初めからやり直す際に呼び出されるメソッド
     public void ResetStatus()
     {
-        bodyCollider.enabled = true;
-        _status = E_RobotStatus.Ready;
-        cooltime = 0;
-
         // アニメーターの状態をリセットする
         _animator.SetBool("Cooltime", false);
         _animator.SetBool("OnGround", true);
         _animator.Play("robot");    // robotステートに切り替える
+
+        bodyCollider.enabled = true;
+        _status = E_RobotStatus.Ready;
+        cooltime = 0;
     }
 
 
