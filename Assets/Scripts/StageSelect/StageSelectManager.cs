@@ -34,9 +34,6 @@ public class StageSelectManager : MonoBehaviour
             Stage stage = stageDataBase.stageList[stageNum];
             stage.StageNum = stageNum;
 
-            Debug.Log(stageDataBase.stageList.Count);
-            Debug.Log(stageNum);
-
             if (isExistData) stage.ProgressData = spDataList[stageNum];
             else stage.ProgressData = new StageProgressData();
         }

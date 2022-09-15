@@ -27,7 +27,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     }
 
     // ステージを検索するためのDB
-    [SerializeField] private StageDataBase stageDataBase;
+    private StageDataBase _stageDB;
+    public StageDataBase StageDB
+    {
+        get { return _stageDB; }
+        set { _stageDB = value; }
+    }
 
     [Header("イベント系統")]
     [Tooltip("ゲーム中にカスタム画面へ以降した際にカスタム画面が開くまでの遅延時間")]
@@ -290,29 +295,29 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             CurrentStage = _stageSelectGlobal.Stage;
             StageNum = CurrentStage.StageNum;
+            StageDB = StageSelectGlobal.Instance.StageDataBase;
             /* ゴール座標はどうするか */
         }
     }
     // ステージ進捗を保存するメソッド
     private void SaveProgress(bool isClear)
     {
+        // セーブデータとなるクラスを取得し
         ProgressData progressData = ProgressData.Instance;
-        var stageList = stageDataBase.stageList;
-
-        if(stageDataBase == null)
-        {
-            Debug.Log("SceneControllerのPlaySceneControllerにStageDataBaseを代入すると進捗がセーブされます");
-            return;
-        }
 
         if (CurrentStage != null)
         {
             Debug.Log("進捗をセーブします");
 
+            // 進捗を今所持しているStageインスタンスに保存
             CurrentStage.ProgressData.IsClear = isClear;
             CurrentStage.ProgressData.BestDistance = Score;
-            progressData.CreateSaveData(stageList);
 
+            // StageDBに反映（参照型だからこの処理要らないかも？）
+            StageDB.stageList[StageNum] = CurrentStage;
+
+            // セーブデータを作って保存
+            progressData.CreateSaveData(StageDB.stageList);
             progressData.Save();
         }
         else
