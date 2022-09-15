@@ -14,7 +14,7 @@ public class NumberBoard : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         SetNumber(_num);
