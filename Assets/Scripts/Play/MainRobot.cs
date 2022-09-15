@@ -19,7 +19,8 @@ public class MainRobot : MonoBehaviour
 
     private float _highScore = 0;   // 最高到達距離
 
-    private bool IsNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
+    private bool _isNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
+    public bool IsNotStart { get { return _isNotStart; } private set { _isNotStart = value; } }
     private bool IsUsePartsInForce = false; // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
     private bool ReplayMode = false;        // リプレイ操作に移るかのフラグ
     private ReplayData _useReplayData;
@@ -218,10 +219,7 @@ public class MainRobot : MonoBehaviour
         // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
         if (_status.IsFlying)
         {
-            ReplayMode = false;
-            _player.StopReplayInForce();
-            _move.OpenCustomMove();
-            _status.OpenCustomMenu();
+            GameOver(); // ゲームオーバー時の爆発処理を呼ぶ
         }
         // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
     }
