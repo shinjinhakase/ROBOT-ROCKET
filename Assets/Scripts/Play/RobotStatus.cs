@@ -229,7 +229,7 @@ public class RobotStatus : MonoBehaviour
     public void BuildUsePartsObject(PartsPerformance performance, PartsInfo.PartsData data)
     {
         // 位置と角度を調整する
-        Vector3 localPosition = transform.position;
+        Vector3 localPosition = Vector3.zero;
         float angle = data.angle;
         switch (performance.forceType)
         {
@@ -251,7 +251,9 @@ public class RobotStatus : MonoBehaviour
         }
 
         // オブジェクトを生成する
-        _partsObject = Instantiate(_partsPrefab, localPosition, Quaternion.Euler(Vector3.forward * angle), transform);
+        _partsObject = Instantiate(_partsPrefab, transform);
+        _partsObject.transform.localPosition = localPosition;
+        _partsObject.transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         if (performance.animatorController)
         {
             // アニメーターを設定する
