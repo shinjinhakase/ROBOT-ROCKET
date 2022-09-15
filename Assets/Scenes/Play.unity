@@ -1377,7 +1377,7 @@ MonoBehaviour:
   robotMaxY: 2.5
   robotMinY: -2.5
   goalX: 5
-  initY: -2.5
+  initY: -2
   cameraVelocity: 0.05
 --- !u!114 &484747448
 MonoBehaviour:
