@@ -151,7 +151,8 @@ public class MainRobot : MonoBehaviour
     public void UsePartsByReplay(PartsInfo.PartsData data)
     {
         if (!_player.IsPlaying) return;
-        UseParts(data, playPartsManager.GetPerformance(data.id));
+        playPartsManager.UseParts(out PartsPerformance performance, out _, out _);
+        UseParts(data, performance);
     }
     // パーツ使用時の共通処理
     private void UseParts(PartsInfo.PartsData data, PartsPerformance performance, IForce force = null)
@@ -188,6 +189,7 @@ public class MainRobot : MonoBehaviour
     // パーツの使用が終わった際の処理
     public void endUseParts()
     {
+        PartsInfo.Instance.RemoveParts();   // パーツをリストから削除する
         _status.endUseParts();
     }
 

@@ -39,8 +39,6 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         IsUsingParts = true;
         data = partsInfo.GetParts(0);
         performance = partsPerformanceData.getData(data.id);
-        // リストからアイテムを除外する
-        partsInfo.RemoveParts();
 
         // 加える力を構築する
         switch (performance.forceType)
