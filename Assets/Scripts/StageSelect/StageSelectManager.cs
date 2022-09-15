@@ -26,7 +26,7 @@ public class StageSelectManager : MonoBehaviour
 
         // セーブデータが存在するか
         bool isExistData = false;
-        if (spDataList != null) isExistData = true;
+        //if (spDataList != null) isExistData = true;
 
         for (int stageNum = 0; stageNum < stageDataBase.stageList.Count; stageNum++)
         {

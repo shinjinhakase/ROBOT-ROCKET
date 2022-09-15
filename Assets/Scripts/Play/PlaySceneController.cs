@@ -26,6 +26,14 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         set { if (value <= _goalXPoint) _score = value; else _score = _goalXPoint; }
     }
 
+    // ステージを検索するためのDB
+    private StageDataBase _stageDB;
+    public StageDataBase StageDB
+    {
+        get { return _stageDB; }
+        set { _stageDB = value; }
+    }
+
     [Header("イベント系統")]
     [Tooltip("ゲーム中にカスタム画面へ以降した際にカスタム画面が開くまでの遅延時間")]
     [SerializeField] private float OpenCustomWhenPlayDuration = 1f;
@@ -48,7 +56,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
     private IEnumerator hitStopCoroutine;
 
-    private Stage _currentStage = new Stage();
+    private Stage _currentStage =null;
     public Stage CurrentStage { get { return _currentStage; } private set { _currentStage = value; } }
 
 
@@ -159,6 +167,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             cam.IsFollowRobot = false;
             robot.GameClear();
 
+            SaveProgress(true);
+
             endGameEvent.Invoke();
 
             gameClearEvent.Invoke();
@@ -175,6 +185,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // カメラの追尾を切り、ロボットのゲームオーバー処理を実行する
             cam.IsFollowRobot = false;
             robot.GameOver();
+
+            SaveProgress(false);
 
             endGameEvent.Invoke();
             
@@ -283,9 +295,36 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             CurrentStage = _stageSelectGlobal.Stage;
             StageNum = CurrentStage.StageNum;
+            StageDB = StageSelectGlobal.Instance.StageDataBase;
             /* ゴール座標はどうするか */
         }
     }
+    // ステージ進捗を保存するメソッド
+    private void SaveProgress(bool isClear)
+    {
+        // セーブデータとなるクラスを取得し
+        ProgressData progressData = ProgressData.Instance;
+
+        if (CurrentStage != null)
+        {
+            Debug.Log("進捗をセーブします");
+
+            // 進捗を今所持しているStageインスタンスに保存
+            CurrentStage.ProgressData.IsClear = isClear;
+            CurrentStage.ProgressData.BestDistance = Score;
+
+            // StageDBに反映（参照型だからこの処理要らないかも？）
+            StageDB.stageList[StageNum] = CurrentStage;
+
+            // セーブデータを作って保存
+            progressData.CreateSaveData(StageDB.stageList);
+            progressData.Save();
+        }
+        else
+        {
+            Debug.Log("Stageインスタンスがありません");
+        }
+    } 
 
     // シーンの処理場面を示す列挙型
     public enum E_PlayScene
