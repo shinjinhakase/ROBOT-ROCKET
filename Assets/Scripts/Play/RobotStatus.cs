@@ -230,18 +230,18 @@ public class RobotStatus : MonoBehaviour
     {
         // 位置と角度を調整する
         Vector3 localPosition = Vector3.zero;
-        float angle = data.angle;
+        float angle = data.angle - 90;
         switch (performance.forceType)
         {
             case PartsPerformance.E_ForceType.Rocket:
                 localPosition += (Vector3)_rocketLocate;
-                angle -= 90;
                 break;
             case PartsPerformance.E_ForceType.Propeller:
                 localPosition += (Vector3)_propellerLocate;
                 break;
             case PartsPerformance.E_ForceType.Glider:
                 localPosition += (Vector3)_gliderLocate;
+                angle += 90;
                 break;
             // 爆弾は装備している瞬間がほぼ無いので、パーツオブジェクトは生成しない
             case PartsPerformance.E_ForceType.Bomb:

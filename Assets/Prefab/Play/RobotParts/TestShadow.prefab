@@ -233,7 +233,7 @@ MonoBehaviour:
   - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   _partsPrefab: {fileID: 7164228743143090572, guid: 31762018a1b8af841b5d730ed224b08f, type: 3}
   _bombExplodeDistance: 0
-  _propellerLocate: {x: 0, y: 0.15}
+  _propellerLocate: {x: 0.05, y: 0.15}
   _rocketLocate: {x: -0.05, y: -0.15}
   _gliderLocate: {x: 0.05, y: -0.3}
   startUsePartsEvent:
