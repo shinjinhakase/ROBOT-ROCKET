@@ -29,6 +29,11 @@ public class PartsInfo : SavableSingletonBase<PartsInfo>
     [Serializable]
     public class PartsData
     {
+        public PartsData() { }
+        public PartsData(PartsData data) {
+            id = data.id;
+            angle = data.angle;
+        }
         public PartsPerformance.E_PartsID id;
         public float angle;
     }

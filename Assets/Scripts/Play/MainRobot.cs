@@ -104,7 +104,7 @@ public class MainRobot : MonoBehaviour
             _player.LoadReplayData(_useReplayData);
 
             // 用意してきたパーツをリプレイのものに変更
-            partsInfo.partsList = _player.InitialPartsDatas;
+            partsInfo.partsList = new List<PartsInfo.PartsData>(_player.InitialPartsDatas);
 
             // スコアをリプレイのものに変更
             playSceneController.Score = _useReplayData.score;
