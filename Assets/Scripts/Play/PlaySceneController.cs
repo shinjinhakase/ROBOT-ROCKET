@@ -122,7 +122,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             PartsInfo.Instance.Reset();
 
             // カスタムメニューのオープン処理
-            if (IsNeedSetResult && robot._status.IsFlying) {
+            if (IsNeedSetResult && !robot.IsNotStart) {
                 CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
             }
             else
