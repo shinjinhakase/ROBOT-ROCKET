@@ -52,6 +52,8 @@ public class PartsPerformance : ScriptableObject
     public string partsName;    //アイテム名前
     [Tooltip("装備時に表示される見た目。")]
     public Sprite partsSprite;
+    [Tooltip("パーツのアニメーターコントローラー。")]
+    public RuntimeAnimatorController animatorController;
     [Tooltip("UI用にアイコンとして用いられる見た目。")]
     public Sprite iconSprite;
     [Tooltip("説明文。UIでパーツ説明に用います。"), TextArea(3, 5)]
