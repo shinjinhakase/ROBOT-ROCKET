@@ -25,7 +25,19 @@ public class GameEndPanel : UIOpener
     {
         PlaySceneController _playSceneController = PlaySceneController.Instance;
         resultText.text = resultMessage;
-        scoreText.text = "Score：" + _playSceneController.Score + "\nHigh Score：???";
+
+        string highscoreStr;
+        if (_playSceneController.IsLoadStage)
+            highscoreStr = _playSceneController.CurrentStage.ProgressData.BestDistance.ToString();
+        else
+        {
+            Debug.Log("isLoadStage = false : ハイスコアは読み込まれません");
+            highscoreStr = "???";
+        }
+
+        scoreText.text = "Score：" + _playSceneController.Score
+                + "\nHigh Score：" + highscoreStr;
+
         base.OpenPanel();
     }
 }
