@@ -8,6 +8,7 @@ using UnityEditor;
 public class LoadStage : MonoBehaviour
 {
     [SerializeField] private string scenePrefix;
+    [SerializeField] private StageDataBase stageDataBase;
 
     private int stageNum = -1;
     private Stage stage = new Stage();
@@ -24,6 +25,7 @@ public class LoadStage : MonoBehaviour
         Debug.Log("OnLoadStage : Debugópèàóù");
         string sceneName = scenePrefix + stageNum;
         StageSelectGlobal.Instance.Stage = stage;
+        StageSelectGlobal.Instance.StageDataBase = stageDataBase;
         sceneName = "Play";
         SceneManager.LoadScene(sceneName);
     }

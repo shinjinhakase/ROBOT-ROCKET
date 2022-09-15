@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenePrefix: Stage_
+  stageDataBase: {fileID: 11400000, guid: 815d30dae568bed408682267f3d029af, type: 2}
 --- !u!1 &542417456
 GameObject:
   m_ObjectHideFlags: 0

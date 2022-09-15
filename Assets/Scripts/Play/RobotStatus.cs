@@ -71,7 +71,7 @@ public class RobotStatus : MonoBehaviour
 
         _status = E_RobotStatus.Fly;
 
-        // TODO：飛行のアニメーションへ遷移
+        // 飛行のアニメーションへ遷移（OnGroundで勝手に遷移する）
     }
 
     // パーツの使用開始
@@ -95,7 +95,19 @@ public class RobotStatus : MonoBehaviour
         // クールタイムを計算しておく
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
-        // TODO：アイテムの種類によって特有のアニメーションへ遷移
+        // アイテムの種類によって特有のアニメーションへ遷移
+        if (performance.forceType == PartsPerformance.E_ForceType.Rocket)
+        {
+            _animator.SetTrigger("Rocket");
+        }
+        else if (performance.forceType == PartsPerformance.E_ForceType.Propeller)
+        {
+            _animator.SetTrigger("Propeller");
+        }
+        else if (performance.forceType == PartsPerformance.E_ForceType.Glider)
+        {
+            _animator.SetTrigger("Glider");
+        }
     }
 
     // パーツの効果終了
@@ -108,7 +120,11 @@ public class RobotStatus : MonoBehaviour
         }
 
         // 状態遷移（クールタイムがあれば待機状態へ移行する）
-        if (cooltime > 0) _status = E_RobotStatus.Cooldown;
+        if (cooltime > 0)
+        {
+            _status = E_RobotStatus.Cooldown;
+            _animator.SetBool("Cooltime", true);
+        }
         else _status = E_RobotStatus.Fly;
 
         // 使用し終わったパーツをパージして投げ出す
@@ -119,7 +135,8 @@ public class RobotStatus : MonoBehaviour
         }
 
         endUsePartsEvent.Invoke();
-        // TODO：飛行orクールタイムのアニメーションに遷移する
+        // 飛行orクールタイムのアニメーションに遷移する
+        _animator.SetTrigger("EndUse");
     }
 
     // クールタイムの終了
@@ -134,7 +151,8 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.Fly;
         cooltime = 0;
 
-        // TODO：飛行アニメーションに遷移する
+        // 飛行アニメーションに遷移する
+        _animator.SetBool("Cooltime", false);
     }
 
     // ゲームクリア時に呼び出されるメソッド
@@ -147,7 +165,8 @@ public class RobotStatus : MonoBehaviour
         }
         _status = E_RobotStatus.EndFly;
 
-        // TODO：クリア時のアニメーションなどのロボット関係の処理
+        // クリア時のアニメーションなどのロボット関係の処理
+        _animator.SetTrigger("Clear");
     }
 
     // ゲーム失敗時に呼び出されるメソッド
@@ -177,8 +196,20 @@ public class RobotStatus : MonoBehaviour
     // 初めからやり直す際に呼び出されるメソッド
     public void ResetStatus()
     {
+        // アニメーターの状態をリセットする
+        _animator.SetBool("Cooltime", false);
+        _animator.SetBool("OnGround", true);
+        _animator.Play("robot");    // robotステートに切り替える
+
         bodyCollider.enabled = true;
         _status = E_RobotStatus.Ready;
         cooltime = 0;
+    }
+
+
+    // アニメーターに地面に接しているかを伝える
+    public void SetOnGround(bool IsGround)
+    {
+        _animator.SetBool("OnGround", IsGround);
     }
 }
