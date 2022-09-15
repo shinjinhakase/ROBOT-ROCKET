@@ -203,6 +203,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1109 &-7035098303954859836
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: OnGround
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Cooltime
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 5815521107259326502}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
 --- !u!1101 &-7022179090634181764
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -570,6 +590,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1109 &-171529286140468133
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: OnGround
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Cooltime
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8920924924778517922}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -584,43 +624,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Cooltime
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Clear
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Rocket
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Glider
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Propeller
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EndUse
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -698,17 +738,19 @@ AnimatorStateMachine:
   - {fileID: 2959030043859542141}
   - {fileID: 5455174414951339517}
   - {fileID: 8714264093262400295}
-  m_EntryTransitions: []
+  m_EntryTransitions:
+  - {fileID: -171529286140468133}
+  - {fileID: -7035098303954859836}
   m_StateMachineTransitions:
-  - first: {fileID: -2655693028741851701}
-    second:
-    - {fileID: -6086101434036357639}
-  - first: {fileID: -6851560689626275359}
-    second:
-    - {fileID: -7773685640699138006}
   - first: {fileID: 7346945075395405609}
     second:
     - {fileID: 3750301268427204858}
+  - first: {fileID: -6851560689626275359}
+    second:
+    - {fileID: -7773685640699138006}
+  - first: {fileID: -2655693028741851701}
+    second:
+    - {fileID: -6086101434036357639}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 320, y: -270, z: 0}
   m_EntryPosition: {x: 40, y: 100, z: 0}
