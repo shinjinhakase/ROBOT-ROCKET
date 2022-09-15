@@ -178,6 +178,12 @@ public class RobotStatus : MonoBehaviour
 
         // クリア時のアニメーションなどのロボット関係の処理
         _animator.SetTrigger("Clear");
+        if (_partsObject)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+            Destroy(_partsObject.gameObject);
+        }
     }
 
     // ゲーム失敗時に呼び出されるメソッド
