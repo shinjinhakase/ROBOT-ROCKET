@@ -15,6 +15,10 @@ public class Shaker : MonoBehaviour
                 _offsetX = Random.Range(0f, 100f);
                 _offsetY = Random.Range(0f, 100f);
             }
+            else if( _doShake && !value )
+            {
+                transform.localPosition = Vector3.zero;
+            }
             _doShake = value;
         }
     }

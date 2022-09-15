@@ -32,6 +32,7 @@ public class RobotStatus : MonoBehaviour
 
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _usePartsAudioSource;
     private PurgeManager _purgeManager;
 
     [SerializeField] private ParticleSystem _usePartsEffect = null;
@@ -125,6 +126,13 @@ public class RobotStatus : MonoBehaviour
         {
             _animator.SetTrigger("Glider");
         }
+
+        // SEを鳴らす
+        if (performance.usePartsSE != null && _usePartsAudioSource != null)
+        {
+            _usePartsAudioSource.clip = performance.usePartsSE;
+            _usePartsAudioSource.Play();
+        }
     }
 
     // パーツの効果終了
@@ -155,6 +163,9 @@ public class RobotStatus : MonoBehaviour
         // 飛行orクールタイムのアニメーションに遷移する
         if (_partsObject) Destroy(_partsObject.gameObject);
         _animator.SetTrigger("EndUse");
+
+        // SEのストップ
+        if (_usePartsAudioSource) _usePartsAudioSource.Stop();
     }
 
     // クールタイムの終了

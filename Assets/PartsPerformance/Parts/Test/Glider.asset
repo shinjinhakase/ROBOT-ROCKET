@@ -26,3 +26,4 @@ MonoBehaviour:
   animatorController: {fileID: 0}
   iconSprite: {fileID: -1440641971, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
   description: 
+  usePartsSE: {fileID: 0}

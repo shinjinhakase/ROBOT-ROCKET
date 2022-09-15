@@ -58,4 +58,7 @@ public class PartsPerformance : ScriptableObject
     public Sprite iconSprite;
     [Tooltip("説明文。UIでパーツ説明に用います。"), TextArea(3, 5)]
     public string description;  //アイテム説明
+    
+    [Tooltip("使用時の効果音。パーツを使用した際に鳴ります。")]
+    public AudioClip usePartsSE;
 }

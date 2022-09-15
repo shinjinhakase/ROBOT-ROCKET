@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7276a2c2a0c044580847a49efda31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  purgePartsPrefab: {fileID: -3521977866789243238, guid: baec86ace4e2e144088405c6f765c859, type: 3}
+  purgePartsPrefab: {fileID: -3521977866789243238, guid: 347313f9e05891c4a9bdeab1c8b128ab, type: 3}
   DestroyDuration: 1
   initMaxVelocity: 4
   initMinVelocity: 2
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyCollider: {fileID: 2680677857970551468}
   _animator: {fileID: 6759603554914344141}
+  _usePartsEffect: {fileID: 0}
   GameOverRobotPurgeData:
   - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   - {fileID: 1875956871, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}

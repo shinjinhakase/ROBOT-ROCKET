@@ -67,6 +67,11 @@ public class PartsPerformanceEditor : Editor
         SerializedProperty desc = serializedObject.FindProperty("description");
         EditorGUILayout.PropertyField(desc, true);
 
+        // サウンド関係の設定
+        EditorGUILayout.LabelField("SE関連項目");
+        SerializedProperty usePartsSE = serializedObject.FindProperty("usePartsSE");
+        EditorGUILayout.PropertyField(usePartsSE, false);
+
         // 変更を検知した場合、設定ファイルに書き出す
         if (EditorGUI.EndChangeCheck())
         {
