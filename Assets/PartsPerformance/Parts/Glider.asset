@@ -23,5 +23,6 @@ MonoBehaviour:
   summonObjects: []
   partsName: 
   partsSprite: {fileID: 21300000, guid: 88422a3cec8440b4585bca2aa45d03e2, type: 3}
+  animatorController: {fileID: 0}
   iconSprite: {fileID: 21300000, guid: c11f60da813795a4f8f2151f99abef60, type: 3}
   description: 

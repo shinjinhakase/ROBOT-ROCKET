@@ -189,8 +189,8 @@ MonoBehaviour:
   - {fileID: 1650497562280670869}
   - {fileID: 1650497563018378971}
   waitDuration: 0.5
-  time: 1.2
-  distance: 5
+  time: 1.4
+  distance: 6
   IsCallControllerWhenEndMotion: 1
 --- !u!1001 &1926922804426398645
 PrefabInstance:

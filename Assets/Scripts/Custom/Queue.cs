@@ -135,6 +135,7 @@ public class Queue : MonoBehaviour{
             PartsInfo.PartsData newparts=new PartsInfo.PartsData();
             newparts.id=id;
             newparts.angle=angle+90;
+            if (_data.getData(id).forceType == PartsPerformance.E_ForceType.Glider) newparts.angle -= 90;
             _partsInfo.AddParts(newparts);
 
         }

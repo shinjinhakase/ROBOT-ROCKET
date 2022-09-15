@@ -34,7 +34,16 @@ public class RobotStatus : MonoBehaviour
     [SerializeField] private Animator _animator;
     private PurgeManager _purgeManager;
 
+    // ゲームオーバー時のパージロボットスプライトデータ
     [SerializeField] private List<Sprite> GameOverRobotPurgeData = new List<Sprite>();
+
+    [Header("装備パーツ情報")]
+    [SerializeField] private SpriteRenderer _partsPrefab;
+    private SpriteRenderer _partsObject;
+    [SerializeField] private float _bombExplodeDistance = 0f;
+    [SerializeField] private Vector2 _propellerLocate = Vector2.zero;
+    [SerializeField] private Vector2 _rocketLocate = Vector2.zero;
+    [SerializeField] private Vector2 _gliderLocate = Vector2.zero;
 
     [Header("イベント系統")]
     [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
@@ -96,6 +105,7 @@ public class RobotStatus : MonoBehaviour
         cooltime = Mathf.RoundToInt(performance.cooltime / Time.fixedDeltaTime);
 
         // アイテムの種類によって特有のアニメーションへ遷移
+        BuildUsePartsObject(performance, data);
         if (performance.forceType == PartsPerformance.E_ForceType.Rocket)
         {
             _animator.SetTrigger("Rocket");
@@ -136,6 +146,7 @@ public class RobotStatus : MonoBehaviour
 
         endUsePartsEvent.Invoke();
         // 飛行orクールタイムのアニメーションに遷移する
+        if (_partsObject) Destroy(_partsObject.gameObject);
         _animator.SetTrigger("EndUse");
     }
 
@@ -167,6 +178,12 @@ public class RobotStatus : MonoBehaviour
 
         // クリア時のアニメーションなどのロボット関係の処理
         _animator.SetTrigger("Clear");
+        if (_partsObject)
+        {
+            _purgeManager.AddPartsBySprite(usingPartsSprite);
+            usingPartsSprite = null;
+            Destroy(_partsObject.gameObject);
+        }
     }
 
     // ゲーム失敗時に呼び出されるメソッド
@@ -207,9 +224,52 @@ public class RobotStatus : MonoBehaviour
     }
 
 
+
     // アニメーターに地面に接しているかを伝える
     public void SetOnGround(bool IsGround)
     {
         _animator.SetBool("OnGround", IsGround);
+    }
+
+    // パーツデータから装備するパーツを構築する
+    public void BuildUsePartsObject(PartsPerformance performance, PartsInfo.PartsData data)
+    {
+        // 位置と角度を調整する
+        Vector3 localPosition = Vector3.zero;
+        float angle = data.angle - 90;
+        switch (performance.forceType)
+        {
+            case PartsPerformance.E_ForceType.Rocket:
+                localPosition += (Vector3)_rocketLocate;
+                break;
+            case PartsPerformance.E_ForceType.Propeller:
+                localPosition += (Vector3)_propellerLocate;
+                break;
+            case PartsPerformance.E_ForceType.Glider:
+                localPosition += (Vector3)_gliderLocate;
+                angle += 90;
+                break;
+            // 爆弾は装備している瞬間がほぼ無いので、パーツオブジェクトは生成しない
+            case PartsPerformance.E_ForceType.Bomb:
+                // TODO：爆発生成処理
+            default:
+                return;
+        }
+
+        // オブジェクトを生成する
+        _partsObject = Instantiate(_partsPrefab, transform);
+        _partsObject.transform.localPosition = localPosition;
+        _partsObject.transform.rotation = Quaternion.Euler(Vector3.forward * angle);
+        if (performance.animatorController)
+        {
+            // アニメーターを設定する
+            var partsAnimator = _partsObject.gameObject.AddComponent<Animator>();
+            partsAnimator.runtimeAnimatorController = performance.animatorController;
+        }
+        else
+        {
+            // スプライト（静止画）を設定する
+            _partsObject.sprite = performance.partsSprite;
+        }
     }
 }

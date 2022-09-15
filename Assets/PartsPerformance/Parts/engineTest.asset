@@ -23,5 +23,6 @@ MonoBehaviour:
   summonObjects: []
   partsName: 
   partsSprite: {fileID: 0}
+  animatorController: {fileID: 0}
   iconSprite: {fileID: 0}
   description: 

@@ -59,6 +59,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     private Stage _currentStage =null;
     public Stage CurrentStage { get { return _currentStage; } private set { _currentStage = value; } }
 
+    private bool _isLoadStage = false;// エラーで再生が中断されないための真偽値
+    public bool IsLoadStage { get { return _isLoadStage; } private set { _isLoadStage = value; } }
+
 
     protected override void Awake()
     {
@@ -297,6 +300,13 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             StageNum = CurrentStage.StageNum;
             StageDB = StageSelectGlobal.Instance.StageDataBase;
             /* ゴール座標はどうするか */
+
+            IsLoadStage = true;
+        }
+
+        if(!IsLoadStage)
+        {
+            Debug.Log("isLoadStage = false : Stage_Selectの値を使用する幾つかの機能はエラー回避のために動作しません。");
         }
     }
     // ステージ進捗を保存するメソッド
@@ -305,7 +315,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         // セーブデータとなるクラスを取得し
         ProgressData progressData = ProgressData.Instance;
 
-        if (CurrentStage != null)
+        if (IsLoadStage)
         {
             Debug.Log("進捗をセーブします");
 
@@ -322,7 +332,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
         else
         {
-            Debug.Log("Stageインスタンスがありません");
+            Debug.Log("isLoadStage = false : 進捗をデータは保存されません");
         }
     } 
 
