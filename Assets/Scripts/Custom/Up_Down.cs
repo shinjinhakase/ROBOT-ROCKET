@@ -6,11 +6,28 @@ public class Up_Down : MonoBehaviour{
     
     public bool up;
     public GameObject queue_obj;
+
+    SpriteRenderer _renderer;
     
-    void Start(){  
+    void Start(){
+
+        _renderer=GetComponent<SpriteRenderer>();
+        _renderer.color=new Color32(255,255,255,255);
+
     }
 
     void Update(){
+
+        if(Queue.itemlist.Count>=10){
+
+            _renderer.color=new Color32(255,255,255,255);
+
+        }else{
+
+            _renderer.color=new Color32(255,255,255,0);
+            
+        }
+        
     }
 
     public void Click(){
