@@ -14,8 +14,6 @@ public class ForceMove : MonoBehaviour
     private bool IsMainRobot = false;
     public bool IsAcceptExternalForce = true;   // 外力を受け入れるかの判定（falseにするとCollisionForceから力が来なくなる）
 
-    [SerializeField] private float customCraneVelocity = 10f;
-
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;
     [SerializeField] private float testF;
@@ -31,6 +29,8 @@ public class ForceMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         firstPosition = transform.position;
         IsMainRobot = TryGetComponent<MainRobot>(out _);
+
+        StartCoroutine(InitGravityScale());
     }
 
     private void FixedUpdate()
@@ -115,20 +115,26 @@ public class ForceMove : MonoBehaviour
         }
         forces.Clear();
     }
-    // カスタムメニューを開いた際の移動をする
-    public void OpenCustomMove()
-    {
-        ZeroForce();
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.up * customCraneVelocity;
-    }
 
     // 初期状態にリセットする
     public void ResetToFirst()
     {
         ZeroForce();
-        rb.gravityScale = 1;
         rb.velocity = Vector2.zero;
         transform.position = firstPosition;
+    }
+
+    private IEnumerator InitGravityScale()
+    {
+        while (true)
+        {
+            var _playSceneController = PlaySceneController.Instance;
+            if (_playSceneController)
+            {
+                rb.gravityScale = _playSceneController.GravityScale;
+                yield break;
+            }
+            yield return null;
+        }
     }
 }
