@@ -15,6 +15,8 @@ public class SummonableObject : MonoBehaviour
     [Header("召喚時設定")]
     [Tooltip("trueにすると、召喚時に自身をActiveにする")]
     [SerializeField] private bool IsActiveWhenSummon = true;
+    [Tooltip("trueにすると、パーツの使用終了とともに消滅する")]
+    [SerializeField] private bool _isDestroyWithParts = false;
     [Tooltip("trueにすると、召還後に指定秒数経つと自動で消滅する")]
     [SerializeField] private bool IsDestroyAfterSeconds = false;
     [Tooltip("IsDestroyAfterSecondsがtrueの際の、消滅秒数設定")]
@@ -22,6 +24,7 @@ public class SummonableObject : MonoBehaviour
     [Tooltip("SetPositionが呼び出された際の設定初期位置")]
     [SerializeField] private Vector3 _localPosition = Vector3.zero;
     [SerializeField] private float _explodeDistance = 0f;
+    public bool IsDestroyWithParts => _isDestroyWithParts;
 
     [Header("Rigidbody2D関連")]
     [Tooltip("Rigidbody2Dがアタッチされていた際、召喚時に加える初速設定")]

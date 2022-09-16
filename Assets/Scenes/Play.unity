@@ -366,6 +366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 1562978720919226171, guid: 8a7975ebd53e0b947a5b080848db206a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1562978720919226173, guid: 8a7975ebd53e0b947a5b080848db206a, type: 3}
       propertyPath: initVelocity.x
       value: -10
