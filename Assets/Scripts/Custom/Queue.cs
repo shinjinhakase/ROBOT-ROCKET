@@ -46,11 +46,13 @@ public class Queue : MonoBehaviour{
             newitem_renderer.sprite=_data.getData(myList[i].id).partsSprite;
 
             //グライダーの場合大きさを修正
+            /*
             if(myList[i].id==PartsPerformance.E_PartsID.Glider){
 
                 newitem.transform.localScale=new Vector3(5,5,1);
 
             }
+            */
 
             Items newitem_script=newitem.GetComponent<Items>();
             newitem_script.mynumber=itemlist.Count;
