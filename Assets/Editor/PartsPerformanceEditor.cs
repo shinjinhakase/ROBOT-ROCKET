@@ -71,6 +71,8 @@ public class PartsPerformanceEditor : Editor
         EditorGUILayout.LabelField("SE関連項目");
         SerializedProperty usePartsSE = serializedObject.FindProperty("usePartsSE");
         EditorGUILayout.PropertyField(usePartsSE, false);
+        SerializedProperty purgePartsSE = serializedObject.FindProperty("purgePartsSE");
+        EditorGUILayout.PropertyField(purgePartsSE, false);
 
         // 変更を検知した場合、設定ファイルに書き出す
         if (EditorGUI.EndChangeCheck())
