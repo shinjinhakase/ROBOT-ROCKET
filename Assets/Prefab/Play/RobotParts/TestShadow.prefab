@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7294488629614353554}
   - component: {fileID: 2212285623844537327}
   - component: {fileID: 190510015643709843}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: GroundCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3143221622444660812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.40781832, y: -1.2931399, z: 0}
+  m_LocalPosition: {x: 0, y: -0.475, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyCollider: {fileID: 2680677857970551468}
   _animator: {fileID: 6759603554914344141}
+  _usePartsAudioSource: {fileID: 0}
   _usePartsEffect: {fileID: 0}
   GameOverRobotPurgeData:
   - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
@@ -318,7 +319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8478727793972353363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.40781832, y: -1.6568601, z: 0}
+  m_LocalPosition: {x: 0, y: -0.475, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
