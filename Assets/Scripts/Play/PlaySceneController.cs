@@ -30,6 +30,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         set { if (value <= _goalXPoint) _score = value; else _score = _goalXPoint; }
     }
 
+    // 重力スケール
+    [SerializeField] private float _gravityScale = 1f;
+    public float GravityScale => _gravityScale;
+
     // ステージを検索するためのDB
     private StageDataBase _stageDB;
     public StageDataBase StageDB

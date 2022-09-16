@@ -1139,6 +1139,7 @@ MonoBehaviour:
   robot: {fileID: 5707609333356513361}
   _goalXPoint: 30
   _score: 0
+  _gravityScale: 0.5
   OpenCustomWhenPlayDuration: 1
   startAnimationEvent:
     m_PersistentCalls:
@@ -3759,7 +3760,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forces: []
   IsAcceptExternalForce: 1
-  customCraneVelocity: 10
   testAngle: 80
   testF: 30
   testT: 3
