@@ -43,10 +43,12 @@ public class RobotStatus : MonoBehaviour
     [Header("装備パーツ情報")]
     [SerializeField] private SpriteRenderer _partsPrefab;
     private SpriteRenderer _partsObject;
-    [SerializeField] private float _bombExplodeDistance = 0f;
     [SerializeField] private Vector2 _propellerLocate = Vector2.zero;
     [SerializeField] private Vector2 _rocketLocate = Vector2.zero;
     [SerializeField] private Vector2 _gliderLocate = Vector2.zero;
+
+    [SerializeField] private float _bombExplodeDistance = 0f;
+    [SerializeField] private ParticleSystem _explodesPrefab;
 
     [Header("イベント系統")]
     [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
@@ -128,7 +130,7 @@ public class RobotStatus : MonoBehaviour
         }
 
         // SEを鳴らす
-        if (performance.usePartsSE != null && _usePartsAudioSource != null)
+        if (performance.usePartsSE != null && _usePartsAudioSource != null && performance.forceType != PartsPerformance.E_ForceType.Bomb)
         {
             _usePartsAudioSource.clip = performance.usePartsSE;
             _usePartsAudioSource.Play();
@@ -202,6 +204,7 @@ public class RobotStatus : MonoBehaviour
             usingPartsSprite = null;
             Destroy(_partsObject.gameObject);
         }
+        if (_usePartsAudioSource) _usePartsAudioSource.Stop();
     }
 
     // ゲーム失敗時に呼び出されるメソッド
@@ -222,6 +225,7 @@ public class RobotStatus : MonoBehaviour
             usingPartsSprite = null;
             Destroy(_partsObject.gameObject);
         }
+        if (_usePartsAudioSource) _usePartsAudioSource.Stop();
     }
 
     // カスタムメニューを開いた際に呼び出されるメソッド
@@ -231,12 +235,15 @@ public class RobotStatus : MonoBehaviour
         {
             bodyCollider.enabled = false;
             _status = E_RobotStatus.EndFly;
-        }
-        if (_partsObject)
-        {
-            _purgeManager.AddPartsBySprite(usingPartsSprite);
-            usingPartsSprite = null;
-            Destroy(_partsObject.gameObject);
+
+            if (_usePartsAudioSource) _usePartsAudioSource.Stop();
+
+            if (_partsObject)
+            {
+                _purgeManager.AddPartsBySprite(usingPartsSprite);
+                usingPartsSprite = null;
+                Destroy(_partsObject.gameObject);
+            }
         }
     }
 
@@ -281,7 +288,22 @@ public class RobotStatus : MonoBehaviour
                 break;
             // 爆弾は装備している瞬間がほぼ無いので、パーツオブジェクトは生成しない
             case PartsPerformance.E_ForceType.Bomb:
-                // TODO：爆発生成処理
+                // 爆発生成処理
+                if (_explodesPrefab)
+                {
+                    Vector3 position = Quaternion.Euler(0, 0, data.angle - 180) * Vector3.right * _bombExplodeDistance;
+                    var explodes = Instantiate(_explodesPrefab, transform.position + position, Quaternion.Euler(-90, 0, 0));
+                    explodes.Play();
+                    GimickManager.Instance.RegisterAsDeleteObject(explodes.gameObject);
+
+                    // 使用時の効果音を鳴らす
+                    if(explodes.TryGetComponent(out AudioSource audiouSource))
+                    {
+                        audiouSource.clip = performance.usePartsSE;
+                        audiouSource.Play();
+                    }
+                }
+                return;
             default:
                 return;
         }

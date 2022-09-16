@@ -219,9 +219,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             ResetStage();
 
             // TODO：カメラの調整などの処理
-            cam.IsFollowRobot = true;
+            // cam.IsFollowRobot = true;
 
             Invoke("endFirstCameraMove", 0.1f);
+            CallMethodAfterDuration(() => cam.IsFollowRobot = true, 0.1f);
         }
     }
     // リセットの処理を行う
@@ -234,8 +235,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         // 使用パーツ状況とメインロボット状況をリセット
         PlayPartsManager.Instance.ResetPartsStatus();
         robot.ResetToStart();
-        // カメラをロボットの所へ初期状態でセット
-        cam.SetCameraToRobot();
 
         // TODO：シャドウの初期化処理
         // TODO：ステージの復元処理（稼働オブジェクトがあるなら）
