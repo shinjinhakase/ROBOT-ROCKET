@@ -11,17 +11,10 @@ public class StageSelectUIManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Text timeText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Text numImageText;
+    [SerializeField] private Image noActiveImage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private bool isDisplayNoActiveImage = true;
 
     public void SelectStage(Stage stage)
     {
@@ -33,5 +26,9 @@ public class StageSelectUIManager : MonoBehaviour
             + stage.ProgressData.BestDistance.ToString("f2") + "m";
         timeText.text = "Best Time\n"
             + stage.ProgressData.BestTime.ToString("f2") + "sec";
+
+        numImageText.text = (stage.StageNum + 1).ToString("00");
+        isDisplayNoActiveImage = false;
+        noActiveImage.gameObject.SetActive(isDisplayNoActiveImage);
     }
 }
