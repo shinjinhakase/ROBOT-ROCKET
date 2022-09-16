@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 7
   forceType: 2
   m: 0.05
-  F: 10
+  F: 40
   t: 4
   R: 0
   k: 20
