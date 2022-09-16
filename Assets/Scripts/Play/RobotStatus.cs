@@ -50,6 +50,8 @@ public class RobotStatus : MonoBehaviour
     [SerializeField] private float _bombExplodeDistance = 0f;
     [SerializeField] private ParticleSystem _explodesPrefab;
 
+    private List<GameObject> _destroyWithPartsObjects = new List<GameObject>();
+
     [Header("イベント系統")]
     [Tooltip("パーツの使用開始時に呼ばれるメソッド")]
     [SerializeField] private UnityEvent startUsePartsEvent = new UnityEvent();
@@ -168,6 +170,8 @@ public class RobotStatus : MonoBehaviour
 
         // SEのストップ
         if (_usePartsAudioSource) _usePartsAudioSource.Stop();
+
+        DestroyAllObjectsWithParts();
     }
 
     // クールタイムの終了
@@ -204,6 +208,7 @@ public class RobotStatus : MonoBehaviour
             usingPartsSprite = null;
             Destroy(_partsObject.gameObject);
         }
+        DestroyAllObjectsWithParts();
         if (_usePartsAudioSource) _usePartsAudioSource.Stop();
     }
 
@@ -225,6 +230,7 @@ public class RobotStatus : MonoBehaviour
             usingPartsSprite = null;
             Destroy(_partsObject.gameObject);
         }
+        DestroyAllObjectsWithParts();
         if (_usePartsAudioSource) _usePartsAudioSource.Stop();
     }
 
@@ -244,6 +250,7 @@ public class RobotStatus : MonoBehaviour
                 usingPartsSprite = null;
                 Destroy(_partsObject.gameObject);
             }
+            DestroyAllObjectsWithParts();
         }
     }
 
@@ -323,5 +330,23 @@ public class RobotStatus : MonoBehaviour
             // スプライト（静止画）を設定する
             _partsObject.sprite = performance.partsSprite;
         }
+    }
+
+    // パーツの使用終了と共に破棄されるパーツの登録
+    public void RegisterObjectAsDestroyWithParts(GameObject target)
+    {
+        _destroyWithPartsObjects.Add(target);
+    }
+    private void DestroyAllObjectsWithParts()
+    {
+        // 終了と共に削除するオブジェクトの削除
+        for (int i = 0; i < _destroyWithPartsObjects.Count; i++)
+        {
+            if (_destroyWithPartsObjects[i])
+            {
+                Destroy(_destroyWithPartsObjects[i]);
+            }
+        }
+        _destroyWithPartsObjects.Clear();
     }
 }

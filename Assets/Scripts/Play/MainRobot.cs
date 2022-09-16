@@ -181,6 +181,10 @@ public class MainRobot : MonoBehaviour
         {
             var summonned = Instantiate(summonObject, nowPosition, Quaternion.identity);
             summonned.Summon(data, _transform);
+            if (summonned.IsDestroyWithParts)
+            {
+                _status.RegisterObjectAsDestroyWithParts(summonned.gameObject);
+            }
         }
     }
     // パーツの使用が終わった際の処理
