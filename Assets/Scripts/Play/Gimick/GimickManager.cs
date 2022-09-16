@@ -7,6 +7,8 @@ public class GimickManager : SingletonMonoBehaviourInSceneBase<GimickManager>
     private List<GimickBase> gimickList = new List<GimickBase>();
     private List<GameObject> deleteObjects = new List<GameObject>();    // ステージリセット時に削除するオブジェクトのリスト
 
+    [SerializeField] private List<SoundBeep> soundBeeps = new List<SoundBeep>();
+
     // ギミックを管理リストに追加する
     public void SaveGimick(GimickBase gimick)
     {
@@ -44,5 +46,15 @@ public class GimickManager : SingletonMonoBehaviourInSceneBase<GimickManager>
     public void RegisterAsDeleteObject(GameObject target)
     {
         deleteObjects.Add(target);
+    }
+
+    // ブロック破壊の音を鳴らす
+    public void BeepSEByIndex(int index)
+    {
+        if (index < 0 || index >= gimickList.Count) {
+            Debug.LogWarning("効果音のインデックス指定が不正です。");
+            return;
+        }
+        soundBeeps[index].Beep();
     }
 }
