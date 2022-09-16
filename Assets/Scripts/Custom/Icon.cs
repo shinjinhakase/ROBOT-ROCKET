@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Icon : MonoBehaviour{
     
     public GameObject pop;
@@ -16,6 +16,9 @@ public class Icon : MonoBehaviour{
     public int tabnumber;
 
     public GameObject custom_panel;
+
+    public Text drawtext;
+    public string description;
     
     void Start(){
 
@@ -79,6 +82,12 @@ public class Icon : MonoBehaviour{
         Queue.icon_list.Add(draw_icon);
 
         Queue.nowActive=Queue.itemlist.Count-1;
+
+    }
+
+    public void DrawDescription(){
+
+        drawtext.text=description;
 
     }
 
