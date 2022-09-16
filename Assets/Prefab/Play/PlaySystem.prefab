@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4051984925432428711}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.5, z: 0}
-  m_LocalScale: {x: 35, y: 5, z: 1}
+  m_LocalPosition: {x: 5, y: -6.5, z: 0}
+  m_LocalScale: {x: 24, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5707609332570812405}
@@ -71,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1959813857
+  m_SortingLayer: -1
+  m_SortingOrder: -49
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.36078432}
   m_FlipX: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9acfc86e1c61e11458c602025988886d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5707609333356513362}
+  target: {fileID: 5707609333521278305}
 --- !u!1 &4199972038569644307
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,7 +3285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _status: {fileID: 5707609333302362210}
   _move: {fileID: 0}
-  _underline: -4
+  _underline: -3
 --- !u!114 &5707609333356513365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3678,6 +3678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robot: {fileID: 5707609333356513361}
   IsFollowRobot: 1
+  cameraUnderLimit: 0
   robotX: -5
   robotMaxY: 2.5
   robotMinY: -2.5

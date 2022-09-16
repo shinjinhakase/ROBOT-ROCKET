@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
     // カメラの追尾フラグ
     [Header("ロボット追尾設定")]
     public bool IsFollowRobot = false;
+    [Tooltip("カメラの最低位置。この位置より下にカメラが移動することはありません。")]
+    [SerializeField] private float cameraUnderLimit;
     [Tooltip("ロボットのX軸の相対座標。0の場合画面中央にロボットが映る。")]
     [SerializeField] private float robotX;
     [Tooltip("ロボットのY軸の上端の相対座標。この値を超えないようにカメラが追尾する。")]
@@ -68,6 +70,7 @@ public class CameraController : MonoBehaviour
             float robotY = robotTransform.position.y;
             if (cameraPos.y + robotMinY > robotY) cameraPos.y = robotY - robotMinY;
             else if (cameraPos.y + robotMaxY < robotY) cameraPos.y = robotY - robotMaxY;
+            if (cameraPos.y < cameraUnderLimit) cameraPos.y = cameraUnderLimit;
             _transform.position = cameraPos;
         }
     }
