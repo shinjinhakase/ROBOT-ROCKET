@@ -33,6 +33,8 @@ public class RobotStatus : MonoBehaviour
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _usePartsAudioSource;
+    [SerializeField] private AudioSource _purgePartsAudioSource;
+    private AudioClip _purgePartsSE;
     private PurgeManager _purgeManager;
 
     [SerializeField] private ParticleSystem _usePartsEffect = null;
@@ -137,6 +139,10 @@ public class RobotStatus : MonoBehaviour
             _usePartsAudioSource.clip = performance.usePartsSE;
             _usePartsAudioSource.Play();
         }
+        if (_purgePartsAudioSource != null && performance.purgePartsSE != null)
+        {
+            _purgePartsSE = performance.purgePartsSE;
+        }
     }
 
     // パーツの効果終了
@@ -168,7 +174,12 @@ public class RobotStatus : MonoBehaviour
         if (_partsObject) Destroy(_partsObject.gameObject);
         _animator.SetTrigger("EndUse");
 
-        // SEのストップ
+        // SEの処理
+        if (_purgePartsAudioSource != null && _purgePartsSE != null)
+        {
+            _purgePartsAudioSource.PlayOneShot(_purgePartsSE);
+            _purgePartsSE = null;
+        }
         if (_usePartsAudioSource) _usePartsAudioSource.Stop();
 
         DestroyAllObjectsWithParts();

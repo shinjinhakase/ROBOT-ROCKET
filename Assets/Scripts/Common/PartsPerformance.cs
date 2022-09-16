@@ -61,4 +61,6 @@ public class PartsPerformance : ScriptableObject
     
     [Tooltip("使用時の効果音。パーツを使用した際に鳴ります。")]
     public AudioClip usePartsSE;
+    [Tooltip("パーツを使用し終わり、パージする際に鳴ります。")]
+    public AudioClip purgePartsSE;
 }
