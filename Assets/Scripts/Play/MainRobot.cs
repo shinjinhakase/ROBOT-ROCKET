@@ -18,6 +18,7 @@ public class MainRobot : MonoBehaviour
     [HideInInspector] public ForceMove _move;
 
     private float _highScore = 0;   // 最高到達距離
+    [SerializeField] private float _underline;  // 超えたらゲームオーバーとなる基準高度
 
     private bool _isNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
     public bool IsNotStart { get { return _isNotStart; } private set { _isNotStart = value; } }
@@ -55,23 +56,19 @@ public class MainRobot : MonoBehaviour
             {
                 playPartsManager.IsUsingParts = false;
             }
+
+            // 高度によるゲームオーバー判定
+            if (transform.position.y <= _underline)
+            {
+                playSceneController.GameOver();
+            }
         }
         // 飛行し始め判定
-        else if (IsNotStart &&  playSceneController.scene == PlaySceneController.E_PlayScene.GamePlay && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
+        else if (IsNotStart &&  playSceneController.IsPlayingGame && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
         {
             IsNotStart = false;
             RobotStartMove();
             UsePartsByControl();
-        }
-
-        // ヒットストップデバッグ
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            PlaySceneController.Instance.RequestHitStopBySlow(0.25f, 1f);
-        }
-        else if(Input.GetKeyDown(KeyCode.S))
-        {
-            PlaySceneController.Instance.RequestHitStopByStop(1f);
         }
     }
 

@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     private Transform _transform;
     private Transform robotTransform;
 
+    private bool _initialized = false;
+
     // カメラの追尾フラグ
     [Header("ロボット追尾設定")]
     public bool IsFollowRobot = false;
@@ -37,6 +39,7 @@ public class CameraController : MonoBehaviour
         cam = GetComponent<Camera>();
         _transform = cam.transform;
         robotTransform = robot.transform;
+        _initialized = true;
     }
 
     private void LateUpdate()
@@ -70,7 +73,24 @@ public class CameraController : MonoBehaviour
     }
 
     // カメラの最初の移動モーションの準備をする
-    public void CameraReady()
+    public void CallCameraReady()
+    {
+        StartCoroutine(WaitForInitialized());
+    }
+    private IEnumerator WaitForInitialized()
+    {
+        // 自身の準備が完了するまで待機する
+        while (true)
+        {
+            if (_initialized)
+            {
+                CameraReady();
+                yield break;
+            }
+            yield return null;
+        }
+    }
+    private void CameraReady()
     {
         IsBeginning = true;
 

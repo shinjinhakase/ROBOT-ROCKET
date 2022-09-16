@@ -11,8 +11,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     public E_PlayScene scene { get; private set; } = E_PlayScene.FirstCameraMove;
     public int StageNum = -1;
 
-    // カスタムメニューを開けるかの判定
-    public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;
+    // シーン判定
+    public bool IsPlayingGame => scene == E_PlayScene.GamePlay; // ゲームプレイ中か判定
+    public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;  // カスタムメニューを開けるか判定
+    public bool IsWaitingForRobot => IsPlayingGame && !_isRobotStartMove;   // ゲーム開始後、ロボットの動き始めを待っている状態か判定
+    public bool IsRobotStartMove => IsPlayingGame && _isRobotStartMove;     // ゲーム開始後、ロボットが動き始めたか判定
+    private bool _isRobotStartMove;
 
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
@@ -68,7 +72,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         base.Awake();
 
         // カメラ移動の準備をする
-        cam.CameraReady();
+        cam.CallCameraReady();
 
         // (必要であればここで暗転の解除など)
         InitStageInfo();
@@ -93,6 +97,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (scene == E_PlayScene.StartAnimation)
         {
+            _isRobotStartMove = false;
             scene = E_PlayScene.GamePlay;
 
             // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
@@ -107,6 +112,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (scene == E_PlayScene.GamePlay)
         {
+            _isRobotStartMove = true;
             startRobotMove.Invoke();
         }
     }

@@ -70,9 +70,9 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        if (!NoMemoryMode)
+        if (!NoMemoryMode && !PlaySceneController.Instance.IsWaitingForRobot)
         {
-            // リプレイモードではない時は、取得したデータを自動で保存させてみる
+            // リプレイモードではなく、ロボットが動き始めていた時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);
         }
         IsGamePlay = false;
@@ -93,7 +93,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         var waitForSeconds = new WaitForSeconds(TransformUpdateFrame * Time.fixedDeltaTime);
         while (true)
         {
-            if(_sceneController.scene != PlaySceneController.E_PlayScene.GamePlay)
+            if (!_sceneController.IsPlayingGame)
             {
                 yield break;
             }
