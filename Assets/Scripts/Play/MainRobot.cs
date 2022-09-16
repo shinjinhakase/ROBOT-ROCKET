@@ -20,6 +20,8 @@ public class MainRobot : MonoBehaviour
     private float _highScore = 0;   // 最高到達距離
     [SerializeField] private float _underline;  // 超えたらゲームオーバーとなる基準高度
 
+    [SerializeField] private ParticleSystem _gameoverPerticle;
+
     private bool _isNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
     public bool IsNotStart { get { return _isNotStart; } private set { _isNotStart = value; } }
     private bool IsUsePartsInForce = false; // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
@@ -211,6 +213,10 @@ public class MainRobot : MonoBehaviour
         // 失敗アニメーション処理に遷移する
         _move.ZeroForce();
         _status.GameOver();
+
+        // エフェクトを表示する
+        var effect = Instantiate(_gameoverPerticle, transform.position, Quaternion.Euler(-90, 0, 0));
+        GimickManager.Instance.RegisterAsDeleteObject(effect.gameObject);
 
         // ロボットを非表示にする（パージのパーツが飛び散るアニメーションに移る）
         gameObject.SetActive(false);

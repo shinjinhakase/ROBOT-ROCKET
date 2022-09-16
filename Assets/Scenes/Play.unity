@@ -862,10 +862,6 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[2].Array.data[3].X
       value: 160000000
       objectReference: {fileID: 0}
-    - target: {fileID: 5707609332905304419, guid: c2077c0deace2334896328c501392c09, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7022958070507720176, guid: c2077c0deace2334896328c501392c09, type: 3}
       propertyPath: m_Layer
       value: 5
