@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   forceType: 1
-  m: 0.01
+  m: 0.1
   F: 8
   t: 4
   R: 0
