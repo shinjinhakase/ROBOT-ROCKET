@@ -24,17 +24,14 @@ public class StageSelectManager : MonoBehaviour
     {
         var spDataList = progressData.StageProgressDataList;
 
-        // セーブデータが存在するか
-        bool isExistData = false;
-        //if (spDataList != null) isExistData = true;
-
         for (int stageNum = 0; stageNum < stageDataBase.stageList.Count; stageNum++)
         {
             // ステージ情報作成
             Stage stage = stageDataBase.stageList[stageNum];
             stage.StageNum = stageNum;
 
-            if (isExistData) stage.ProgressData = spDataList[stageNum];
+            // セーブデータが存在する場合はDBに登録し、無い場合は埋め合わせる
+            if (stageNum < spDataList.Count) stage.ProgressData = spDataList[stageNum];
             else stage.ProgressData = new StageProgressData();
         }
     }

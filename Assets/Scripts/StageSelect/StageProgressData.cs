@@ -11,8 +11,8 @@ public class StageProgressData
 
     // ƒƒCƒ“î•ñ
     [SerializeField] private bool isClear = false;
-    [SerializeField] private float bestDistance = -1;
-    [SerializeField] private float bestTime = -1;
+    [SerializeField] private float bestDistance = 0f;
+    [SerializeField] private float bestTime = 0f;
 
     public int StageNum
     {
