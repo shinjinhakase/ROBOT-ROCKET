@@ -73,4 +73,10 @@ public class CrashableObject : GimickBase
         }
         gameObject.SetActive(false);
     }
+
+    // GimicManager‚©‚çŽw’è‚ÌŒø‰Ê‰¹‚ð–Â‚ç‚·
+    public void BeepByGimickManager(int index)
+    {
+        GimickManager.Instance.BeepSEByIndex(index);
+    }
 }
