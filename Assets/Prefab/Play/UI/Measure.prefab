@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539503134206055175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0333, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1146199475
   m_SortingLayer: 2
   m_SortingOrder: -11
-  m_Sprite: {fileID: 21300000, guid: e91326404d2ee9547870a479b4646df2, type: 3}
+  m_Sprite: {fileID: 1335439265, guid: 3c226000c0aab5e41977cffd3200d9e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,9 +133,9 @@ MonoBehaviour:
   needle: {fileID: 1539503134206055172}
   measureSprite: {fileID: 540730275430533112}
   iconBuilder: {fileID: 1539503135280816014}
-  _warningWeight: 2
-  _maxWeight: 4
-  _maxAngle: 340
+  _warningWeight: 2.9583
+  _maxWeight: 3.9444
+  _maxAngle: 355
 --- !u!1 &1539503135280816009
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,8 +257,8 @@ SpriteRenderer:
   m_SortingLayerID: 1146199475
   m_SortingLayer: 2
   m_SortingOrder: -12
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+  m_Sprite: {fileID: -50115420, guid: 3c226000c0aab5e41977cffd3200d9e8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -14,6 +14,7 @@ public class Measure : UIOpener
     [SerializeField] private float _warningWeight = 2f;
     [SerializeField] private float _maxWeight = 5f;
     [SerializeField] private float _maxAngle = 340f;
+    [SerializeField] private bool _turnRight = false;
 
     private void Awake()
     {
@@ -46,7 +47,8 @@ public class Measure : UIOpener
         float weight = PlayPartsManager.Instance.GetAllWeight() + ForceMove.RobotWeight;
         float angle = weight * _maxAngle / _maxWeight;
         if (angle > _maxAngle) angle = _maxWeight;
-        needle.rotation = Quaternion.Euler(0, 0, -angle);
+        if (_turnRight) needle.rotation = Quaternion.Euler(0, 0, -angle);
+        else needle.rotation = Quaternion.Euler(0, 0, angle);
 
         // ”‰‚ÌU“®§Œä
         measureSprite.DoShake = weight >= _warningWeight;
