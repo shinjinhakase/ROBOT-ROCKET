@@ -138,7 +138,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             if (IsNeedSetResult)
             {
                 endGameEvent.Invoke();
-                OpenCustomWhenPlayEvent.Invoke();
+                if (IsRobotStartMove) OpenCustomWhenPlayEvent.Invoke();
             }
 
             // カスタムメニューのオープン処理

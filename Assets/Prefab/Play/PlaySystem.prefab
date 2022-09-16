@@ -2134,7 +2134,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 236, y: -118}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 44, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5707609332592414544
 CanvasRenderer:
@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 685338911a042ac4c8a0891e8fc3e657, type: 3}
+  m_Sprite: {fileID: -207875418, guid: d825b22f322c5f141aa65ae6e0e36818, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2621,34 +2621,18 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 5707609332688900492}
     m_ColliderPaths:
-    - - X: 119999900
-        Y: -29999959
-      - X: 119999900
+    - - X: 0
+        Y: -40000000
+      - X: 160000000
+        Y: -40000000
+      - X: 160000000
         Y: -30000000
       - X: 0
         Y: -30000000
-      - X: 0
-        Y: -40000000
-      - X: 119999900
-        Y: -40000000
-      - X: 119999900
-        Y: -40000041
-      - X: 119999959
-        Y: -40000100
-      - X: 160000041
-        Y: -40000100
-      - X: 160000100
-        Y: -40000041
-      - X: 160000100
-        Y: -29999959
-      - X: 160000041
-        Y: -29999900
-      - X: 119999959
-        Y: -29999900
   m_CompositePaths:
     m_Paths:
-    - - {x: 15.999974, y: -4.00001}
-      - {x: 15.999974, y: -2.99999}
+    - - {x: 15.999971, y: -4}
+      - {x: 15.999971, y: -3}
       - {x: 0, y: -3.0000293}
       - {x: 0.000029300001, y: -4}
   m_VertexDistance: 0.0005
