@@ -10,6 +10,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     public ReplayData Data => _data;
     [SerializeField] private int TransformUpdateFrame = 50; // 位置情報を更新する間隔（FixedUpdate単位でのフレーム）
     private int frameCnt = -1;
+    public float TimeSec => _data.finishFrame * Time.fixedDeltaTime;
 
     private PlaySceneController _sceneController;
     [SerializeField] private MainRobot robot;
@@ -75,6 +76,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
             // リプレイモードではなく、ロボットが動き始めていた時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);
             Save();
+            PlaySceneController.Instance.SaveProgress();
         }
         IsGamePlay = false;
         NoMemoryMode = false;
