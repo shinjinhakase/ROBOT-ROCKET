@@ -14,6 +14,7 @@ public class  SingletonDontDestroy<U>
         if (null != Instance && Instance != this)
         {
             Destroy(this.gameObject);
+            return;
         }
 
         Instance = this as U;
