@@ -18,6 +18,7 @@ public class ReplayPlayer : MonoBehaviour
 
     // 準備してきたパーツのIDリストを取得する（初期重量計算用）
     public List<PartsPerformance.E_PartsID> ReadyPartsIDList => _replayData.readyPartsList.ConvertAll(data => data.id);
+    public List<PartsInfo.PartsData> ReadyPartsList => new List<PartsInfo.PartsData>(_replayData.readyPartsList);
     public List<PartsInfo.PartsData> InitialPartsDatas => _replayData.readyPartsList;
 
     // 再生用変数
