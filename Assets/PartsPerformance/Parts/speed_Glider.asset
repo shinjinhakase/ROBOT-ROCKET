@@ -19,11 +19,11 @@ MonoBehaviour:
   t: 8
   R: 2
   k: 0
-  cooltime: 0
+  cooltime: 0.1
   summonObjects: []
   partsName: "\u9AD8\u901F\u7A7A\u633A\u88C5\u5099"
   partsSprite: {fileID: -280874989, guid: 2fb082ace00339644835899667eb15bb, type: 3}
-  animatorController: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: 4039d4b48d64eba4fabdf174923ab7fb, type: 2}
   iconSprite: {fileID: 21300000, guid: 86fee5c32e11a864d8fc778f01d4ba8e, type: 3}
   description: "\u305D\u306E\u6614\u6709\u6A5F\u751F\u547D\u4F53\u304C\u7A7A\u304B\u3089\u5730\u4E0A\u3078\u5F37\u8972\u3059\u308B\u305F\u3081\u306B\u4F5C\u3063\u305F\u3068\u3055\u308C\u308B\u8B0E\u306E\u6ED1\u7A7A\u88C5\u5099\u3002\u30B9\u30D4\u30FC\u30C9\u304C\u51FA\u308B\u304C\u3001\u6ED1\u7A7A\u6027\u80FD\u306F\u305D\u3053\u305D\u3053\u3002"
-  usePartsSE: {fileID: 0}
+  usePartsSE: {fileID: 8300000, guid: 7a9e5b49243922141932700794955b84, type: 3}
