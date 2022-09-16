@@ -7,6 +7,7 @@ public class FollowIcon : MonoBehaviour
 {
     public Transform target; // 追尾対象
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private IconDirectionForce _iconDirectionForce;
 
     [SerializeField] private float Duration = 0.2f; // 時差
 
@@ -41,5 +42,12 @@ public class FollowIcon : MonoBehaviour
     public void SetSprite(Sprite sprite)
     {
         _spriteRenderer.sprite = sprite;
+    }
+
+    // スプライト変更・力の向き設定メソッド
+    public void SetSprite(Sprite sprite, PartsInfo.PartsData data)
+    {
+        SetSprite(sprite);
+        if (_iconDirectionForce != null) _iconDirectionForce.SetRotate(data);
     }
 }

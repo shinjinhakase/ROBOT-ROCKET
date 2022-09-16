@@ -12,16 +12,16 @@ public class FollowerManager : MonoBehaviour
     // 追従アイコンをID指定で初期化する（ReplayPlayer用）
     public void InitFunctionForReplayPlayer()
     {
-        InitFollowersByIDList(replayPlayer.ReadyPartsIDList);
+        InitFollowersByIDList(replayPlayer.ReadyPartsList);
     }
-    private void InitFollowersByIDList(List<PartsPerformance.E_PartsID> IDList)
+    private void InitFollowersByIDList(List<PartsInfo.PartsData> datas)
     {
         DestroyAllFollowers();
         PlayPartsManager _playPartsManager = PlayPartsManager.Instance;
-        foreach(var id in IDList)
+        foreach (var data in datas)
         {
             var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
-            follower.SetSprite(_playPartsManager.GetPerformance(id).iconSprite);
+            follower.SetSprite(_playPartsManager.GetPerformance(data.id).iconSprite, data);
             if (followers.Count == 0) follower.target = transform;
             else follower.target = followers[^1].transform;
             followers.Add(follower);
@@ -36,7 +36,7 @@ public class FollowerManager : MonoBehaviour
         foreach (var data in PartsInfo.Instance.GetPartsList())
         {
             var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
-            follower.SetSprite(_playPartsManager.GetPerformance(data.id).iconSprite);
+            follower.SetSprite(_playPartsManager.GetPerformance(data.id).iconSprite, data);
             if (followers.Count == 0) follower.target = transform;
             else follower.target = followers[^1].transform;
             followers.Add(follower);
@@ -59,7 +59,7 @@ public class FollowerManager : MonoBehaviour
     public void GetParts(PartsInfo.PartsData data)
     {
         var follower = Instantiate(followPrefab, transform.position, Quaternion.identity, transform);
-        follower.SetSprite(PlayPartsManager.Instance.GetPerformance(data.id).iconSprite);
+        follower.SetSprite(PlayPartsManager.Instance.GetPerformance(data.id).iconSprite, data);
         if (followers.Count == 0) follower.target = transform;
         else follower.target = followers[^1].transform;
         followers.Add(follower);
