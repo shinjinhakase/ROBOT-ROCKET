@@ -14,6 +14,11 @@ public class ForceMove : MonoBehaviour
     private bool IsMainRobot = false;
     public bool IsAcceptExternalForce = true;   // 外力を受け入れるかの判定（falseにするとCollisionForceから力が来なくなる）
 
+    [Header("ゴール時の速度制御設定")]
+    [SerializeField] private float goalMaxVelocty = 0f;
+    [SerializeField] private float goalReduceVelocity = 0f;
+    private IEnumerator goalDecreaseVelocityIEnumerator;
+
     [Header("テスト用パラメータ")]
     [SerializeField] private float testAngle;
     [SerializeField] private float testF;
@@ -119,6 +124,11 @@ public class ForceMove : MonoBehaviour
     // 初期状態にリセットする
     public void ResetToFirst()
     {
+        if (goalDecreaseVelocityIEnumerator != null)
+        {
+            StopCoroutine(goalDecreaseVelocityIEnumerator);
+            goalDecreaseVelocityIEnumerator = null;
+        }
         ZeroForce();
         rb.velocity = Vector2.zero;
         transform.position = firstPosition;
@@ -135,6 +145,44 @@ public class ForceMove : MonoBehaviour
                 yield break;
             }
             yield return null;
+        }
+    }
+
+    public void StartVelocityDecrease()
+    {
+        goalDecreaseVelocityIEnumerator = GoalDecreaseVelocity();
+        StartCoroutine(goalDecreaseVelocityIEnumerator);
+    }
+
+    // ゴール時に減速する処理
+    private IEnumerator GoalDecreaseVelocity()
+    {
+        // 開始地点をゴールに合わせる
+        Vector3 position = transform.position;
+        position.x = PlaySceneController.Instance.GoalXPoint;
+        transform.position = position;
+
+        // 開始時の速度を決める
+        if (rb.velocity.x >= goalMaxVelocty)
+        {
+            Vector2 velocity = rb.velocity;
+            velocity.x = goalMaxVelocty;
+            rb.velocity = velocity;
+        }
+        // 段々と減速する
+        WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+        while (true)
+        {
+            Vector2 velocity = rb.velocity;
+            if (velocity.x <= 0)
+            {
+                velocity.x = 0;
+                rb.velocity = velocity;
+                yield break;
+            }
+            velocity.x -= goalReduceVelocity;
+            rb.velocity = velocity;
+            yield return waitForFixedUpdate;
         }
     }
 }
