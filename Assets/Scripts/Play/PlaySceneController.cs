@@ -72,7 +72,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         base.Awake();
 
         // ƒJƒƒ‰ˆÚ“®‚Ì€”õ‚ð‚·‚é
-        cam.CameraReady();
+        cam.CallCameraReady();
 
         // (•K—v‚Å‚ ‚ê‚Î‚±‚±‚ÅˆÃ“]‚Ì‰ðœ‚È‚Ç)
         InitStageInfo();
