@@ -337,6 +337,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     }
     private void SaveProgress(bool isClear)
     {
+        // 掛かった時間を取得する
+        float TimeSec = ReplayInputManager.Instance.TimeSec;
+
         // セーブデータとなるクラスを取得し
         ProgressData progressData = ProgressData.Instance;
 
