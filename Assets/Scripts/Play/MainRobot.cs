@@ -57,7 +57,7 @@ public class MainRobot : MonoBehaviour
             }
         }
         // îÚçsÇµénÇﬂîªíË
-        else if (IsNotStart &&  playSceneController.scene == PlaySceneController.E_PlayScene.GamePlay && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
+        else if (IsNotStart &&  playSceneController.IsPlayingGame && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
         {
             IsNotStart = false;
             RobotStartMove();
