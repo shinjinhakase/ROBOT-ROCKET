@@ -580,6 +580,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5707609333521278304}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: SetCameraToRobot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   startGameEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2810,10 +2822,11 @@ MonoBehaviour:
   - {fileID: 558496154, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   _partsPrefab: {fileID: 7164228743143090572, guid: 4827106a5827dc645a4b22e9ff0292a4, type: 3}
-  _bombExplodeDistance: 0
   _propellerLocate: {x: 0.05, y: 0.15}
   _rocketLocate: {x: -0.05, y: -0.15}
   _gliderLocate: {x: 0.05, y: -0.3}
+  _bombExplodeDistance: 4
+  _explodesPrefab: {fileID: 5104206729679191814, guid: a3007ca07be415249ab76ad467c0afb8, type: 3}
   startUsePartsEvent:
     m_PersistentCalls:
       m_Calls:

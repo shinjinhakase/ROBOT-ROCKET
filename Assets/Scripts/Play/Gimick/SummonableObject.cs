@@ -45,6 +45,9 @@ public class SummonableObject : MonoBehaviour
 
         // 設定がされていれば、指定秒数後に自身を破棄する
         if (IsDestroyAfterSeconds) Destroy(gameObject, _destroyDuration);
+
+        // ステージリセット時の削除対象に登録する
+        GimickManager.Instance.RegisterAsDeleteObject(gameObject);
     }
     // 召喚された際に呼び出されるメソッド（初速も設定する）
     public void Summon(PartsInfo.PartsData data, Transform robotTransform, Vector2 initVelocity)
@@ -56,6 +59,9 @@ public class SummonableObject : MonoBehaviour
 
         // 設定がされていれば、指定秒数後に自身を破棄する
         if (IsDestroyAfterSeconds) Destroy(gameObject, _destroyDuration);
+
+        // ステージリセット時の削除対象に登録する
+        GimickManager.Instance.RegisterAsDeleteObject(gameObject);
     }
 
     [Serializable]
