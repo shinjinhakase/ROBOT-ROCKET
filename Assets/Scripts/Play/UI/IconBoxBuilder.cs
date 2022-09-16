@@ -26,7 +26,7 @@ public class IconBoxBuilder : MonoBehaviour
     {
         var iconBox = Instantiate(_iconBoxPrefab, transform);
         iconBox.transform.localPosition = DirectionVector * iconBoxes.Count;
-        iconBox.SetSprite(GetPerformance(data));
+        iconBox.SetSprite(GetPerformance(data), data);
         iconBoxes.Add(iconBox);
     }
 
@@ -42,7 +42,7 @@ public class IconBoxBuilder : MonoBehaviour
             if (i >= length) Destroy(iconBoxes[i].gameObject);
             else
             {
-                iconBoxes[i].SetSprite(GetPerformance(dataList[i]));
+                iconBoxes[i].SetSprite(GetPerformance(dataList[i]), dataList[i]);
             }
         }
         // êVÇµÇ≠î†Çê∂ê¨Ç∑ÇÈ

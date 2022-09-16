@@ -6,6 +6,7 @@ using UnityEngine;
 public class DropParts : GimickBase
 {
     [SerializeField] private SpriteRenderer _iconSpriteRenderer;
+    [SerializeField] private IconDirectionForce _iconDirectionForce;
 
     // 取得するパーツの情報
     [SerializeField] private PartsInfo.PartsData partsData;
@@ -14,6 +15,7 @@ public class DropParts : GimickBase
     public override void OnSceneStart()
     {
         if (_iconSpriteRenderer) StartCoroutine(SetIconSprite());
+        if (_iconDirectionForce) _iconDirectionForce.SetRotate(partsData);
     }
 
     // ギミックをリセットするメソッド
