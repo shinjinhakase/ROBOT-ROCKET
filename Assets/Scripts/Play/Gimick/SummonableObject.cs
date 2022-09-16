@@ -19,6 +19,9 @@ public class SummonableObject : MonoBehaviour
     [SerializeField] private bool IsDestroyAfterSeconds = false;
     [Tooltip("IsDestroyAfterSecondsがtrueの際の、消滅秒数設定")]
     [SerializeField] private float _destroyDuration = 0f;
+    [Tooltip("SetPositionが呼び出された際の設定初期位置")]
+    [SerializeField] private Vector3 _localPosition = Vector3.zero;
+    [SerializeField] private float _explodeDistance = 0f;
 
     [Header("Rigidbody2D関連")]
     [Tooltip("Rigidbody2Dがアタッチされていた際、召喚時に加える初速設定")]
@@ -62,6 +65,17 @@ public class SummonableObject : MonoBehaviour
 
         // ステージリセット時の削除対象に登録する
         GimickManager.Instance.RegisterAsDeleteObject(gameObject);
+    }
+
+    // 位置を設定する汎用メソッド
+    public void SetPosition(PartsInfo.PartsData _, Transform target)
+    {
+        transform.position = target.position + _localPosition;
+    }
+    // 位置を爆弾の位置に設定するメソッド
+    public void SetPositionToBombLocate(PartsInfo.PartsData data, Transform summoner)
+    {
+        transform.position = summoner.position + Quaternion.Euler(0, 0, data.angle - 180) * Vector3.right * _explodeDistance;
     }
 
     [Serializable]
