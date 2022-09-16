@@ -349,7 +349,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // 進捗を今所持しているStageインスタンスに保存
             CurrentStage.ProgressData.IsClear = isClear;
-            CurrentStage.ProgressData.BestDistance = Score;
+            if(CurrentStage.ProgressData.BestDistance < Score)
+                CurrentStage.ProgressData.BestDistance = Score;
+            if (Score >= GoalXPoint && CurrentStage.ProgressData.BestTime > TimeSec)
+                CurrentStage.ProgressData.BestTime = TimeSec;
 
             // StageDBに反映（参照型だからこの処理要らないかも？）
             StageDB.stageList[StageNum] = CurrentStage;
