@@ -16,6 +16,7 @@ public class CrashableObject : GimickBase
     [Tooltip("破壊を待つ時間に表示されるスプライト。設定されていなければ、スプライトを変更しない。")]
     [SerializeField] private Sprite _destroyAnimationSprite;
     [SerializeField] private UnityEvent _crashEvent = new UnityEvent();
+    [SerializeField] private UnityEvent _resetEvent = new UnityEvent();
 
     // パージスプライトの設定
     [Header("パージ設定")]
@@ -32,6 +33,7 @@ public class CrashableObject : GimickBase
         gameObject.SetActive(true);
         _collider.enabled = true;
         IsAlive = true;
+        _resetEvent.Invoke();
     }
 
     // 何かと衝突した際、呼ばれるメソッド
@@ -69,6 +71,6 @@ public class CrashableObject : GimickBase
         {
             _purgeManager.AddPartsBySprite(_purgeSprites);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
