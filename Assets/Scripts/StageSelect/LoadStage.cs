@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 using UnityEngine.UI;
 
 // NextButtonにアタッチ
@@ -33,12 +30,10 @@ public class LoadStage : MonoBehaviour
     public void OnLoadStage()
     {
         Debug.Log($"Push loadStage : stageNum -> {stageNum}");
-        Debug.Log("OnLoadStage : Debug用処理");
 
         string sceneName = scenePrefix + stageNum;
         StageSelectGlobal.Instance.Stage = stage;
         StageSelectGlobal.Instance.StageDataBase = stageDataBase;
-        sceneName = "Play";
         SceneManager.LoadScene(sceneName);
     }
 }
