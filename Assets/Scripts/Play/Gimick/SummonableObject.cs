@@ -72,10 +72,25 @@ public class SummonableObject : MonoBehaviour
     {
         transform.position = target.position + _localPosition;
     }
+    // 親を召喚者に設定するめそっど
+    public void SetParentToSummoner(PartsInfo.PartsData _, Transform summoner)
+    {
+        transform.SetParent(summoner);
+    }
     // 位置を爆弾の位置に設定するメソッド
     public void SetPositionToBombLocate(PartsInfo.PartsData data, Transform summoner)
     {
         transform.position = summoner.position + Quaternion.Euler(0, 0, data.angle - 180) * Vector3.right * _explodeDistance;
+    }
+
+    // パーツの使用終了時間を破棄時間に設定する
+    public void SetDestroyTimeToPartsDestroy(PartsInfo.PartsData data, Transform summoner)
+    {
+        if (data == null) return;
+        var performance = PlayPartsManager.Instance.GetPerformance(data.id);
+        if (performance.forceType == PartsPerformance.E_ForceType.Bomb) Destroy(gameObject);
+        else if (performance.forceType == PartsPerformance.E_ForceType.NoForce) Destroy(gameObject);
+        else Destroy(gameObject, performance.t);
     }
 
     [Serializable]

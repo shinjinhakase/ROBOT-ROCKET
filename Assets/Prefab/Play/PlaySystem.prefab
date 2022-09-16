@@ -5348,6 +5348,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2646392053650725903, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646392053650725903, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1146199475
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646392053650725903, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2830880735061789449, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2830880735061789449, guid: a788f306020840147b042e3fa37baee5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3393492053265437073, guid: a788f306020840147b042e3fa37baee5, type: 3}
       propertyPath: m_Layer
       value: 5
