@@ -61,7 +61,7 @@ public class StageNumBoard : NumbersManager
             PlaySceneController _playSceneController = PlaySceneController.Instance;
             if(_playSceneController)
             {
-                UpdateNum(_playSceneController.StageNum);
+                UpdateNum(_playSceneController.StageNum + 1);
                 yield break;
             }
             yield return null;
