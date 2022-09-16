@@ -55,6 +55,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent gameClearEvent = new UnityEvent();
     [Tooltip("カスタムメニューを出す際に呼び出されるメソッド")]
     [SerializeField] private UnityEvent OpenCustomMenuEvent = new UnityEvent();
+    [Tooltip("ステージがリセットされ、最初に戻る際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent RetryEvent = new UnityEvent();
     [Tooltip("現在のリプレイを確認する処理に以降した際に、ステージリセット直前に呼び出される処理")]
     [SerializeField] private UnityEvent CheckReplayEvent = new UnityEvent();
 
@@ -100,7 +102,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             _isRobotStartMove = false;
             scene = E_PlayScene.GamePlay;
 
-            // TODO：ゲーム開始処理（シャドウに開始を伝えるなどの色々な処理）
+            // ゲーム開始処理
             robot.GameStart();
 
             // 開始時のイベントを呼び出す
@@ -122,23 +124,17 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     {
         if (IsOpenableCustomMenu)
         {
-            bool IsNeedSetResult = false;
-            if (scene == E_PlayScene.GamePlay)
-            {
-                IsNeedSetResult = true;
-            }
+            // ゲームのプレイ中か判定
+            bool IsNeedSetResult = scene == E_PlayScene.GamePlay;
             scene = E_PlayScene.CustomMenu;
 
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
-
             if (IsNeedSetResult) endGameEvent.Invoke();
 
-            // パーツの状態をカスタム時に戻す
-            PartsInfo.Instance.Reset();
-
             // カスタムメニューのオープン処理
+            PartsInfo.Instance.Reset(); // パーツの状態をカスタム時に戻す
             if (IsNeedSetResult && !robot.IsNotStart) {
                 CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
             }
@@ -155,14 +151,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (scene == E_PlayScene.CustomMenu) 
         {
             scene = E_PlayScene.FirstCameraMove;
-
-            // ステージをリセットし、最初からやり直す。
-            ResetStage();
-
-            // TODO：カメラの調整などの処理
-            cam.IsFollowRobot = true;
-
-            endFirstCameraMove();
+            RetryReady();
         }
     }
     // ゲームクリア処理を行う
@@ -173,10 +162,9 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.GameEnd;
 
+            // カメラの追従を止め、ロボットのクリア処理を行う
             cam.IsFollowRobot = false;
             robot.GameClear();
-
-            SaveProgress(true);
 
             endGameEvent.Invoke();
 
@@ -195,8 +183,6 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             cam.IsFollowRobot = false;
             robot.GameOver();
 
-            SaveProgress(false);
-
             endGameEvent.Invoke();
             
             // ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
@@ -214,31 +200,46 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // ロボットをリプレイモードに設定する
             CheckReplayEvent.Invoke();
             robot.SetReplayMode();
-
-            // ステージをリセットし、最初からやり直す。
-            ResetStage();
-
-            // TODO：カメラの調整などの処理
-            // cam.IsFollowRobot = true;
-
-            Invoke("endFirstCameraMove", 0.1f);
-            CallMethodAfterDuration(() => cam.IsFollowRobot = true, 0.1f);
+            RetryReady();
         }
+    }
+    // カスタム画面を経由せずにリトライする処理
+    public void Retry()
+    {
+        if(scene == E_PlayScene.GameEnd)
+        {
+            scene = E_PlayScene.FirstCameraMove;
+            RetryReady();
+        }
+    }
+
+    // リトライの処理を行う
+    private void RetryReady()
+    {
+        // ステージをリセットし、最初からやり直す
+        ResetStage();
+        RetryEvent.Invoke();
+
+        // 処理時間を待ってから次の処理を呼び出す
+        Action startNextTry = () =>
+        {
+            cam.IsFollowRobot = true;
+            endFirstCameraMove();
+        };
+        CallMethodAfterDuration(startNextTry, 0.1f);
     }
     // リセットの処理を行う
     [ContextMenu("Debug/ResetStage")]
-    public void ResetStage()
+    private void ResetStage()
     {
         // ヒットストップ処理を停止し、時間の流れを戻す
         StopHitStopIfExists(true);
 
-        // 使用パーツ状況とメインロボット状況をリセット
+        // 使用パーツ状況とメインロボット状況をリセット（順番に実行する必要あり）
         PlayPartsManager.Instance.ResetPartsStatus();
         robot.ResetToStart();
-
-        // TODO：シャドウの初期化処理
-        // TODO：ステージの復元処理（稼働オブジェクトがあるなら）
     }
+
 
 
     // 一時停止する形でヒットストップを実装する
@@ -295,6 +296,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         action();
         yield break;
     }
+
     // ステージ情報を受け取るメソッド
     private void InitStageInfo()
     {
@@ -315,6 +317,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         }
     }
     // ステージ進捗を保存するメソッド
+    public void SaveProgress()
+    {
+        SaveProgress(Score >= GoalXPoint);
+    }
     private void SaveProgress(bool isClear)
     {
         // セーブデータとなるクラスを取得し

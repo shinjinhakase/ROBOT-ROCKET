@@ -74,6 +74,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         {
             // リプレイモードではなく、ロボットが動き始めていた時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);
+            Save();
         }
         IsGamePlay = false;
         NoMemoryMode = false;
@@ -82,6 +83,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     [ContextMenu("Debug/Save")]
     public void Save()
     {
+        // ロボットが動き始めていないならデータを保存しない
         ReplayDatas datas = ReplayDatas.Instance;
         datas.RegisterData(_data);
         datas.Save();
