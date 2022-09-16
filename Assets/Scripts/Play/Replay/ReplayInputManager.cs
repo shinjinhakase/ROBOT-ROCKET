@@ -108,6 +108,6 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     public string GetTweetText()
     {
         float finishTime = _data.finishFrame * Time.fixedDeltaTime;
-        return "ステージ" + _data.StageNum + 1 + "にて、" + _data.readyPartsList.Count + "個のパーツを用いて" + finishTime + "秒で" + _data.score + "mまで飛べました！\n";
+        return "ステージ" + (_data.StageNum + 1) + "にて、" + _data.readyPartsList.Count + "個のパーツを用いて" + finishTime + "秒で" + _data.score + "mまで飛べました！\n";
     }
 }
