@@ -154,6 +154,20 @@ public class ReplayPlayer : MonoBehaviour
         _isPlaying = false;
     }
 
+    // 終わった際の処理を判断して呼ぶ
+    public void CallFinishForMainRobot()
+    {
+        var _playSceneController = PlaySceneController.Instance;
+        if (_replayData.score >= _playSceneController.GoalXPoint)
+        {
+            _playSceneController.GameClear();
+        }
+        else
+        {
+            _playSceneController.GameOver();
+        }
+    }
+
     // 更新の有無を判定する
     private void UpdateCheckPerFrame(out bool IsStartUsing, out bool IsEndUsing, out bool IsTransUpdate,
         out List<PartsInfo.PartsData> getPartsData, out List<ReplayData.ForceData> addForceList)
