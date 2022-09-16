@@ -18,8 +18,6 @@ public class  SingletonDontDestroy<U>
 
         Instance = this as U;
 
-        base.Awake();
-
         DontDestroyOnLoad(this);
     }
 }
