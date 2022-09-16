@@ -20,7 +20,8 @@ MonoBehaviour:
   R: 0
   k: 0
   cooltime: 0.1
-  summonObjects: []
+  summonObjects:
+  - {fileID: 2740784457445904070, guid: 5c18f763d53943c4195bbd68566b8321, type: 3}
   partsName: "\u9759\u6B62\u8ECC\u9053\u8CA8\u7269\u8F38\u9001\u7528\u30ED\u30B1\u30C3\u30C8"
   partsSprite: {fileID: -1004536883, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
   animatorController: {fileID: 0}

@@ -17,7 +17,7 @@ MonoBehaviour:
   m: 0.1
   F: 70
   t: 10
-  R: 5
+  R: 1
   k: 0
   cooltime: 0.1
   summonObjects: []
