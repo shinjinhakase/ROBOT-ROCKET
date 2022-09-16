@@ -57,8 +57,12 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [SerializeField] private UnityEvent OpenCustomMenuEvent = new UnityEvent();
     [Tooltip("ステージがリセットされ、最初に戻る際に呼び出されるメソッド")]
     [SerializeField] private UnityEvent RetryEvent = new UnityEvent();
+    [Tooltip("リプレイではなく、普通にリトライする際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent NoReplayRetryEvent = new UnityEvent();
     [Tooltip("現在のリプレイを確認する処理に以降した際に、ステージリセット直前に呼び出される処理")]
     [SerializeField] private UnityEvent CheckReplayEvent = new UnityEvent();
+    [Tooltip("プレイ中にカスタム画面を開いた際に呼び出されるメソッド")]
+    [SerializeField] private UnityEvent OpenCustomWhenPlayEvent = new UnityEvent();
 
     private IEnumerator hitStopCoroutine;
 
@@ -131,7 +135,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
-            if (IsNeedSetResult) endGameEvent.Invoke();
+            if (IsNeedSetResult)
+            {
+                endGameEvent.Invoke();
+                OpenCustomWhenPlayEvent.Invoke();
+            }
 
             // カスタムメニューのオープン処理
             PartsInfo.Instance.Reset(); // パーツの状態をカスタム時に戻す
@@ -151,6 +159,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (scene == E_PlayScene.CustomMenu) 
         {
             scene = E_PlayScene.FirstCameraMove;
+            NoReplayRetryEvent.Invoke();
             RetryReady();
         }
     }
@@ -209,6 +218,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if(scene == E_PlayScene.GameEnd)
         {
             scene = E_PlayScene.FirstCameraMove;
+            NoReplayRetryEvent.Invoke();
             RetryReady();
         }
     }
