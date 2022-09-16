@@ -370,4 +370,13 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         GameEnd,            // ゲーム終了
         CustomMenu          // カスタムメニューを開いている
     }
+
+    // ヒットストップの種類の列挙型
+    public enum E_HitStopType
+    {
+        None,
+        Slow,
+        Stop
+    }
+
 }

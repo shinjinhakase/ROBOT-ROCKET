@@ -15,6 +15,9 @@ public class CrashableObject : GimickBase
     [SerializeField] private float _destroyDuration = 0.1f;
     [Tooltip("破壊を待つ時間に表示されるスプライト。設定されていなければ、スプライトを変更しない。")]
     [SerializeField] private Sprite _destroyAnimationSprite;
+    [SerializeField] private PlaySceneController.E_HitStopType _hitEffectType = PlaySceneController.E_HitStopType.None;
+    [SerializeField] private float _hitEffectTimeScale;
+    [SerializeField] private float _hitEffectTime;
     [SerializeField] private UnityEvent _crashEvent = new UnityEvent();
     [SerializeField] private UnityEvent _resetEvent = new UnityEvent();
 
@@ -78,5 +81,18 @@ public class CrashableObject : GimickBase
     public void BeepByGimickManager(int index)
     {
         GimickManager.Instance.BeepSEByIndex(index);
+    }
+
+    // 指定された設定でヒットストップを準備する
+    public void RequestHitStop()
+    {
+        if (_hitEffectType == PlaySceneController.E_HitStopType.Slow)
+        {
+            PlaySceneController.Instance.RequestHitStopBySlow(_hitEffectTimeScale, _hitEffectTime);
+        }
+        else if (_hitEffectType == PlaySceneController.E_HitStopType.Stop)
+        {
+            PlaySceneController.Instance.RequestHitStopByStop(_hitEffectTime);
+        }
     }
 }
