@@ -250,6 +250,11 @@ public class MainRobot : MonoBehaviour
     {
         if (!_player.IsPlaying && _status.IsFlying && other.CompareTag(GameOverColliderTag))
         {
+            if (other.TryGetComponent(out GameOverSE gameoverSE))
+            {
+                // ゲームオーバー用のSEが設定されているなら鳴らす。
+                gameoverSE.Beep();
+            }
             PlaySceneController.Instance.GameOver();
         }
     }
