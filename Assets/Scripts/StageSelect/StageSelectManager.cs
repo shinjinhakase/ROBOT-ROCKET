@@ -43,8 +43,7 @@ public class StageSelectManager : MonoBehaviour
             Stage stage = stageDataBase.stageList[stageNum];
 
             // ステージ選択ボタンをプレハブから作成
-            GameObject numberSelectButtonObj = Instantiate(numberSelectButtonBase);
-            numberSelectButtonObj.transform.SetParent(scrollViewContent.transform);
+            GameObject numberSelectButtonObj = Instantiate(numberSelectButtonBase, scrollViewContent.transform);
 
             // ボタン初期化
             NumberSelectButton numberSelectButton
