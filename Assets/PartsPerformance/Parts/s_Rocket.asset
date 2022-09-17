@@ -27,3 +27,4 @@ MonoBehaviour:
   iconSprite: {fileID: -968913385, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
   description: "\u7C21\u5358\u306A\u56FA\u4F53\u30ED\u30B1\u30C3\u30C8\u3002\u3082\u306E\u3059\u3054\u304F\u5F31\u3044\u304C\u8EFD\u3044\u3057\u624B\u8EFD\u306B\u88C5\u5099\u51FA\u6765\u308B\u3002"
   usePartsSE: {fileID: 8300000, guid: 4a09ebc75b40fc246a318b9549d0ecf4, type: 3}
+  purgePartsSE: {fileID: 8300000, guid: e5dd9e42cb3aca04c9bfa95fb4f59824, type: 3}
