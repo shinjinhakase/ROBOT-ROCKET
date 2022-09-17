@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RobotAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 81f87fda08331ad488b79b6025d0c18c, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -890733346, guid: 9b7ec72177be13c4cb37de6402ecd6e4, type: 3}
+  - {fileID: 1172219157, guid: 9b7ec72177be13c4cb37de6402ecd6e4, type: 3}
+  - {fileID: 1674591239, guid: 9b7ec72177be13c4cb37de6402ecd6e4, type: 3}
+  - {fileID: 1336057433, guid: 9b7ec72177be13c4cb37de6402ecd6e4, type: 3}
+  - {fileID: 478330751, guid: 9b7ec72177be13c4cb37de6402ecd6e4, type: 3}
+  - {fileID: -971223992, guid: e6605f168cb68c14eab731738959129b, type: 3}
+  - {fileID: 1929870398, guid: e6605f168cb68c14eab731738959129b, type: 3}
+  - {fileID: 1362680801, guid: e6605f168cb68c14eab731738959129b, type: 3}
+  - {fileID: 1639479450, guid: e6605f168cb68c14eab731738959129b, type: 3}
+  - {fileID: -50928355, guid: f84e773750117e343a6ac8379d203d00, type: 3}
+  - {fileID: -886310107, guid: f84e773750117e343a6ac8379d203d00, type: 3}
+  - {fileID: -828671366, guid: f84e773750117e343a6ac8379d203d00, type: 3}
+  - {fileID: -1298991852, guid: eaa86fd7ac0df2d4a94df371ae3dfd82, type: 3}
+  - {fileID: 1992117339, guid: eaa86fd7ac0df2d4a94df371ae3dfd82, type: 3}
+  - {fileID: -712282752, guid: eaa86fd7ac0df2d4a94df371ae3dfd82, type: 3}
+  - {fileID: -131620453, guid: 39c065ac55c36494987f668e8bc3f5c5, type: 3}
+  - {fileID: -1759852792, guid: 39c065ac55c36494987f668e8bc3f5c5, type: 3}
+  - {fileID: 760734433, guid: 39c065ac55c36494987f668e8bc3f5c5, type: 3}
+  - {fileID: 392172748, guid: 39c065ac55c36494987f668e8bc3f5c5, type: 3}
+  - {fileID: 2003540331, guid: b62c7e5ec12d03b4e99d7f86fa7c92e4, type: 3}
+  - {fileID: 322426243, guid: b62c7e5ec12d03b4e99d7f86fa7c92e4, type: 3}
+  - {fileID: 1486235891, guid: b62c7e5ec12d03b4e99d7f86fa7c92e4, type: 3}
+  - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1875956871, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1176732188, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 558496154, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: 1888264551, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
+  - {fileID: -1429140428, guid: ebd8c0ef5d6c90842a1c9946faeae6a5, type: 3}
+  - {fileID: 97418055, guid: ebd8c0ef5d6c90842a1c9946faeae6a5, type: 3}
+  - {fileID: -529667530, guid: ebd8c0ef5d6c90842a1c9946faeae6a5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - spriteSheet12_RobotClear_4
+  - spriteSheet12_RobotClear_1
+  - spriteSheet12_RobotClear_0
+  - spriteSheet12_RobotClear_3
+  - spriteSheet12_RobotClear_2
+  - spriteSheet4_RobotFall_0
+  - spriteSheet4_RobotFall_1
+  - spriteSheet4_RobotFall_2
+  - spriteSheet4_RobotFall_3
+  - RobotSprite_wait_2
+  - RobotSprite_wait_1
+  - RobotSprite_wait_0
+  - spriteSheet9_RobotAttitudeControl_1
+  - spriteSheet9_RobotAttitudeControl_0
+  - spriteSheet9_RobotAttitudeControl_2
+  - spriteSheet13_RobotUseGlider_3
+  - spriteSheet13_RobotUseGlider_2
+  - spriteSheet13_RobotUseGlider_1
+  - spriteSheet13_RobotUseGlider_0
+  - spriteSheet8_RobotPanic_2
+  - spriteSheet8_RobotPanic_0
+  - spriteSheet8_RobotPanic_1
+  - RobotDead_rightLeg
+  - RobotDead_body
+  - RobotDead_leftArm
+  - RobotDead_rightArm
+  - RobotDead_head
+  - RobotDead_leftLeg
+  - spriteSheet6_RobotUsePropeller_2
+  - spriteSheet6_RobotUsePropeller_1
+  - spriteSheet6_RobotUsePropeller_0
+  m_RenderDataMap: {}
+  m_Tag: RobotAtlas
+  m_IsVariant: 0

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ItemAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 02b7cc50c38a5b34fbdbe67bc19001ab, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 86fee5c32e11a864d8fc778f01d4ba8e, type: 3}
+  - {fileID: -399489225, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: 1529232219, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: -551730975, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: 1456174448, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: 1349899044, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: -1554782895, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  - {fileID: 2121272766, guid: 2fb082ace00339644835899667eb15bb, type: 3}
+  - {fileID: -280874989, guid: 2fb082ace00339644835899667eb15bb, type: 3}
+  - {fileID: 664073629, guid: 2fb082ace00339644835899667eb15bb, type: 3}
+  - {fileID: -81976223, guid: 2fb082ace00339644835899667eb15bb, type: 3}
+  - {fileID: -968913385, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: 1884534875, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: -687874192, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: -1440641971, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: 1253854705, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: -1235522917, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  - {fileID: 1266385712, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  - {fileID: -1837160464, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  - {fileID: 882917364, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  - {fileID: -1004536883, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Glider
+  - spriteSheet10_PropellerUse_4
+  - spriteSheet10_PropellerUse_5
+  - spriteSheet10_PropellerUse_2
+  - spriteSheet10_PropellerUse_3
+  - spriteSheet10_PropellerUse_0
+  - spriteSheet10_PropellerUse_1
+  - spriteSheet14_GliderUse_2
+  - spriteSheet14_GliderUse_3
+  - spriteSheet14_GliderUse_0
+  - spriteSheet14_GliderUse_1
+  - Icons20_4
+  - Icons20_5
+  - Icons20_0
+  - Icons20_1
+  - Icons20_2
+  - Icons20_3
+  - Rockets_3
+  - Rockets_2
+  - Rockets_1
+  - Rockets_0
+  m_RenderDataMap: {}
+  m_Tag: ItemAtlas
+  m_IsVariant: 0
