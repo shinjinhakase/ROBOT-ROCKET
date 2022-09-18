@@ -25,7 +25,7 @@ public class MainRobot : MonoBehaviour
 
     // シーン判定
     private bool IsWaitForControl => playSceneController ? playSceneController.IsWaitingForRobot && !playSceneController.IsReplayMode : false;
-    private bool IsControlMode => playSceneController ? playSceneController.IsRobotStartMove && !playSceneController.IsReplayMode : false;
+    private bool IsControlMode => playSceneController ? playSceneController.IsRobotStartMove && playSceneController.IsPlayingGame && !playSceneController.IsReplayMode : false;
     private bool IsReplayMode => playSceneController ? playSceneController.IsReplayMode : throw new NullReferenceException("PlaySceneControllerのAwake処理前にInstanceを参照しました");
 
     private void Awake()
@@ -222,7 +222,7 @@ public class MainRobot : MonoBehaviour
     public void OpenCustomMenu()
     {
         // 飛行中に呼び出されたなら、ゲームオーバー時の爆破処理を呼ぶ
-        if (playSceneController ? playSceneController.IsRobotStartMove : false)
+        if (playSceneController ? playSceneController.IsRobotStartMove && _status.IsFlying : false)
         {
             GameOver();
         }

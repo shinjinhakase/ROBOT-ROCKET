@@ -66,7 +66,8 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        if (!NoMemoryMode && !PlaySceneController.Instance.IsWaitingForRobot)
+        PlaySceneController _playSceneController = PlaySceneController.Instance;
+        if (_playSceneController.IsRobotStartMove && !_playSceneController.IsReplayMode)
         {
             // リプレイモードではなく、ロボットが動き始めていた時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);

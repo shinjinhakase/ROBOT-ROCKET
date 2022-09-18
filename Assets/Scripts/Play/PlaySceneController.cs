@@ -15,7 +15,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     public bool IsPlayingGame => scene == E_PlayScene.GamePlay; // ゲームプレイ中か判定
     public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;  // カスタムメニューを開けるか判定
     public bool IsWaitingForRobot => IsPlayingGame && !_isRobotStartMove;   // ゲーム開始後、ロボットの動き始めを待っている状態か判定
-    public bool IsRobotStartMove => IsPlayingGame && _isRobotStartMove;     // ゲーム開始後、ロボットが動き始めたか判定
+    public bool IsRobotStartMove => _isRobotStartMove;          // ゲーム開始後、ロボットが動き始めたか判定
     private bool _isRobotStartMove;
     public bool IsReplayMode => _isReplayMode;  // リプレイ再生モードか判定
     private bool _isReplayMode;
@@ -142,7 +142,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             // ゲームのプレイ中か判定
             bool IsPlayingGame = this.IsPlayingGame;
-            bool IsRobotStartMove = this.IsRobotStartMove;
+            bool IsRobotStartMove = this.IsRobotStartMove && IsPlayingGame;
             scene = E_PlayScene.CustomMenu;
 
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
