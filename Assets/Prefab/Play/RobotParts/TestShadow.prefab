@@ -225,6 +225,7 @@ MonoBehaviour:
   bodyCollider: {fileID: 2680677857970551468}
   _animator: {fileID: 6759603554914344141}
   _usePartsAudioSource: {fileID: 0}
+  _purgePartsAudioSource: {fileID: 0}
   _usePartsEffect: {fileID: 0}
   GameOverRobotPurgeData:
   - {fileID: -432742973, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
@@ -234,13 +235,26 @@ MonoBehaviour:
   - {fileID: 1888264551, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   - {fileID: -781544064, guid: 32f0d08ff5a71cd46ab4db1d35fa5506, type: 3}
   _partsPrefab: {fileID: 7164228743143090572, guid: 31762018a1b8af841b5d730ed224b08f, type: 3}
-  _bombExplodeDistance: 0
   _propellerLocate: {x: 0.05, y: 0.15}
   _rocketLocate: {x: -0.05, y: -0.15}
   _gliderLocate: {x: 0.05, y: -0.3}
+  _bombExplodeDistance: 0
+  _explodesPrefab: {fileID: 0}
   startUsePartsEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2686121090419367529}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: UseParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   endUsePartsEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -355,7 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forces: []
   IsAcceptExternalForce: 0
-  customCraneVelocity: 10
+  goalMaxVelocty: 0
+  goalReduceVelocity: 0
   testAngle: 0
   testF: 0
   testT: 0
@@ -411,18 +426,6 @@ MonoBehaviour:
       - m_Target: {fileID: 6735901713704480786}
         m_TargetAssemblyTypeName: ShadowRobot, Assembly-CSharp
         m_MethodName: endUseParts
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2686121090419367529}
-        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
-        m_MethodName: UseParts
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
