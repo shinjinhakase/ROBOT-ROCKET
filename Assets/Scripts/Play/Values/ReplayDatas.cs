@@ -11,7 +11,7 @@ public class ReplayDatas : SavableSingletonBase<ReplayDatas>
     public List<ReplayData> datas = new List<ReplayData>();
     public List<ReplayData> GetDatas() => datas;
     public int Length => datas.Count;
-    public ReplayData GetData(int index) => datas[index];
+    public ReplayData GetData(int index) => new ReplayData(datas[index]);
 
     // リプレイデータを追加する
     public void RegisterData(ReplayData data)
@@ -31,6 +31,7 @@ public class ReplayDatas : SavableSingletonBase<ReplayDatas>
     public ReplayData GetHighScoreReplay(int StageNum)
     {
         var dataList = GetStageReplay(StageNum);
+        if (!(dataList?.Count > 0)) return null;
         ReplayData highscore = dataList[0];
         for(int i = 1; i < dataList.Count; i++)
         {

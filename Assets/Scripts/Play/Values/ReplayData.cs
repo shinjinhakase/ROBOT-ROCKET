@@ -124,7 +124,7 @@ public class ReplayData
 
     // ロボットの位置情報を格納するクラス
     [Serializable]
-    public class LocateData
+    public struct LocateData
     {
         public int frame;   // 経過フレーム数
         public Vector2 position;    // 座標
@@ -138,7 +138,7 @@ public class ReplayData
     }
     // 加わった力を記録するクラス
     [Serializable]
-    public class ForceData
+    public struct ForceData
     {
         public int frame;   // 経過フレーム数
         public PartsPerformance.E_ForceType forceType;
@@ -184,7 +184,7 @@ public class ReplayData
     }
     // 獲得したパーツデータを格納するクラス
     [Serializable]
-    public class GetPartsData
+    public struct GetPartsData
     {
         public int frame;
         public PartsPerformance.E_PartsID id;

@@ -15,8 +15,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     public bool IsPlayingGame => scene == E_PlayScene.GamePlay; // ゲームプレイ中か判定
     public bool IsOpenableCustomMenu => scene == E_PlayScene.GamePlay || scene == E_PlayScene.GameEnd;  // カスタムメニューを開けるか判定
     public bool IsWaitingForRobot => IsPlayingGame && !_isRobotStartMove;   // ゲーム開始後、ロボットの動き始めを待っている状態か判定
-    public bool IsRobotStartMove => IsPlayingGame && _isRobotStartMove;     // ゲーム開始後、ロボットが動き始めたか判定
+    public bool IsRobotStartMove => _isRobotStartMove;          // ゲーム開始後、ロボットが動き始めたか判定
     private bool _isRobotStartMove;
+    public bool IsReplayMode => _isReplayMode;  // リプレイ再生モードか判定
+    private bool _isReplayMode;
 
     [SerializeField] private CameraController cam;
     [SerializeField] private MainRobot robot;
@@ -99,6 +101,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // 開始アニメーション処理を呼び出す
             startAnimationEvent.Invoke();
+
+            Debug.Log("処理遷移：スタートアニメーション開始");
         }
     }
     // ゲームが開始した際に呼び出されるメソッド
@@ -115,6 +119,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // 開始時のイベントを呼び出す
             startGameEvent.Invoke();
+
+            Debug.Log("処理遷移：ゲーム開始");
         }
     }
     // ロボットが動き始めた際に呼び出されるメソッド
@@ -124,6 +130,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             _isRobotStartMove = true;
             startRobotMove.Invoke();
+
+            Debug.Log("処理遷移：ロボット移動開始");
         }
     }
     // カスタムメニューを開く
@@ -133,13 +141,14 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         if (IsOpenableCustomMenu)
         {
             // ゲームのプレイ中か判定
-            bool IsNeedSetResult = scene == E_PlayScene.GamePlay;
+            bool IsPlayingGame = this.IsPlayingGame;
+            bool IsRobotStartMove = this.IsRobotStartMove && IsPlayingGame;
             scene = E_PlayScene.CustomMenu;
 
             // 飛行中なら、ロボットを連れていってカスタムメニューを開く処理に移る
             cam.IsFollowRobot = false;
             robot.OpenCustomMenu();
-            if (IsNeedSetResult)
+            if (IsPlayingGame)
             {
                 endGameEvent.Invoke();
                 if (IsRobotStartMove) OpenCustomWhenPlayEvent.Invoke();
@@ -147,13 +156,15 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // カスタムメニューのオープン処理
             PartsInfo.Instance.Reset(); // パーツの状態をカスタム時に戻す
-            if (IsNeedSetResult && !robot.IsNotStart) {
+            if (IsRobotStartMove) {
                 CallMethodAfterDuration(OpenCustomMenuEvent.Invoke, OpenCustomWhenPlayDuration);
             }
             else
             {
                 OpenCustomMenuEvent.Invoke();
             }
+
+            Debug.Log("処理遷移：カスタムメニューを開く");
         }
     }
     // カスタムメニューを閉じたときの処理
@@ -164,6 +175,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.FirstCameraMove;
             NoReplayRetryEvent.Invoke();
+
+            Debug.Log("処理遷移：カスタムメニューを閉じた");
+
+            _isReplayMode = false;
             RetryReady();
         }
     }
@@ -182,6 +197,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             endGameEvent.Invoke();
 
             gameClearEvent.Invoke();
+
+            Debug.Log("処理遷移：ゲームクリア");
         }
     }
     // ゲームオーバー処理を行う
@@ -200,6 +217,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
             
             // ロボットパージアニメーション待機後に、結果表示をするなどの処理を呼ぶ
             gameOverEvent.Invoke();
+
+            Debug.Log("処理遷移：ゲームオーバー");
         }
     }
     // 現在のプレイをリプレイで確認する
@@ -212,7 +231,11 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
 
             // ロボットをリプレイモードに設定する
             CheckReplayEvent.Invoke();
-            robot.SetReplayMode();
+            robot.SetReplayData();
+
+            Debug.Log("処理遷移：リプレイ確認");
+
+            _isReplayMode = true;
             RetryReady();
         }
     }
@@ -223,6 +246,10 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         {
             scene = E_PlayScene.FirstCameraMove;
             NoReplayRetryEvent.Invoke();
+
+            Debug.Log("処理遷移：そのままリトライ");
+
+            _isReplayMode = false;
             RetryReady();
         }
     }
@@ -233,6 +260,8 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
         // ステージをリセットし、最初からやり直す
         ResetStage();
         RetryEvent.Invoke();
+
+        Debug.Log("処理遷移：リトライ準備処理");
 
         // 処理時間を待ってから次の処理を呼び出す
         Action startNextTry = () =>

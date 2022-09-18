@@ -11,6 +11,7 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
 
     // シーン上にあるシャドウロボットオブジェクトのリスト
     private bool IsStart = false;
+    private List<ReplayData> _useReplayDatas = new List<ReplayData>();
     private List<ShadowRobot> shadows = new List<ShadowRobot>();
 
 
@@ -20,8 +21,15 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
     {
         if (IsStart) return;
 
+        // リプレイモードでは無いとき、シャドウに用いるリプレイデータを更新する
+        if (!PlaySceneController.Instance.IsReplayMode)
+        {
+            // このステージのリプレイデータを全てシャドウにする
+            _useReplayDatas = new List<ReplayData>(StageReplayDatas);
+        }
+
         // このステージのリプレイデータを全てシャドウにする
-        foreach (var replayData in StageReplayDatas)
+        foreach (var replayData in _useReplayDatas)
         {
             var shadow = Instantiate(shadowPrefab, firstPosition, Quaternion.identity);
             shadow.LoadReplayData(replayData);
