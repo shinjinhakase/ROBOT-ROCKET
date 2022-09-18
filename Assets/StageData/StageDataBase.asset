@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34405acf7054dd644a5912ada6bbf95c, type: 3}
+  m_Name: StageDataBase
+  m_EditorClassIdentifier: 
+  stageList:
+  - thumbnail: {fileID: 21300000, guid: 2391e327be8edeb4383f9f17e453c0d6, type: 3}
+    goalDistance: 30
+    memo: TestData0
+  - thumbnail: {fileID: 21300000, guid: c0b3f019f85e2454fa2123f99d0468f7, type: 3}
+    goalDistance: 30
+    memo: TestData1
+  - thumbnail: {fileID: 21300000, guid: f0f92d18087a27945bb7104225fa60d0, type: 3}
+    goalDistance: 30
+    memo: TestData2
+  - thumbnail: {fileID: 21300000, guid: 9ca03e025184f7a41ab13d930e192daf, type: 3}
+    goalDistance: 30
+    memo: TestData3
+  - thumbnail: {fileID: 21300000, guid: 0cd4cba2412c17c4aa676f40e9baa978, type: 3}
+    goalDistance: 50
+    memo: TestData4

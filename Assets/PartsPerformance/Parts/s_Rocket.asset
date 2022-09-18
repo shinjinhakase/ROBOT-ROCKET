@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
+  m_Name: s_Rocket
+  m_EditorClassIdentifier: 
+  id: 10
+  forceType: 1
+  m: 0.2
+  F: 8
+  t: 4
+  R: 0
+  k: 0
+  cooltime: 0.1
+  summonObjects: []
+  partsName: "\u30ED\u30B1\u30C3\u30C8\u82B1\u706B"
+  partsSprite: {fileID: -1837160464, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
+  animatorController: {fileID: 0}
+  iconSprite: {fileID: -968913385, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  description: "\u7C21\u5358\u306A\u56FA\u4F53\u30ED\u30B1\u30C3\u30C8\u3002\u3082\u306E\u3059\u3054\u304F\u5F31\u3044\u304C\u8EFD\u3044\u3057\u624B\u8EFD\u306B\u88C5\u5099\u51FA\u6765\u308B\u3002"
+  usePartsSE: {fileID: 8300000, guid: 4a09ebc75b40fc246a318b9549d0ecf4, type: 3}
+  purgePartsSE: {fileID: 8300000, guid: e5dd9e42cb3aca04c9bfa95fb4f59824, type: 3}

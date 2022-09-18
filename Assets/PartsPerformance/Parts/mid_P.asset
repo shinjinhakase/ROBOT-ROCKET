@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36502209984bfcc45930493facfb0bc3, type: 3}
+  m_Name: mid_P
+  m_EditorClassIdentifier: 
+  id: 6
+  forceType: 2
+  m: 0.5
+  F: 60
+  t: 5
+  R: 0
+  k: 50
+  cooltime: 0.1
+  summonObjects: []
+  partsName: "\u30D7\u30ED\u30DA\u30E9"
+  partsSprite: {fileID: 1456174448, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
+  animatorController: {fileID: 9100000, guid: 6bf3552ba2233984b8d2198024dcc090, type: 2}
+  iconSprite: {fileID: -1235522917, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
+  description: "\u3054\u304F\u666E\u901A\u306E\u30D7\u30ED\u30DA\u30E9\u3002\u3068\u308A\u3042\u3048\u305A\u3069\u3053\u306B\u3067\u3082\u843D\u3061\u3066\u308B\u3002\u30ED\u30B1\u30C3\u30C8\u3068\u6BD4\u3079\u3066\u901F\u5EA6\u304C\u51FA\u306A\u3044\u304C\u30D1\u30EF\u30FC\u306F\u3042\u308B\u3002"
+  usePartsSE: {fileID: 8300000, guid: 75713832ed8ea3842b722edd819b3591, type: 3}
+  purgePartsSE: {fileID: 8300000, guid: bd210bc1c5860964b8dc95610bbd37f8, type: 3}
