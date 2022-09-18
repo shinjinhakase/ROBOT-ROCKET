@@ -20,7 +20,7 @@ public class RobotStatus : MonoBehaviour
     private E_RobotStatus _status = E_RobotStatus.Ready;
     private int cooltime = 0;       // クールタイム
 
-    private Sprite usingPartsSprite = null;
+    private Sprite usingPartsSprite = null; // 生成している使用中パージスプライトの参照
 
     // ロボットの状態判定メソッド
     public bool IsWaitingForFly => _status == E_RobotStatus.Ready;  // 飛行未開始判定
@@ -30,6 +30,7 @@ public class RobotStatus : MonoBehaviour
     public bool IsEndFly => _status == E_RobotStatus.EndFly;    // 飛行終了判定
 
 
+    // キャッシュ等
     [SerializeField] private Collider2D bodyCollider;
     [SerializeField] private Animator _animator;
     [SerializeField] private AudioSource _usePartsAudioSource;
@@ -45,13 +46,14 @@ public class RobotStatus : MonoBehaviour
     [Header("装備パーツ情報")]
     [SerializeField] private SpriteRenderer _partsPrefab;
     private SpriteRenderer _partsObject;
-    [SerializeField] private Vector2 _propellerLocate = Vector2.zero;
-    [SerializeField] private Vector2 _rocketLocate = Vector2.zero;
-    [SerializeField] private Vector2 _gliderLocate = Vector2.zero;
+    [SerializeField] private Vector2 _propellerLocate = Vector2.zero;   // プロペラの出現位置
+    [SerializeField] private Vector2 _rocketLocate = Vector2.zero;      // ロケットの出現位置
+    [SerializeField] private Vector2 _gliderLocate = Vector2.zero;      // グライダーの出現位置
 
-    [SerializeField] private float _bombExplodeDistance = 0f;
-    [SerializeField] private ParticleSystem _explodesPrefab;
+    [SerializeField] private float _bombExplodeDistance = 0f;   // 爆発の出現距離
+    [SerializeField] private ParticleSystem _explodesPrefab;    // 爆発エフェクトのPrefab
 
+    // パーツの使用終了とともに破棄するオブジェクトのリスト
     private List<GameObject> _destroyWithPartsObjects = new List<GameObject>();
 
     [Header("イベント系統")]
@@ -233,7 +235,7 @@ public class RobotStatus : MonoBehaviour
         }
         _status = E_RobotStatus.EndFly;
 
-        // TODO：ゲーム失敗時のアニメーションなどのロボット関係の処理
+        // ゲーム失敗時のアニメーションなどのロボット関係の処理
         _purgeManager.AddPartsBySprite(GameOverRobotPurgeData);
         if (_partsObject)
         {

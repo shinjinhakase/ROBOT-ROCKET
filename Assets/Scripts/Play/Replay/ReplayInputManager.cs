@@ -7,7 +7,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
 {
     // 現在のプレイのリプレイデータ
     [SerializeField] private ReplayData _data = new ReplayData();
-    public ReplayData Data => _data;
+    public ReplayData Data => new ReplayData(_data);
     [SerializeField] private int TransformUpdateFrame = 50; // 位置情報を更新する間隔（FixedUpdate単位でのフレーム）
     private int frameCnt = -1;
     public float TimeSec => _data.finishFrame * Time.fixedDeltaTime;
@@ -15,7 +15,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     private PlaySceneController _sceneController;
     [SerializeField] private MainRobot robot;
 
-    private bool NoMemoryMode = false;
+    private bool NoMemoryMode;
     private bool IsGamePlay = false;
 
     private void FixedUpdate()
@@ -23,16 +23,11 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         if (IsGamePlay) frameCnt++;
     }
 
-    // リプレイデータを保存せず、現在あるデータをそのままにする状態にする
-    public void SetNoMemoryMode()
-    {
-        if (IsGamePlay) return;
-        NoMemoryMode = true;
-    }
     // データの初期化（シーン管理でゲームを開始したと同時に呼び出され、使用パーツ情報が初期化される）
     public void Ready()
     {
         _sceneController = PlaySceneController.Instance;
+        NoMemoryMode = _sceneController.IsReplayMode;
         if (NoMemoryMode) return;
         _data.ReadyPartsInfo(_sceneController.StageNum);
     }
@@ -71,7 +66,8 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
     // ゲーム結果を記録（ゲームが終了した際に記録）
     public void SetResult()
     {
-        if (!NoMemoryMode && !PlaySceneController.Instance.IsWaitingForRobot)
+        PlaySceneController _playSceneController = PlaySceneController.Instance;
+        if (_playSceneController.IsRobotStartMove && !_playSceneController.IsReplayMode)
         {
             // リプレイモードではなく、ロボットが動き始めていた時は、取得したデータを自動で保存させてみる
             _data.RegisterResult(frameCnt, _sceneController.Score);
@@ -79,7 +75,6 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
             PlaySceneController.Instance.SaveProgress();
         }
         IsGamePlay = false;
-        NoMemoryMode = false;
     }
     // リプレイデータを保存する
     [ContextMenu("Debug/Save")]
@@ -89,6 +84,7 @@ public class ReplayInputManager : SingletonMonoBehaviourInSceneBase<ReplayInputM
         ReplayDatas datas = ReplayDatas.Instance;
         datas.RegisterData(_data);
         datas.Save();
+        Debug.Log("リプレイデータを保存しました");
     }
 
     // 定期的にロボット位置を記録する

@@ -19,7 +19,7 @@ public class ReplayPlayer : MonoBehaviour
     // 準備してきたパーツのIDリストを取得する（初期重量計算用）
     public List<PartsPerformance.E_PartsID> ReadyPartsIDList => _replayData.readyPartsList.ConvertAll(data => data.id);
     public List<PartsInfo.PartsData> ReadyPartsList => new List<PartsInfo.PartsData>(_replayData.readyPartsList);
-    public List<PartsInfo.PartsData> InitialPartsDatas => _replayData.readyPartsList;
+    public List<PartsInfo.PartsData> InitialPartsDatas => new List<PartsInfo.PartsData>(_replayData.readyPartsList);
 
     // 再生用変数
     private int frameCnt = 0;
@@ -77,9 +77,11 @@ public class ReplayPlayer : MonoBehaviour
                     PartsInfo.PartsData getParts = GetPartsData;
                     startUsePartsEvent.Invoke(getParts);
                 }
-                catch (IndexOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
-                    throw new Exception("リプレイデータから使用したパーツの性能を取得できません。");
+                    Debug.LogError("リプレイデータから使用したパーツのカスタムデータを取得できません。");
+                    FinishReplay();
+                    return;
                 }
                 _currentPartsNo++;
             }
@@ -96,16 +98,23 @@ public class ReplayPlayer : MonoBehaviour
             // 力の追加処理
             foreach (var forceData in addForceList)
             {
-                IForce force = forceData.buildForce();
-                _forceMove.AddForce(force);
+                try
+                {
+                    IForce force = forceData.buildForce();
+                    _forceMove.AddForce(force);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("リプレイデータから力を復元できません。エラーメッセージ：" + e.Message);
+                    FinishReplay();
+                    return;
+                }
             }
 
             // リプレイの終了判定
             if(frameCnt >= _replayData.finishFrame)
             {
-                _isLoaded = false;
-                _isPlaying = false;
-                endReplayEvent.Invoke();
+                FinishReplay();
             }
         }
     }
@@ -154,6 +163,15 @@ public class ReplayPlayer : MonoBehaviour
         _isLoaded = false;
         _isPlaying = false;
     }
+
+    // 再生が終了したときの処理
+    private void FinishReplay()
+    {
+        _isLoaded = false;
+        _isPlaying = false;
+        endReplayEvent.Invoke();
+    }
+
 
     // 終わった際の処理を判断して呼ぶ
     public void CallFinishForMainRobot()

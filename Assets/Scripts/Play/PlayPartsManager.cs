@@ -68,6 +68,8 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         partsInfo.AddParts(data);
         performance = partsPerformanceData.getData(data.id);
         getPartsEvent.Invoke(data);
+
+        Debug.Log("パーツを獲得しました：ID = " + data.id);
     }
     public void GetParts(PartsInfo.PartsData data)
     {
@@ -92,5 +94,7 @@ public class PlayPartsManager : SingletonMonoBehaviourInSceneBase<PlayPartsManag
         IsUsingParts = false;
         partsInfo.Reset();
         partsInfo = PartsInfo.Instance;
+
+        Debug.Log("カスタムパーツデータを保存時の状態にリセットしました");
     }
 }

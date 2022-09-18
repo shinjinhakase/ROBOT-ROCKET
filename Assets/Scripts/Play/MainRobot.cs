@@ -17,16 +17,16 @@ public class MainRobot : MonoBehaviour
     public RobotStatus _status;
     [HideInInspector] public ForceMove _move;
 
-    private float _highScore = 0;   // 最高到達距離
+    private ReplayData _useReplayData;  // リプレイ再生時に用いるデータ
+    private float _highScore = 0;       // 最高到達距離
     [SerializeField] private float _underline;  // 超えたらゲームオーバーとなる基準高度
 
     [SerializeField] private ParticleSystem _gameoverPerticle;
 
-    private bool _isNotStart = false;        // 飛行し始めたタイミングを計るための、飛行していないかフラグ
-    public bool IsNotStart { get { return _isNotStart; } private set { _isNotStart = value; } }
-    private bool IsUsePartsInForce = false; // アイテムを強制的に使用するかのフラグ（リプレイなどで整合性が崩れないように）
-    private bool ReplayMode = false;        // リプレイ操作に移るかのフラグ
-    private ReplayData _useReplayData;
+    // シーン判定
+    private bool IsWaitForControl => playSceneController ? playSceneController.IsWaitingForRobot && !playSceneController.IsReplayMode : false;
+    private bool IsControlMode => playSceneController ? playSceneController.IsRobotStartMove && playSceneController.IsPlayingGame && !playSceneController.IsReplayMode : false;
+    private bool IsReplayMode => playSceneController ? playSceneController.IsReplayMode : throw new NullReferenceException("PlaySceneControllerのAwake処理前にInstanceを参照しました");
 
     private void Awake()
     {
@@ -38,8 +38,8 @@ public class MainRobot : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // 飛行中の処理
-        if (_status.IsFlying && !_player.IsPlaying)
+        // 飛行中の操作モード時処理
+        if (IsControlMode)
         {
             // アイテム使用終了判定
             if (_status.IsUsingParts && !playPartsManager.IsUsingParts)
@@ -47,13 +47,12 @@ public class MainRobot : MonoBehaviour
                 endUseParts();
             }
 
-            // 仮の操作処理（アイテム使用）
+            // アイテム使用キーの入力受付
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("アイテム使用ボタンを押した");
                 UsePartsByControl();
             }
-            // アイテムの手動パージ
+            // アイテムの手動パージ処理
             if (playPartsManager.IsUsingParts && Input.GetKeyDown(KeyCode.R))
             {
                 playPartsManager.IsUsingParts = false;
@@ -66,9 +65,8 @@ public class MainRobot : MonoBehaviour
             }
         }
         // 飛行し始め判定
-        else if (IsNotStart &&  playSceneController.IsPlayingGame && _status.IsWaitingForFly && Input.GetKeyDown(KeyCode.Space))
+        else if (IsWaitForControl && partsInfo.HasNext && Input.GetKeyDown(KeyCode.Space))
         {
-            IsNotStart = false;
             RobotStartMove();
             UsePartsByControl();
         }
@@ -77,7 +75,7 @@ public class MainRobot : MonoBehaviour
     private void FixedUpdate()
     {
         // 最高到達距離を確認する
-        if (_status.IsFlying && !_player.IsPlaying && transform.position.x > _highScore)
+        if (IsControlMode && transform.position.x > _highScore)
         {
             _highScore = transform.position.x;
             playSceneController.Score = _highScore;
@@ -96,28 +94,24 @@ public class MainRobot : MonoBehaviour
         playSceneController = PlaySceneController.Instance;
         playPartsManager = PlayPartsManager.Instance;
 
-        if (ReplayMode)
+        if (IsReplayMode)
         {
             // リプレイの初期設定
             if (_useReplayData == null) throw new Exception("リプレイ用のデータが設定されていません。");
             _player.LoadReplayData(_useReplayData);
 
             // 用意してきたパーツをリプレイのものに変更
-            partsInfo.partsList = new List<PartsInfo.PartsData>(_player.InitialPartsDatas);
+            partsInfo.partsList = _player.InitialPartsDatas;
 
             // スコアをリプレイのものに変更
             playSceneController.Score = _useReplayData.score;
 
-            // リプレイ用の処理モードに変更
-            IsUsePartsInForce = true;
-            IsNotStart = false;
+            // リプレイ時は1秒後に動き始める
             Invoke("RobotStartMove", 1f);
         }
         else
         {
-            // 操作する際の処理
-            IsUsePartsInForce = false;
-            IsNotStart = true;  // まだ飛行を開始していないフラグをtrueにする
+            // リプレイ時に使用するデータを初期化する
             _useReplayData = null;
         }
     }
@@ -131,7 +125,7 @@ public class MainRobot : MonoBehaviour
         // 状態を変化させる
         _status.startGame();
 
-        // ロボットが動き始めた際のイベントを呼ぶ
+        // ロボットが動き始めた際の処理状態に移る
         playSceneController.RobotStartMove();
         if (_player.IsLoaded) _player.StartReplay();
     }
@@ -140,7 +134,7 @@ public class MainRobot : MonoBehaviour
     [ContextMenu("Debug/UseParts")]
     private void UsePartsByControl()
     {
-        if (_player.IsPlaying) return;
+        if (playSceneController.IsReplayMode) return;
         else if (!partsInfo.HasNext) return;
         else if (!_status.IsPartsUsable) return;
         playPartsManager.UseParts(out PartsPerformance performance, out PartsInfo.PartsData data, out IForce force);
@@ -149,7 +143,7 @@ public class MainRobot : MonoBehaviour
     // リプレイによってアイテムを使用する処理
     public void UsePartsByReplay(PartsInfo.PartsData data)
     {
-        if (!_player.IsPlaying) return;
+        if (!playSceneController.IsReplayMode) return;
         playPartsManager.UseParts(out PartsPerformance performance, out _, out _);
         UseParts(data, performance);
     }
@@ -163,9 +157,9 @@ public class MainRobot : MonoBehaviour
             return;
         }
         // アイテムが使用できない状態のとき
-        else if (!_status.IsPartsUsable && IsUsePartsInForce)
+        else if (!_status.IsPartsUsable && IsReplayMode)
         {
-            // アイテムを使用できる状態に強制的に移行する
+            // リプレイ時はアイテムを使用できる状態に強制的に移行する
             if (_status.IsUsingParts) _status.endUseParts();
             _status.endCooltime();
         }
@@ -185,22 +179,25 @@ public class MainRobot : MonoBehaviour
             summonned.Summon(data, _transform);
             if (summonned.IsDestroyWithParts)
             {
+                // 設定がオンであれば、パーツとともに破棄されるように登録する
                 _status.RegisterObjectAsDestroyWithParts(summonned.gameObject);
             }
         }
+
+        Debug.Log("(MainRobot)パーツを使用しました：ID = " + data.id);
     }
     // パーツの使用が終わった際の処理
     public void endUseParts()
     {
         PartsInfo.Instance.RemoveParts();   // パーツをリストから削除する
         _status.endUseParts();
+        Debug.Log("(MainRobot)パーツの使用を終了しました");
     }
 
 
     // ゲームクリア時の処理
     public void GameClear()
     {
-        ReplayMode = false;
         // 力を無くし、成功アニメーション処理に遷移する
         _move.ZeroForce();
         _status.GameClear();
@@ -209,7 +206,6 @@ public class MainRobot : MonoBehaviour
     // ゲームオーバー時の処理
     public void GameOver()
     {
-        ReplayMode = false;
         // 失敗アニメーション処理に遷移する
         _move.ZeroForce();
         _status.GameOver();
@@ -225,15 +221,15 @@ public class MainRobot : MonoBehaviour
     // カスタムメニューを開いたときの処理
     public void OpenCustomMenu()
     {
-        // 飛行中に呼び出されたなら、クレーンで持ち上げられるアニメーションを入れる
-        if (_status.IsFlying)
+        // 飛行中に呼び出されたなら、ゲームオーバー時の爆破処理を呼ぶ
+        if (playSceneController ? playSceneController.IsRobotStartMove && _status.IsFlying : false)
         {
-            GameOver(); // ゲームオーバー時の爆発処理を呼ぶ
+            GameOver();
         }
-        // （ゲームオーバー後に呼び出されたなら、既に非表示なので何もしない）
+        // （ゲーム終了後に呼び出されたなら何もしない）
     }
 
-    // リセットするときの処理
+    // スタート地点に戻り、状態をリセットする
     public void ResetToStart()
     {
         _highScore = 0;
@@ -244,13 +240,12 @@ public class MainRobot : MonoBehaviour
     }
 
     // リプレイを再生する際の準備
-    public void SetReplayMode()
+    public void SetReplayData()
     {
-        ReplayMode = true;
         if (_useReplayData == null)
         {
             // リプレイデータが空なら、現在のリプレイデータを取得する
-            _useReplayData = new ReplayData(ReplayInputManager.Instance.Data);
+            _useReplayData = ReplayInputManager.Instance.Data;
         }
     }
 
@@ -258,7 +253,7 @@ public class MainRobot : MonoBehaviour
     // ゲームオーバーとなる当たり判定との衝突判定を担うメソッド
     public void CheckGameOverCollision(Collider2D other)
     {
-        if (!_player.IsPlaying && _status.IsFlying && other.CompareTag(GameOverColliderTag))
+        if (IsControlMode && other.CompareTag(GameOverColliderTag))
         {
             if (other.TryGetComponent(out GameOverSE gameoverSE))
             {
@@ -268,7 +263,7 @@ public class MainRobot : MonoBehaviour
             PlaySceneController.Instance.GameOver();
         }
     }
-    // リプレイに自分の位置と速度情報を格納する
+    // リプレイ用に自分の位置と速度情報を返答する
     public void GetTransform(out Vector2 position, out Vector2 velocity)
     {
         position = transform.position;
