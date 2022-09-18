@@ -3842,12 +3842,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  endUsePartsEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5707609334011331171}
-        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
-        m_MethodName: EndUseParts
+      - m_Target: {fileID: 5707609333356513368}
+        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
+        m_MethodName: UseParts
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3857,9 +3854,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5707609333356513368}
-        m_TargetAssemblyTypeName: FollowerManager, Assembly-CSharp
-        m_MethodName: UseParts
+  endUsePartsEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5707609334011331171}
+        m_TargetAssemblyTypeName: ReplayInputManager, Assembly-CSharp
+        m_MethodName: EndUseParts
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
