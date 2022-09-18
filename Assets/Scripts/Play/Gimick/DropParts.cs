@@ -29,10 +29,13 @@ public class DropParts : GimickBase
     {
         if (!other.TryGetComponent(out MainRobot robot) || Picked) return;
         Picked = true;
-        // ロボットの重量を増やし、使用パーツリストの一番最後に獲得パーツを追加する
-        PlayPartsManager.Instance.GetParts(partsData, out PartsPerformance performance);
-        ForceMove move = robot._move;
-        move.SetWeight(move.GetWeight() + performance.m);
+        if (!PlaySceneController.Instance.IsReplayMode)
+        {
+            // ロボットの重量を増やし、使用パーツリストの一番最後に獲得パーツを追加する
+            PlayPartsManager.Instance.GetParts(partsData, out PartsPerformance performance);
+            ForceMove move = robot._move;
+            move.SetWeight(move.GetWeight() + performance.m);
+        }
 
         // 自身を無効化する
         gameObject.SetActive(false);
