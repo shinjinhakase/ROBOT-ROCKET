@@ -14,16 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12
   forceType: 0
-  m: 0
-  F: 0
+  m: 0.3
+  F: 12
   t: 0
   R: 0
   k: 0
-  cooltime: 0
+  cooltime: 0.6
   summonObjects: []
-  partsName: 
-  partsSprite: {fileID: 587638089, guid: 4629f07489445f24ba0a5ed6c232698c, type: 3}
+  partsName: "\u7206\u5F3E"
+  partsSprite: {fileID: 1266385712, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
   animatorController: {fileID: 0}
-  iconSprite: {fileID: 21300000, guid: e35e9c062578dd04fb846858fe705528, type: 3}
+  iconSprite: {fileID: 1884534875, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
   description: 
   usePartsSE: {fileID: 0}
+  purgePartsSE: {fileID: 0}
