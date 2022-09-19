@@ -77,10 +77,10 @@ public class ShadowRobot : MonoBehaviour
     public void AddGettingPartsWeight(PartsInfo.PartsData data)
     {
         // 獲得したパーツの重量を取得する
-        float weight = _playPartsManager.GetPerformance(data.id).m;
+        var performance = _playPartsManager.GetPerformance(data.id);
 
         // ロボットの重量を更新する
-        _move.SetWeight(_move.GetWeight() + weight);
+        _move.AddWeightByPartsPerformance(performance);
     }
 
     // リプレイ終了時の処理

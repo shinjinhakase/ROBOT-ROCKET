@@ -88,10 +88,10 @@ public class ForceMove : MonoBehaviour
     }
 
     // 重量を設定する（初期重量の設定用。アイテムを使用した後は自動で重量が減っていく）
-    public void SetWeight(float mass) {
-        rb.mass = mass;
-    }
+    public void SetWeight(float mass) => rb.mass = mass;
     public float GetWeight() => rb.mass;
+    public void AddWeightByPartsData(PartsInfo.PartsData data) => rb.mass += PlayPartsManager.Instance.GetPerformance(data.id).m;
+    public void AddWeightByPartsPerformance(PartsPerformance performance) => rb.mass += performance.m;
     public Vector2 GetVelocity() => rb.velocity;
 
     // 加える合力の計算

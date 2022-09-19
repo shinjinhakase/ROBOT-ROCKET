@@ -34,7 +34,7 @@ public class DropParts : GimickBase
             // ロボットの重量を増やし、使用パーツリストの一番最後に獲得パーツを追加する
             PlayPartsManager.Instance.GetParts(partsData, out PartsPerformance performance);
             ForceMove move = robot._move;
-            move.SetWeight(move.GetWeight() + performance.m);
+            move.AddWeightByPartsPerformance(performance);
         }
 
         // 自身を無効化する
