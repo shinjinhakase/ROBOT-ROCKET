@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Icon : MonoBehaviour{
     public GameObject custom_panel;
 
     public Text drawtext;
-    public string description;
+    [NonSerialized] public string description;
     
     void Start(){
 
@@ -26,7 +27,7 @@ public class Icon : MonoBehaviour{
         _performance=_data.getData(id);
         SpriteRenderer _renderer=this.GetComponent<SpriteRenderer>();
         _renderer.sprite=_performance.iconSprite;
-
+        description = _performance.description;
     }
 
     void Update(){
