@@ -3858,13 +3858,21 @@ PrefabInstance:
       value: icon_bomb (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3067166681779259012, guid: b669c9b9549afda4ab68f4747ba6a39f, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067166681779259012, guid: b669c9b9549afda4ab68f4747ba6a39f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7882686079578793299, guid: b669c9b9549afda4ab68f4747ba6a39f, type: 3}
       propertyPath: id
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 7882686079578793299, guid: b669c9b9549afda4ab68f4747ba6a39f, type: 3}
+      propertyPath: drawtext
+      value: 
+      objectReference: {fileID: 3373468964187751117}
     - target: {fileID: 7882686079578793299, guid: b669c9b9549afda4ab68f4747ba6a39f, type: 3}
       propertyPath: tabnumber
       value: 2
