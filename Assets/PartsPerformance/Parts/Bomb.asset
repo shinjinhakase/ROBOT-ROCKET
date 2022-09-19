@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12
   forceType: 0
-  m: 0.3
-  F: 12
+  m: 0.5
+  F: 16
   t: 0
   R: 0
   k: 0
@@ -25,6 +25,6 @@ MonoBehaviour:
   partsSprite: {fileID: 1266385712, guid: 17c787ee302ad5b4bb370870cdb53c45, type: 3}
   animatorController: {fileID: 0}
   iconSprite: {fileID: 1884534875, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
-  description: 
-  usePartsSE: {fileID: 0}
+  description: "\u666E\u901A\u306E\u30C0\u30A4\u30CA\u30DE\u30A4\u30C8\u3002\u3053\u308C\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068\u3067\u4EFB\u610F\u306E\u65B9\u5411\u306B\u7206\u767A\u7684\u306A\u529B\u3092\u52A0\u3048\u3089\u308C\u308B\u3002\u660E\u3089\u304B\u306B\u5371\u967A\u7269\u306A\u306E\u3067\u3001\u53D6\u308A\u56DE\u3057\u306B\u6CE8\u610F\u3002"
+  usePartsSE: {fileID: 8300000, guid: ca5d897128bec5d41b1e1d72e3f8c887, type: 3}
   purgePartsSE: {fileID: 0}

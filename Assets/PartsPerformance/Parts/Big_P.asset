@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 5
   forceType: 2
   m: 1
-  F: 80
+  F: 40
   t: 8
   R: 0
   k: 10
@@ -25,6 +25,6 @@ MonoBehaviour:
   partsSprite: {fileID: -551730975, guid: c499d648bf940aa4aba7c0bc0f12fdc5, type: 3}
   animatorController: {fileID: 9100000, guid: 6bf3552ba2233984b8d2198024dcc090, type: 2}
   iconSprite: {fileID: -1235522917, guid: c0a9b5aecd0bcd64c8fd3297959a7dd9, type: 3}
-  description: "\u5927\u51FA\u529B\u306E\u30D7\u30ED\u30DA\u30E9\u63A8\u9032\u88C5\u7F6E\u3002\u51FA\u529B\u306E\u304A\u304B\u3052\u3067\u5927\u8CEA\u91CF\u306E\u98DB\u884C\u3082\u53EF\u80FD\u306B\u306A\u308B\u304C\u3001\u30B9\u30D4\u30FC\u30C9\u306F\u51FA\u306A\u3044\u3002"
+  description: "\u5927\u51FA\u529B\u306E\u30D7\u30ED\u30DA\u30E9\u63A8\u9032\u88C5\u7F6E\u3002\u51FA\u529B\u306E\u304A\u304B\u3052\u3067\u5927\u8CEA\u91CF\u306E\u98DB\u884C\u3082\u53EF\u80FD\u306B\u306A\u308B\u304C\u3001\u91CD\u3044\u3002"
   usePartsSE: {fileID: 8300000, guid: 75713832ed8ea3842b722edd819b3591, type: 3}
   purgePartsSE: {fileID: 8300000, guid: 14f60d1a7fe0f5846b79ebf1a91e5126, type: 3}
