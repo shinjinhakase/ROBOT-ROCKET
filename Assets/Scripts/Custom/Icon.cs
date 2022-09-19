@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Icon : MonoBehaviour{
     public GameObject custom_panel;
 
     public Text drawtext;
-    [HideInInspector] public string description;
+    [NonSerialized] public string description;
     
     void Start(){
 
