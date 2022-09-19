@@ -21,6 +21,10 @@ public class RobotStatus : MonoBehaviour
     private int cooltime = 0;       // クールタイム
 
     private Sprite usingPartsSprite = null; // 生成している使用中パージスプライトの参照
+    private PartsPerformance.E_ForceType _nowForceType = PartsPerformance.E_ForceType.NoForce;
+    private bool NeedEndUseTrigger => _nowForceType == PartsPerformance.E_ForceType.Rocket
+        || _nowForceType == PartsPerformance.E_ForceType.Propeller
+        || _nowForceType == PartsPerformance.E_ForceType.Glider;
 
     // ロボットの状態判定メソッド
     public bool IsWaitingForFly => _status == E_RobotStatus.Ready;  // 飛行未開始判定
@@ -90,6 +94,7 @@ public class RobotStatus : MonoBehaviour
         }
 
         _status = E_RobotStatus.Fly;
+        _nowForceType = PartsPerformance.E_ForceType.NoForce;
 
         // 飛行のアニメーションへ遷移（OnGroundで勝手に遷移する）
     }
@@ -110,6 +115,7 @@ public class RobotStatus : MonoBehaviour
         _status = E_RobotStatus.UseParts;
 
         // パージする際に投げ出すパーツの見た目
+        _nowForceType = performance.forceType;
         usingPartsSprite = performance.partsSprite;
 
         // クールタイムを計算しておく
@@ -174,7 +180,8 @@ public class RobotStatus : MonoBehaviour
         endUsePartsEvent.Invoke();
         // 飛行orクールタイムのアニメーションに遷移する
         if (_partsObject) Destroy(_partsObject.gameObject);
-        _animator.SetTrigger("EndUse");
+        if(NeedEndUseTrigger) _animator.SetTrigger("EndUse");
+        _nowForceType = PartsPerformance.E_ForceType.NoForce;
 
         // SEの処理
         if (_purgePartsAudioSource != null && _purgePartsSE != null)
