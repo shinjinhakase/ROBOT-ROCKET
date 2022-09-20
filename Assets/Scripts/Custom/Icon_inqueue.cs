@@ -14,12 +14,12 @@ public class Icon_inqueue : MonoBehaviour{
 
     SpriteRenderer _renderer;
     public PartsPerformance.E_PartsID id;
-    
+
+    private Vector2 _initialLocalPosition = new Vector2(7.6f, 4.0f);    // 生成時の最上部の初期位置
+
     void Start(){
 
         isActive=true;
-
-        _renderer=GetComponent<SpriteRenderer>();
 
         //自身にクリックされたら反応するEventTriggerを追加
         this.gameObject.AddComponent<EventTrigger>();
@@ -28,6 +28,12 @@ public class Icon_inqueue : MonoBehaviour{
         _entry.eventID=EventTriggerType.PointerClick;
         _entry.callback.AddListener((eventData)=>{Click();});
         _trigger.triggers.Add(_entry);
+
+    }
+
+    private void Awake()
+    {
+        _renderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -130,4 +136,15 @@ public class Icon_inqueue : MonoBehaviour{
 
     }
 
+    // インスタンス化した後の初期化処理
+    public void InitialSetting(int partsNo, PartsPerformance performance)
+    {
+        // 管理関連の初期化
+        mynumber = partsNo;
+        id = performance.id;
+
+        // 描画関連の初期化
+        transform.localPosition = _initialLocalPosition + Vector2.down * partsNo;
+        _renderer.sprite = performance.iconSprite;
+    }
 }

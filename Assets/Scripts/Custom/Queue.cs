@@ -40,54 +40,17 @@ public class Queue : MonoBehaviour{
 
         //myListをGameObjectの配列に変形
         for(int i=0;i<myList.Count;i++){
-            
+
+            // パーツの方を生成する
             GameObject newitem=Instantiate(item, custom_panel.transform) as GameObject;
-            SpriteRenderer newitem_renderer=newitem.GetComponent<SpriteRenderer>();
-            newitem_renderer.sprite=_data.getData(myList[i].id).partsSprite;
+            PartsPerformance _performance = _data.getData(myList[i].id);
+            float initDrawAngle = -90f;
+            if (_performance.forceType == PartsPerformance.E_ForceType.Glider) initDrawAngle = 0f;
+            newitem.GetComponent<Items>().InitialSetting(itemlist.Count, _performance, myList[i].angle, initDrawAngle);
 
-            //グライダーの場合大きさを修正
-            if(myList[i].id==PartsPerformance.E_PartsID.Glider){
-
-                newitem.transform.localScale=new Vector3(5,5,1);
-
-            }
-
-            Items newitem_script=newitem.GetComponent<Items>();
-            newitem_script.mynumber=itemlist.Count;
-
-            if(myList[i].angle==180){
-
-                newitem_script.myangle=0;
-
-            }else{
-
-                newitem_script.myangle=myList[i].angle-90f;
-                
-            }
-
-            newitem.transform.localPosition=new Vector3(3.5f,0f,0f);
-
+            // アイコンの方を生成する
             GameObject newicon=Instantiate(icon, transform) as GameObject;
-            Icon_inqueue newicon_script=newicon.GetComponent<Icon_inqueue>();
-            newicon_script.mynumber=itemlist.Count;
-            newicon_script.id=myList[i].id;
-            SpriteRenderer newicon_renderer=newicon.GetComponent<SpriteRenderer>();
-            newicon_renderer.sprite=_data.getData(myList[i].id).iconSprite;
-            newicon.transform.parent=this.transform;
-
-            if(icon_list.Count==0){
-
-                draw_position=4.0f;
-            
-            }else{
-            
-                GameObject last_icon=icon_list[icon_list.Count-1];
-                Vector2 last_position=last_icon.transform.localPosition;
-                draw_position=last_position.y-=1.0f;
-
-            }
-
-            newicon.transform.localPosition=new Vector2(7.6f,draw_position);
+            newicon.GetComponent<Icon_inqueue>().InitialSetting(itemlist.Count, _performance);
 
             itemlist.Add(newitem);
             icon_list.Add(newicon);
@@ -95,6 +58,8 @@ public class Queue : MonoBehaviour{
             nowActive=itemlist.Count-1;
 
         }
+
+        Customize.obj_angle = myList[nowActive].angle;
 
         height=this.transform.localPosition;
 
@@ -134,8 +99,7 @@ public class Queue : MonoBehaviour{
             float angle=itemlist[i].GetComponent<Items>().myangle;
             PartsInfo.PartsData newparts=new PartsInfo.PartsData();
             newparts.id=id;
-            newparts.angle=angle+90;
-            if (_data.getData(id).forceType == PartsPerformance.E_ForceType.Glider) newparts.angle -= 90;
+            newparts.angle=angle;
             _partsInfo.AddParts(newparts);
 
         }
