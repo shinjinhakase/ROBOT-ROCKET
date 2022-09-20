@@ -26,6 +26,8 @@ public class ReplayData
     // ゲーム終了タイミングと記録
     public int finishFrame = 0;
     public float score = 0f;
+    public Collector.CollectionDataList stageCollectionDatas = Collector.CollectionDataList.Build();
+    public Collector.CollectionDataList getCollectionDatas = Collector.CollectionDataList.Build();
 
     public ReplayData() { }
     // コピーコンストラクタ
@@ -40,6 +42,8 @@ public class ReplayData
         forceDatas = new List<ForceData>(originalData.forceDatas);
         finishFrame = originalData.finishFrame;
         score = originalData.score;
+        stageCollectionDatas = originalData.stageCollectionDatas.Clone();
+        getCollectionDatas = originalData.getCollectionDatas.Clone();
     }
 
     // データを初期化して、準備したパーツデータを読み込む
@@ -54,6 +58,8 @@ public class ReplayData
         forceDatas.Clear();
         finishFrame = 0;
         score = 0f;
+        stageCollectionDatas.Clear();
+        getCollectionDatas.Clear();
     }
     // パーツの使用タイミングを記録する
     public void RegisterUseParts(int frame)
@@ -120,6 +126,12 @@ public class ReplayData
     {
         finishFrame = frame;
         this.score = score;
+    }
+    // 収集要素の獲得状況を記録する
+    public void RegisterCollector(Collector.CollectionDataList stageDatas, Collector.CollectionDataList getDatas)
+    {
+        stageCollectionDatas = stageDatas;
+        getCollectionDatas = getDatas;
     }
 
     // ロボットの位置情報を格納するクラス
