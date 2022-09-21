@@ -77,12 +77,6 @@ public class CrashableObject : GimickBase
         gameObject.SetActive(false);
     }
 
-    // GimicManagerから指定の効果音を鳴らす
-    public void BeepByGimickManager(int index)
-    {
-        GimickManager.Instance.BeepSEByIndex(index);
-    }
-
     // 指定された設定でヒットストップを準備する
     public void RequestHitStop()
     {
