@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // 収集アイテムの個数を管理するシングルトン
 public class Collector : SingletonMonoBehaviourInSceneBase<Collector>
@@ -13,11 +14,19 @@ public class Collector : SingletonMonoBehaviourInSceneBase<Collector>
     private CollectionDataList _getCollectionDatas = CollectionDataList.Build();
     public CollectionDataList GetCollectionDatas => _getCollectionDatas.Clone();
 
+    // アイテムの獲得時に呼び出されるイベント
+    [SerializeField] private List<CollectionGetEvent> _collectionGetEvent = new List<CollectionGetEvent>();
 
     // 獲得したアイテム数を初期化する
     public void ResetGetNum()
     {
         _getCollectionDatas.Clear();
+    }
+
+    // 獲得したアイテム数をリプレイデータより読み込む
+    public void LoadFromReplayData(ReplayData data)
+    {
+        _getCollectionDatas = data.getCollectionDatas.Clone();
     }
 
     // ステージにあるアイテムの処理
@@ -30,6 +39,7 @@ public class Collector : SingletonMonoBehaviourInSceneBase<Collector>
     public void GetItem(CollectionDrop.E_CollectionID id, int num = 1)
     {
         _getCollectionDatas.AddNum(id, num);
+        _collectionGetEvent.ForEach(item => item.InvokeIfMatchID(id));
     }
 
 
@@ -83,6 +93,18 @@ public class Collector : SingletonMonoBehaviourInSceneBase<Collector>
             var data = GetData(id);
             data.num += num;
             SetData(data);
+        }
+    }
+
+    [Serializable]
+    private class CollectionGetEvent
+    {
+        public CollectionDrop.E_CollectionID _collectionID;
+        public UnityEvent _events = new UnityEvent();
+
+        public void InvokeIfMatchID(CollectionDrop.E_CollectionID id)
+        {
+            if (_collectionID == id) _events.Invoke();
         }
     }
 }
