@@ -70,6 +70,7 @@ public class PlaySceneController : SingletonMonoBehaviourInSceneBase<PlaySceneCo
     [Tooltip("プレイ中にカスタム画面を開いた際に呼び出されるメソッド")]
     [SerializeField] private UnityEvent OpenCustomWhenPlayEvent = new UnityEvent();
 
+
     private IEnumerator hitStopCoroutine;
 
     private Stage _currentStage =null;

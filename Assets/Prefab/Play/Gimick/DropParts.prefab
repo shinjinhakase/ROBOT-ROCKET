@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 5569863075737847642}
   - component: {fileID: 5569863075737847643}
   - component: {fileID: 5569863075737847588}
-  - component: {fileID: 5569863075737847641}
+  - component: {fileID: 5042411678671107228}
   - component: {fileID: 5569863075737847589}
   m_Layer: 0
   m_Name: DropParts
@@ -282,12 +282,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16936b23ffcc88a408fb757a4e340d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iconSpriteRenderer: {fileID: 5569863074718175079}
-  _iconDirectionForce: {fileID: 6801905360224726322}
+  _pickedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _pickedEventOnlyPlay:
+    m_PersistentCalls:
+      m_Calls: []
   partsData:
     id: 0
     angle: 45
---- !u!114 &5569863075737847641
+--- !u!114 &5042411678671107228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,30 +300,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5569863075737847590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3c1c4436b162e47ac34bf44aaf9cd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dadecf3f119d5c4490ba2244e449ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5569863075737847588}
-        m_TargetAssemblyTypeName: DropParts, Assembly-CSharp
-        m_MethodName: PickItem
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnTriggerStay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
+  _iconSpriteRenderer: {fileID: 5569863074718175079}
+  _iconDirectionForce: {fileID: 6801905360224726322}
 --- !u!58 &5569863075737847589
 CircleCollider2D:
   m_ObjectHideFlags: 0
