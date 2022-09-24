@@ -9,6 +9,8 @@ public class GimickManager : SingletonMonoBehaviourInSceneBase<GimickManager>
 
     [SerializeField] private List<SoundBeep> soundBeeps = new List<SoundBeep>();
 
+    [SerializeField] private MainRobot _mainRobot;
+
     // ギミックを管理リストに追加する
     public void SaveGimick(GimickBase gimick)
     {
@@ -56,5 +58,12 @@ public class GimickManager : SingletonMonoBehaviourInSceneBase<GimickManager>
             return;
         }
         soundBeeps[index].Beep();
+    }
+
+    // 地面の当たり判定がDestroy等で消えた際はOnTriggerExitが反応しないので、AnimatorのOnGround（接地判定）をリセットする。
+    public void ResetOnGround()
+    {
+        _mainRobot._status.SetOnGround(false);
+        ShadowManager.Instance.ResetOnGround();
     }
 }

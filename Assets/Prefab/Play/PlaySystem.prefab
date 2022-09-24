@@ -2229,6 +2229,7 @@ MonoBehaviour:
   soundBeeps:
   - {fileID: 5365767623787590517}
   - {fileID: 8710792164603782712}
+  _mainRobot: {fileID: 5707609333356513361}
 --- !u!114 &108143105667539340
 MonoBehaviour:
   m_ObjectHideFlags: 0
