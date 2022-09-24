@@ -68,6 +68,14 @@ public class ShadowManager : SingletonMonoBehaviourInSceneBase<ShadowManager>
     }
 
 
+    public void ResetOnGround()
+    {
+        foreach(var shadow in shadows)
+        {
+            shadow?.ResetOnGround();
+        }
+    }
+
     // シャドウに使用するリプレイデータを選択する
     private List<ReplayData> StageReplayDatas => ReplayDatas.Instance.GetStageReplay(PlaySceneController.Instance.StageNum);
 }

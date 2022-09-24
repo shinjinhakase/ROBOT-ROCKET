@@ -98,4 +98,5 @@ public class ShadowRobot : MonoBehaviour
     {
         _move.SetWeight(_player.GetInitialWeight(_playPartsManager));
     }
+    public void ResetOnGround() => _status.SetOnGround(false);
 }

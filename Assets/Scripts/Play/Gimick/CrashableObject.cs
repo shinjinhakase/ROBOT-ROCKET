@@ -56,6 +56,11 @@ public class CrashableObject : GimickBase
 
         // 当たり判定を無効化
         _collider.enabled = false;
+        if (gameObject.layer == LayerMask.NameToLayer("StageWall"))
+        {
+            // 地面の当たり判定を無効化する際はロボットの接地判定をリセットする
+            GimickManager.Instance.ResetOnGround();
+        }
 
         // 自身を破棄する
         _crashEvent.Invoke();
