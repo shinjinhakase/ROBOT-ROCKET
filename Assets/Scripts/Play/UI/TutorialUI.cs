@@ -45,7 +45,7 @@ public class TutorialUI : UIOpener
         // 現在表示しているUIのデータと次に表示するUIのデータの取得
         if (pageIndex < 0 || pageIndex >= _pages.Count) throw new ArgumentOutOfRangeException(nameof(pageIndex));
         else if (pageIndex == _nowPageIndex) return;
-        TutorialUIPageData nowPageData = _nowPageIndex < 0 && _nowPageIndex > _pages.Count ? _pages[_nowPageIndex] : null;
+        TutorialUIPageData nowPageData = _nowPageIndex >= 0 && _nowPageIndex < _pages.Count ? _pages[_nowPageIndex] : null;
         TutorialUIPageData nextPageData = _pages[pageIndex];
 
         // テキスト・UIの表示を切り替える

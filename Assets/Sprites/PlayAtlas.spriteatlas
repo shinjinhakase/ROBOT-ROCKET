@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: -50115420, guid: 3c226000c0aab5e41977cffd3200d9e8, type: 3}
   - {fileID: 1335439265, guid: 3c226000c0aab5e41977cffd3200d9e8, type: 3}
   - {fileID: 21300000, guid: e91326404d2ee9547870a479b4646df2, type: 3}
+  - {fileID: 21300000, guid: 6ba01601783ea284aae3ca1b3b2c48d2, type: 3}
   - {fileID: 21300000, guid: 89e46d71714e2e44b9800200eb4b145a, type: 3}
   - {fileID: -1421340438, guid: 6d2502d384244d441a1c3b3e4c6c3e2e, type: 3}
   - {fileID: 435232109, guid: 6d2502d384244d441a1c3b3e4c6c3e2e, type: 3}
@@ -84,6 +85,7 @@ SpriteAtlas:
   - {fileID: -550631577, guid: 7b5d77b79dfcce74b960cec2b1ca14e6, type: 3}
   - {fileID: 21300000, guid: 61d97bd7ce7e1cb408a1f304c0fa7164, type: 3}
   - {fileID: 21300000, guid: 76522ee731de8db4594b6685b967913a, type: 3}
+  - {fileID: 21300000, guid: 8bcd881849fcb4d4aa7dcee76f390902, type: 3}
   - {fileID: 21300000, guid: b3f49a280bb696a4c88f54bad30299fc, type: 3}
   - {fileID: -39174541, guid: 9ae802c931f2d0445b14b2a605fb027f, type: 3}
   - {fileID: -957132337, guid: 9ae802c931f2d0445b14b2a605fb027f, type: 3}
@@ -119,6 +121,7 @@ SpriteAtlas:
   - Measure_0
   - Measure_1
   - "\u30C6\u30B9\u30C8\u91DD\u30C9\u30C3\u30C8\u7D75"
+  - NextIcon
   - ReplayWindow
   - StageNumBoard_0
   - StageNumBoard_1
@@ -150,6 +153,7 @@ SpriteAtlas:
   - StrongWind170-100_0
   - ForceDirection
   - "\u80CC\u666F\u5965"
+  - DisplayPanelGraphic
   - SliceButton
   - ReplayMark_0
   - ReplayMark_1
